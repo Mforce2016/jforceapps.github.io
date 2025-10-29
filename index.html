@@ -11,7 +11,6 @@
       --color-fondo: #f8f9fa;
       --color-texto: #222;
     }
-
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
@@ -21,7 +20,6 @@
       flex-direction: column;
       align-items: center;
     }
-
     header {
       width: 100%;
       background: var(--color-principal);
@@ -29,24 +27,27 @@
       text-align: center;
       padding: 2rem 1rem;
     }
-
+    header img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+      margin-bottom: 0.8rem;
+    }
     header h1 {
       margin: 0;
       font-size: 2rem;
     }
-
     header p {
       font-size: 1.1rem;
       margin-top: 0.5rem;
       opacity: 0.9;
     }
-
     main {
       width: 90%;
       max-width: 800px;
       margin-top: 2rem;
     }
-
     .app-card {
       background: white;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -56,16 +57,16 @@
       text-align: center;
       transition: transform 0.2s ease;
     }
-
-    .app-card:hover {
-      transform: scale(1.02);
-    }
-
+    .app-card:hover { transform: scale(1.02); }
     .app-card h2 {
       color: var(--color-principal);
       margin-bottom: 0.5rem;
     }
-
+    .app-card img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 0.5rem;
+    }
     .boton {
       display: inline-block;
       margin-top: 1rem;
@@ -77,16 +78,11 @@
       font-weight: 500;
       transition: background 0.3s;
     }
-
-    .boton:hover {
-      background: #015c8a;
-    }
-
+    .boton:hover { background: #015c8a; }
     .seccion {
       margin-top: 3rem;
       text-align: center;
     }
-
     footer {
       width: 100%;
       text-align: center;
@@ -96,47 +92,72 @@
       margin-top: 3rem;
       font-size: 0.9rem;
     }
-
     img.qr {
       width: 160px;
       margin-top: 1rem;
       border: 2px solid #ddd;
       border-radius: 8px;
     }
-
     @media (prefers-color-scheme: dark) {
       :root {
         --color-fondo: #121212;
         --color-texto: #eee;
       }
-      .app-card {
-        background: #1e1e1e;
-      }
+      .app-card { background: #1e1e1e; }
     }
   </style>
 </head>
 <body>
 
   <header>
+    <img src="logo.png" alt="Logo JForce Apps">
     <h1>JForce Apps</h1>
     <p>Desarrollos móviles para productividad y gestión personal</p>
   </header>
 
   <main>
+    <!-- Registro LAO -->
     <section class="app-card">
-      <h2>Registro LAO (v1.0)</h2>
+      <img src="icono_registro_lao.png" alt="Icono Registro LAO">
+      <h2>Registro LAO (v1.2)</h2>
       <p>Gestione y controle los días de licencia y vacaciones fácilmente desde su dispositivo.</p>
-      <a href="#" class="boton">Descargar APK</a>
+      <a href="registrolao.apk" class="boton" download>Descargar APK</a>
     </section>
 
+    <!-- TurnosGo -->
+    <section class="app-card">
+      <img src="icono_turnosgo.png" alt="Icono TurnosGo">
+      <h2>TurnosGo - Free (versión 2.2)</h2>
+      <p>Organice y consulte turnos laborales con una interfaz simple, moderna y eficiente.</p>
+      <a href="turnosgo.apk" class="boton" download>Descargar APK</a>
+    </section>
+
+    <!-- Linterna Shake -->
+    <section class="app-card">
+      <img src="icono_linternashake.png" alt="Icono Linterna Shake">
+      <h2>Linterna Shake - Free (v1.2)</h2>
+      <p>Linterna Shake – Luz inmediata con solo agitar.</p>
+      <a href="linternashake.apk" class="boton" download>Descargar APK</a>
+    </section>
+
+    <!-- FitCoach -->
+    <section class="app-card">
+      <img src="icono_fitcoach.png" alt="Icono FitCoach">
+      <h2>FitCoach (versión 2.0)</h2>
+      <p>Planifique entrenamientos, registre progreso y alcance sus objetivos de salud.</p>
+      <a href="fitcoach.apk" class="boton" download>Descargar APK</a>
+    </section>
+
+    <!-- Pagos -->
     <section class="seccion">
-      <h2>Licencias y pagos</h2>
-      <p>Escanee el código QR o use el botón para activar su licencia.</p>
+      <h2>Pagos de Licencias Mensuales</h2>
+      <p>Escanee el código QR o use el botón para activar su licencia mensual.</p>
       <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
       <br>
-      <a href="#" class="boton">Ir a Mercado Pago</a>
+      <a href="#" class="boton" onclick="alert('Alias para pagar: JforceApps')" target="_blank">Ver alias Mercado Pago</a>
     </section>
 
+    <!-- Contacto -->
     <section class="seccion">
       <h2>Contacto</h2>
       <p>¿Consultas o soporte técnico?</p>
