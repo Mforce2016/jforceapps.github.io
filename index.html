@@ -127,10 +127,11 @@
   <main>
     <!-- Registro LAO -->
     <section class="app-card">
-      <img src="icono_registro_lao.png" alt="Icono Registro LAO">
+      <img src="registrolao.png" alt="Icono Registro LAO">
       <h2>Registro LAO (v1.2)</h2>
       <p>Gestione y controle los días de licencia y vacaciones fácilmente desde su dispositivo.</p>
       <a href="registrolao.apk" class="boton" download>Descargar APK</a>
+      <p id="desc_icono_registro_lao" class="descargas">Descargas: cargando...</p>
     </section>
 
     <!-- TurnosGo -->
@@ -139,6 +140,7 @@
       <h2>TurnosGo - Free (versión 2.2)</h2>
       <p>Organice y consulte turnos laborales con una interfaz simple, moderna y eficiente.</p>
       <a href="turnosgo.apk" class="boton" download>Descargar APK</a>
+      <p id="desc_turnosgo" class="descargas">Descargas: cargando...</p>
     </section>
 
     <!-- Linterna Shake -->
@@ -147,6 +149,7 @@
       <h2>Linterna Shake - Free (v1.2)</h2>
       <p>Linterna Shake – Luz inmediata con solo agitar.</p>
       <a href="linternashake.apk" class="boton" download>Descargar APK</a>
+      <p id="desc_linterna" class="descargas">Descargas: cargando...</p>
     </section>
 
     <!-- FitCoach -->
@@ -155,6 +158,7 @@
       <h2>FitCoach (versión 2.0)</h2>
       <p>Planifique entrenamientos, registre progreso y alcance sus objetivos de salud.</p>
       <a href="fitcoach.apk" class="boton" download>Descargar APK</a>
+      <p id="desc_fitcoach" class="descargas">Descargas: cargando...</p>
     </section>
 
     <!-- Pagos -->
@@ -176,11 +180,49 @@
       <p>¿Consultas o soporte técnico?</p>
       <p><a href="mailto:jforceapps@gmail.com" class="boton">jforceapps@gmail.com</a></p>
     </section>
+    <p id="contador">Cargando visitas...</p>
   </main>
 
   <footer>
     © 2025 JForce Apps · Todos los derechos reservados
   </footer>
+  <script>
+    // --- CONTADOR GLOBAL DE VISITAS ---
+    fetch('https://api.countapi.xyz/hit/jforceapps.github.io/visitas')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById("contador").textContent = "👀 Visitas totales: " + d.value;
+      })
+      .catch(() => {
+        document.getElementById("contador").textContent = "Error al cargar visitas.";
+      });
+
+    // --- CONTADOR DE DESCARGAS POR APP ---
+    const apps = ["linterna", "turnosgo", "fitcoach"];
+    function cargarDescargas() {
+      apps.forEach(app => {
+        fetch(`https://api.countapi.xyz/get/jforceapps.github.io/${app}`)
+          .then(r => r.json())
+          .then(d => {
+            document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value;
+          })
+          .catch(() => {
+            document.getElementById("desc_" + app).textContent = "⬇️ Descargas: error";
+          });
+      });
+    }
+    function registrarDescarga(app) {
+      fetch(`https://api.countapi.xyz/hit/jforceapps.github.io/${app}`)
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value;
+        });
+      // Redirigir al enlace real de descarga (ajusta la ruta)
+      window.location.href = `${app}.apk`;
+    }
+
+    cargarDescargas();
+  </script>
 
 </body>
 </html>
