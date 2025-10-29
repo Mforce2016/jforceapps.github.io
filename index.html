@@ -34,15 +34,8 @@
       box-shadow: 0 0 10px rgba(255,255,255,0.5);
       margin-bottom: 0.8rem;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    header p {
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-      opacity: 0.9;
-    }
+    header h1 { margin: 0; font-size: 2rem; }
+    header p { font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.9; }
     main {
       width: 90%;
       max-width: 800px;
@@ -66,12 +59,12 @@
       width: 64px;
       height: 64px;
       margin-bottom: 0.5rem;
-      border-radius: 50%; /* Iconos circulares */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* transición para efecto pop */
+      border-radius: 50%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .app-card img:hover {
-      transform: scale(1.2); /* aumenta tamaño al pasar mouse */
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* sombra más marcada */
+      transform: scale(1.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
     .boton {
       display: inline-block;
@@ -85,10 +78,7 @@
       transition: background 0.3s;
     }
     .boton:hover { background: #015c8a; }
-    .seccion {
-      margin-top: 3rem;
-      text-align: center;
-    }
+    .seccion { margin-top: 3rem; text-align: center; }
     footer {
       width: 100%;
       text-align: center;
@@ -104,16 +94,6 @@
       border: 2px solid #ddd;
       border-radius: 8px;
     }
-   /* Desactivado modo oscuro automático */
-/*
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-fondo: #121212;
-    --color-texto: #eee;
-  }
-  .app-card { background: #1e1e1e; }
-}
-*/
   </style>
 </head>
 <body>
@@ -130,35 +110,35 @@
       <img src="registrolao.png" alt="Icono Registro LAO">
       <h2>Registro LAO (v1.2)</h2>
       <p>Gestione y controle los días de licencia y vacaciones fácilmente desde su dispositivo.</p>
-      <a href="registrolao.apk" class="boton" download>Descargar APK</a>
-      <p id="desc_icono_registro_lao" class="descargas">Descargas: cargando...</p>
+      <a href="#" class="boton" onclick="registrarDescarga('RegistroLAO')">Descargar APK</a>
+      <p id="desc_RegistroLAO">⬇️ Descargas: cargando...</p>
     </section>
 
     <!-- TurnosGo -->
     <section class="app-card">
       <img src="turnosgo.png" alt="Icono TurnosGo">
-      <h2>TurnosGo - Free (versión 2.2)</h2>
+      <h2>TurnosGo - Free (v2.2)</h2>
       <p>Organice y consulte turnos laborales con una interfaz simple, moderna y eficiente.</p>
-      <a href="turnosgo.apk" class="boton" download>Descargar APK</a>
-      <p id="desc_turnosgo" class="descargas">Descargas: cargando...</p>
+      <a href="#" class="boton" onclick="registrarDescarga('TurnosGo')">Descargar APK</a>
+      <p id="desc_TurnosGo">⬇️ Descargas: cargando...</p>
     </section>
 
     <!-- Linterna Shake -->
     <section class="app-card">
       <img src="linterna.png" alt="Icono Linterna Shake">
       <h2>Linterna Shake - Free (v1.2)</h2>
-      <p>Linterna Shake – Luz inmediata con solo agitar.</p>
-      <a href="linternashake.apk" class="boton" download>Descargar APK</a>
-      <p id="desc_linterna" class="descargas">Descargas: cargando...</p>
+      <p>Iluminación inmediata con solo agitar. Compacta, ecológica y lista para cualquier situación.</p>
+      <a href="#" class="boton" onclick="registrarDescarga('LinternaShake')">Descargar APK</a>
+      <p id="desc_LinternaShake">⬇️ Descargas: cargando...</p>
     </section>
 
     <!-- FitCoach -->
     <section class="app-card">
       <img src="fitcoach.png" alt="Icono FitCoach">
-      <h2>FitCoach (versión 2.0)</h2>
+      <h2>FitCoach (v2.0)</h2>
       <p>Planifique entrenamientos, registre progreso y alcance sus objetivos de salud.</p>
-      <a href="fitcoach.apk" class="boton" download>Descargar APK</a>
-      <p id="desc_fitcoach" class="descargas">Descargas: cargando...</p>
+      <a href="#" class="boton" onclick="registrarDescarga('FitCoach')">Descargar APK</a>
+      <p id="desc_FitCoach">⬇️ Descargas: cargando...</p>
     </section>
 
     <!-- Pagos -->
@@ -180,45 +160,38 @@
       <p>¿Consultas o soporte técnico?</p>
       <p><a href="mailto:jforceapps@gmail.com" class="boton">jforceapps@gmail.com</a></p>
     </section>
+
     <p id="contador">Cargando visitas...</p>
   </main>
 
   <footer>
     © 2025 JForce Apps · Todos los derechos reservados
   </footer>
+
   <script>
     // --- CONTADOR GLOBAL DE VISITAS ---
-    fetch('https://api.countapi.xyz/hit/jforceapps.github.io/visitas')
+    fetch('https://api.countapi.xyz/hit/mforce2016.github.io/visitas')
       .then(r => r.json())
-      .then(d => {
-        document.getElementById("contador").textContent = "👀 Visitas totales: " + d.value;
-      })
-      .catch(() => {
-        document.getElementById("contador").textContent = "Error al cargar visitas.";
-      });
+      .then(d => document.getElementById("contador").textContent = "👀 Visitas totales: " + d.value)
+      .catch(() => document.getElementById("contador").textContent = "Error al cargar visitas.");
 
-    // --- CONTADOR DE DESCARGAS POR APP ---
-    const apps = ["linterna", "turnosgo", "fitcoach"];
+    // --- CONTADOR DE DESCARGAS ---
+    const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
     function cargarDescargas() {
       apps.forEach(app => {
-        fetch(`https://api.countapi.xyz/get/jforceapps.github.io/${app}`)
+        fetch(`https://api.countapi.xyz/get/mforce2016.github.io/${app}`)
           .then(r => r.json())
-          .then(d => {
-            document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value;
-          })
-          .catch(() => {
-            document.getElementById("desc_" + app).textContent = "⬇️ Descargas: error";
-          });
+          .then(d => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value)
+          .catch(() => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: error");
       });
     }
+
     function registrarDescarga(app) {
-      fetch(`https://api.countapi.xyz/hit/jforceapps.github.io/${app}`)
+      fetch(`https://api.countapi.xyz/hit/mforce2016.github.io/${app}`)
         .then(r => r.json())
-        .then(d => {
-          document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value;
-        });
-      // Redirigir al enlace real de descarga (ajusta la ruta)
-      window.location.href = `${app}.apk`;
+        .then(d => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value);
+      // descarga real del archivo APK
+      window.location.href = app.toLowerCase() + ".apk";
     }
 
     cargarDescargas();
