@@ -3,184 +3,206 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JForce Apps</title>
+  <title>Jforce Apps</title>
   <style>
     :root {
       --color-principal: #004C91;
       --color-secundario: #0277BD;
       --color-fondo: #f8f9fa;
-      --color-texto: #222;
+      --color-texto: #222222;
     }
+
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: var(--color-fondo);
+      background-color: var(--color-fondo);
       color: var(--color-texto);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
+
     header {
-      width: 100%;
-      background: var(--color-principal);
+      background-color: var(--color-principal);
       color: white;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 20px 10px;
     }
+
     header img {
-      width: 90px;
-      height: 90px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      box-shadow: 0 0 10px rgba(255,255,255,0.5);
-      margin-bottom: 0.8rem;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 10px auto;
     }
+
     header h1 {
       margin: 0;
-      font-size: 2rem;
+      font-size: 1.8em;
     }
-    header p {
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-      opacity: 0.9;
-    }
+
     main {
-      width: 90%;
-      max-width: 800px;
-      margin-top: 2rem;
+      text-align: center;
+      padding: 30px 15px;
     }
+
     .app-card {
       background: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      transition: transform 0.2s ease;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 400px;
     }
-    .app-card:hover { transform: scale(1.02); }
-    .app-card h2 {
-      color: var(--color-principal);
-      margin-bottom: 0.5rem;
-    }
+
     .app-card img {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 0.5rem;
-      border-radius: 50%; /* Iconos circulares */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* transición para efecto pop */
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
     }
-    .app-card img:hover {
-      transform: scale(1.2); /* aumenta tamaño al pasar mouse */
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* sombra más marcada */
-    }
+
     .boton {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.7rem 1.2rem;
-      background: var(--color-secundario);
+      background-color: var(--color-secundario);
       color: white;
-      border-radius: 6px;
+      padding: 10px 18px;
       text-decoration: none;
-      font-weight: 500;
+      border-radius: 8px;
+      font-weight: bold;
       transition: background 0.3s;
     }
-    .boton:hover { background: #015c8a; }
-    .seccion {
-      margin-top: 3rem;
-      text-align: center;
+
+    .boton:hover {
+      background-color: #015C92;
     }
+
+    .leyenda {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     footer {
-      width: 100%;
-      text-align: center;
-      background: var(--color-principal);
+      background-color: var(--color-principal);
       color: white;
-      padding: 1rem;
-      margin-top: 3rem;
-      font-size: 0.9rem;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
     }
-    img.qr {
-      width: 160px;
-      margin-top: 1rem;
-      border: 2px solid #ddd;
-      border-radius: 8px;
+
+    #contador {
+      text-align: center;
+      color: var(--color-principal);
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 14px;
     }
-   /* Desactivado modo oscuro automático */
-/*
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-fondo: #121212;
-    --color-texto: #eee;
-  }
-  .app-card { background: #1e1e1e; }
-}
-*/
+
+    .descargas {
+      font-size: 13px;
+      color: #555;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="logo.png" alt="Logo JForce Apps">
-    <h1>JForce Apps</h1>
-    <p>Desarrollos móviles para productividad y gestión personal</p>
+    <img src="logo.png" alt="Logo Jforce Apps">
+    <h1>Jforce Apps</h1>
   </header>
 
   <main>
-    <!-- Registro LAO -->
+    <!-- Linterna Shake -->
     <section class="app-card">
-      <img src="icono_registro_lao.png" alt="Icono Registro LAO">
-      <h2>Registro LAO (v1.2)</h2>
-      <p>Gestione y controle los días de licencia y vacaciones fácilmente desde su dispositivo.</p>
-      <a href="registrolao.apk" class="boton" download>Descargar APK</a>
+      <img src="linterna.png" alt="Linterna Shake">
+      <h2>Linterna Shake</h2>
+      <p>Iluminación inmediata con solo agitar. Compacta, ecológica y lista para cualquier situación.</p>
+      <a href="#" class="boton" onclick="registrarDescarga('linterna')">Descargar APK</a>
+      <p id="desc_linterna" class="descargas">Descargas: cargando...</p>
     </section>
 
     <!-- TurnosGo -->
     <section class="app-card">
-      <img src="icono_turnosgo.png" alt="Icono TurnosGo">
-      <h2>TurnosGo - Free (versión 2.2)</h2>
-      <p>Organice y consulte turnos laborales con una interfaz simple, moderna y eficiente.</p>
-      <a href="turnosgo.apk" class="boton" download>Descargar APK</a>
-    </section>
-
-    <!-- Linterna Shake -->
-    <section class="app-card">
-      <img src="icono_linternashake.png" alt="Icono Linterna Shake">
-      <h2>Linterna Shake - Free (v1.2)</h2>
-      <p>Linterna Shake – Luz inmediata con solo agitar.</p>
-      <a href="linternashake.apk" class="boton" download>Descargar APK</a>
+      <img src="turnosgo.png" alt="TurnosGo">
+      <h2>TurnosGo</h2>
+      <p>Gestione sus turnos de manera rápida y eficiente. Ideal para profesionales y comercios.</p>
+      <a href="#" class="boton" onclick="registrarDescarga('turnosgo')">Descargar APK</a>
+      <p id="desc_turnosgo" class="descargas">Descargas: cargando...</p>
     </section>
 
     <!-- FitCoach -->
     <section class="app-card">
-      <img src="icono_fitcoach.png" alt="Icono FitCoach">
-      <h2>FitCoach (versión 2.0)</h2>
-      <p>Planifique entrenamientos, registre progreso y alcance sus objetivos de salud.</p>
-      <a href="fitcoach.apk" class="boton" download>Descargar APK</a>
+      <img src="fitcoach.png" alt="FitCoach">
+      <h2>FitCoach</h2>
+      <p>Tu entrenador personal digital. Planes de entrenamiento y seguimiento de progreso físico.</p>
+      <a href="#" class="boton" onclick="registrarDescarga('fitcoach')">Descargar APK</a>
+      <p id="desc_fitcoach" class="descargas">Descargas: cargando...</p>
     </section>
 
-    <!-- Pagos -->
-    <section class="seccion">
+    <!-- Mercado Pago -->
+    <section class="app-card">
       <h2>Pagos de Licencias Mensuales</h2>
       <p>Escanee el código QR o use el botón para activar su licencia mensual.</p>
-      <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
+      <img src="qr-mercadopago.png" alt="QR Mercado Pago" style="width:150px;border-radius:10px;margin-top:10px;">
       <br>
-      <a href="#" class="boton" onclick="alert('Alias para pagar: JforceApps')" target="_blank">Ver alias Mercado Pago</a>
-      <p style="margin-top:1rem; font-size:0.9rem; color:#333;">
-        Una vez abonada la licencia, envíe el comprobante al correo de contacto indicando para qué app solicita el código. 
-        Una vez verificado, se procederá a la asignación del código activador.
+      <a href="#" class="boton" onclick="alert('Alias para pagar: jforce123')" target="_blank">Ver alias Mercado Pago</a>
+      <p class="leyenda">
+        Una vez abonada la licencia, envíe el comprobante al correo de contacto indicando para qué app es el código solicitado. 
+        Tras la verificación, se le asignará el código activador correspondiente.
       </p>
     </section>
 
-    <!-- Contacto -->
-    <section class="seccion">
-      <h2>Contacto</h2>
-      <p>¿Consultas o soporte técnico?</p>
-      <p><a href="mailto:jforceapps@gmail.com" class="boton">jforceapps@gmail.com</a></p>
-    </section>
+    <p id="contador">Cargando visitas...</p>
   </main>
 
   <footer>
-    © 2025 JForce Apps · Todos los derechos reservados
+    © 2025 Jforce Apps - Todos los derechos reservados.
   </footer>
 
+  <script>
+    // --- CONTADOR GLOBAL DE VISITAS ---
+    fetch('https://api.countapi.xyz/hit/jforceapps.github.io/visitas')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById("contador").textContent = "👀 Visitas totales: " + d.value;
+      })
+      .catch(() => {
+        document.getElementById("contador").textContent = "Error al cargar visitas.";
+      });
+
+    // --- CONTADOR DE DESCARGAS POR APP ---
+    const apps = ["linterna", "turnosgo", "fitcoach"];
+
+    function cargarDescargas() {
+      apps.forEach(app => {
+        fetch(`https://api.countapi.xyz/get/jforceapps.github.io/${app}`)
+          .then(r => r.json())
+          .then(d => {
+            document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value;
+          })
+          .catch(() => {
+            document.getElementById("desc_" + app).textContent = "⬇️ Descargas: error";
+          });
+      });
+    }
+
+    function registrarDescarga(app) {
+      fetch(`https://api.countapi.xyz/hit/jforceapps.github.io/${app}`)
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value;
+        });
+      // Redirigir al enlace real de descarga (ajusta la ruta)
+      window.location.href = `${app}.apk`;
+    }
+
+    cargarDescargas();
+  </script>
 </body>
 </html>
