@@ -66,6 +66,12 @@
       width: 64px;
       height: 64px;
       margin-bottom: 0.5rem;
+      border-radius: 50%; /* Iconos circulares */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* transición para efecto pop */
+    }
+    .app-card img:hover {
+      transform: scale(1.2); /* aumenta tamaño al pasar mouse */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* sombra más marcada */
     }
     .boton {
       display: inline-block;
@@ -155,6 +161,10 @@
       <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
       <br>
       <a href="#" class="boton" onclick="alert('Alias para pagar: JforceApps')" target="_blank">Ver alias Mercado Pago</a>
+      <p style="margin-top:1rem; font-size:0.9rem; color:#333;">
+        Una vez abonada la licencia, envíe el comprobante al correo de contacto indicando para qué app solicita el código. 
+        Una vez verificado, se procederá a la asignación del código activador.
+      </p>
     </section>
 
     <!-- Contacto -->
