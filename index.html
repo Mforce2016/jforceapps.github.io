@@ -168,53 +168,51 @@
     © 2025 JForce Apps · Todos los derechos reservados
   </footer>
 
-    <!-- Firebase integrado -->
-  <script type="module">
-    // Importa los módulos desde CDN
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, doc, getDoc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  <script><script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getFirestore, doc, getDoc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    // 🔥 CONFIGURACIÓN PERSONALIZADA (COPIAR DESDE FIREBASE)
-    const firebaseConfig = {
-           apiKey:"AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
-  authDomain: "jforceapps-a6ded.firebaseapp.com",
-  projectId: "jforceapps-a6ded",
-  storageBucket: "jforceapps-a6ded.firebasestorage.app",
-  messagingSenderId: "423134593625",
-  appId: "1:423134593625:web:506c32165696f293682748"
+  const firebaseConfig = {
+  apiKey: "AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
+  authDomain: "jforceapps-a6ded.firebaseapp.com",
+  projectId: "jforceapps-a6ded",
+  storageBucket: "jforceapps-a6ded.firebasestorage.app",
+  messagingSenderId: "423134593625",
+  appId: "1:423134593625:web:506c32165696f293682748"
 };
 
-    // Inicialización
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-    // 📊 Función para incrementar contador en Firestore
-    async function incrementarContador(tipo, id) {
-      const ref = doc(db, tipo, id);
-      const snap = await getDoc(ref);
-      if (!snap.exists()) {
-        await setDoc(ref, { contador: 0 });
-      }
+  // Crear si no existe y sumar
+  async function incrementarContador(tipo, id) {
+    const ref = doc(db, tipo, id);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) {
+      await setDoc(ref, { contador: 1 });
+    } else {
       await updateDoc(ref, { contador: increment(1) });
     }
+  }
 
-    // 📈 Mostrar contador actual
-    async function mostrarContador(tipo, id, elementoId) {
-      const ref = doc(db, tipo, id);
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        document.getElementById(elementoId).textContent = 
-          (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
-      }
+  async function mostrarContador(tipo, id, elementoId) {
+    const ref = doc(db, tipo, id);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      document.getElementById(elementoId).textContent =
+        (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
     }
+  }
 
-    // --- VISITAS ---
-    async function registrarVisita() {
-      await incrementarContador("visitas", "web");
-      mostrarContador("visitas", "web", "contador");
-    }
+  async function registrarVisita() {
+    await incrementarContador("visitas", "web");
+    mostrarContador("visitas", "web", "contador");
+  }
 
-    // --- DESCARGAS ---
+  async function registrarDescarga(app) {
+    await incrementarContador("descargas", app);
+    mostrarContador("descargas", app, "desc_" + app);
+
     // 🔽 Verificar existencia del archivo antes de redirigir
     const archivo = app.toLowerCase() + ".apk";
     fetch(archivo, { method: 'HEAD' })
@@ -234,7 +232,7 @@
   };
 
   window.registrarDescarga = registrarDescarga;
-  </script>
+</script>
 
 </body>
 </html>
