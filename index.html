@@ -215,21 +215,25 @@
     }
 
     // --- DESCARGAS ---
-    async function registrarDescarga(app) {
-      await incrementarContador("descargas", app);
-      mostrarContador("descargas", app, "desc_" + app);
-      // Simula descarga real
-      window.location.href = app.toLowerCase() + ".apk";
-    }
+    // 🔽 Verificar existencia del archivo antes de redirigir
+    const archivo = app.toLowerCase() + ".apk";
+    fetch(archivo, { method: 'HEAD' })
+      .then(res => {
+        if (res.ok) window.location.href = archivo;
+        else alert("El archivo " + archivo + " no se encuentra disponible aún.");
+      })
+      .catch(() => alert("Error al intentar descargar el archivo."));
+  }
 
-    // --- CARGA INICIAL ---
-    window.onload = async () => {
-      registrarVisita();
-      const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
-      for (const app of apps) {
-        await mostrarContador("descargas", app, "desc_" + app);
-      }
-    };
+  window.onload = async () => {
+    registrarVisita();
+    const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
+    for (const app of apps) {
+      await mostrarContador("descargas", app, "desc_" + app);
+    }
+  };
+
+  window.registrarDescarga = registrarDescarga;
   </script>
 
 </body>
