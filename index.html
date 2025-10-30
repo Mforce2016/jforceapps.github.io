@@ -168,71 +168,34 @@
     © 2025 JForce Apps · Todos los derechos reservados
   </footer>
 
-  <script><script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getFirestore, doc, getDoc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  <script>
+    // --- CONTADOR GLOBAL DE VISITAS ---
+    fetch('https://api.countapi.xyz/hit/mforce2016.github.io/visitas')
+      .then(r => r.json())
+      .then(d => document.getElementById("contador").textContent = "👀 Visitas totales: " + d.value)
+      .catch(() => document.getElementById("contador").textContent = "Error al cargar visitas.");
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
-  authDomain: "jforceapps-a6ded.firebaseapp.com",
-  projectId: "jforceapps-a6ded",
-  storageBucket: "jforceapps-a6ded.firebasestorage.app",
-  messagingSenderId: "423134593625",
-  appId: "1:423134593625:web:506c32165696f293682748"
-};
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  // Crear si no existe y sumar
-  async function incrementarContador(tipo, id) {
-    const ref = doc(db, tipo, id);
-    const snap = await getDoc(ref);
-    if (!snap.exists()) {
-      await setDoc(ref, { contador: 1 });
-    } else {
-      await updateDoc(ref, { contador: increment(1) });
-    }
-  }
-
-  async function mostrarContador(tipo, id, elementoId) {
-    const ref = doc(db, tipo, id);
-    const snap = await getDoc(ref);
-    if (snap.exists()) {
-      document.getElementById(elementoId).textContent =
-        (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
-    }
-  }
-
-  async function registrarVisita() {
-    await incrementarContador("visitas", "web");
-    mostrarContador("visitas", "web", "contador");
-  }
-
-  async function registrarDescarga(app) {
-    await incrementarContador("descargas", app);
-    mostrarContador("descargas", app, "desc_" + app);
-
-    // 🔽 Verificar existencia del archivo antes de redirigir
-    const archivo = app.toLowerCase() + ".apk";
-    fetch(archivo, { method: 'HEAD' })
-      .then(res => {
-        if (res.ok) window.location.href = archivo;
-        else alert("El archivo " + archivo + " no se encuentra disponible aún.");
-      })
-      .catch(() => alert("Error al intentar descargar el archivo."));
-  }
-
-  window.onload = async () => {
-    registrarVisita();
+    // --- CONTADOR DE DESCARGAS ---
     const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
-    for (const app of apps) {
-      await mostrarContador("descargas", app, "desc_" + app);
+    function cargarDescargas() {
+      apps.forEach(app => {
+        fetch(`https://api.countapi.xyz/get/mforce2016.github.io/${app}`)
+          .then(r => r.json())
+          .then(d => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value)
+          .catch(() => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: error");
+      });
     }
-  };
 
-  window.registrarDescarga = registrarDescarga;
-</script>
+    function registrarDescarga(app) {
+      fetch(`https://api.countapi.xyz/hit/mforce2016.github.io/${app}`)
+        .then(r => r.json())
+        .then(d => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value);
+      // descarga real del archivo APK
+      window.location.href = app.toLowerCase() + ".apk";
+    }
+
+    cargarDescargas();
+  </script>
 
 </body>
 </html>
