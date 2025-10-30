@@ -147,7 +147,7 @@
       <p>Escanee el código QR o use el botón para activar su licencia mensual.</p>
       <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
       <br>
-      <a href="#" class="boton" onclick="alert('Alias para pagar: JforceApps')" target="_blank">Ver alias Mercado Pago</a>
+      <a href="#" class="boton" onclick="window.open('https://mpago.la/tu_enlace_real','_blank')">Ir a Mercado Pago</a>
       <p style="margin-top:1rem; font-size:0.9rem; color:#333;">
         Una vez abonada la licencia, envíe el comprobante al correo de contacto indicando para qué app solicita el código. 
         Una vez verificado, se procederá a la asignación del código activador.
@@ -168,33 +168,58 @@
     © 2025 JForce Apps · Todos los derechos reservados
   </footer>
 
-  <script>
-    // --- CONTADOR GLOBAL DE VISITAS ---
-    fetch('https://api.countapi.xyz/hit/mforce2016.github.io/visitas')
-      .then(r => r.json())
-      .then(d => document.getElementById("contador").textContent = "👀 Visitas totales: " + d.value)
-      .catch(() => document.getElementById("contador").textContent = "Error al cargar visitas.");
+  <!-- 🔥 INTEGRACIÓN FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, doc, getDoc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    // --- CONTADOR DE DESCARGAS ---
-    const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
-    function cargarDescargas() {
-      apps.forEach(app => {
-        fetch(`https://api.countapi.xyz/get/mforce2016.github.io/${app}`)
-          .then(r => r.json())
-          .then(d => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value)
-          .catch(() => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: error");
-      });
+    // ⚙️ CONFIG PERSONAL (COPIAR DESDE FIREBASE)
+  const firebaseConfig = {
+  apiKey: "AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
+  authDomain: "jforceapps-a6ded.firebaseapp.com",
+  projectId: "jforceapps-a6ded",
+  storageBucket: "jforceapps-a6ded.firebasestorage.app",
+  messagingSenderId: "423134593625",
+  appId: "1:423134593625:web:506c32165696f293682748"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function incrementarContador(tipo, id) {
+      const ref = doc(db, tipo, id);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) await setDoc(ref, { contador: 0 });
+      await updateDoc(ref, { contador: increment(1) });
     }
 
-    function registrarDescarga(app) {
-      fetch(`https://api.countapi.xyz/hit/mforce2016.github.io/${app}`)
-        .then(r => r.json())
-        .then(d => document.getElementById("desc_" + app).textContent = "⬇️ Descargas: " + d.value);
-      // descarga real del archivo APK
+    async function mostrarContador(tipo, id, elemento) {
+      const ref = doc(db, tipo, id);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        document.getElementById(elemento).textContent = 
+          (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
+      }
+    }
+
+    async function registrarVisita() {
+      await incrementarContador("visitas", "web");
+      mostrarContador("visitas", "web", "contador");
+    }
+
+    async function registrarDescarga(app) {
+      await incrementarContador("descargas", app);
+      mostrarContador("descargas", app, "desc_" + app);
       window.location.href = app.toLowerCase() + ".apk";
     }
 
-    cargarDescargas();
+    window.onload = async () => {
+      registrarVisita();
+      const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
+      for (const app of apps) await mostrarContador("descargas", app, "desc_" + app);
+    };
+
+    window.registrarDescarga = registrarDescarga;
   </script>
 
 </body>
