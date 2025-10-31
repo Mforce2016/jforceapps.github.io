@@ -1,6 +1,6 @@
 {
-  "versionCode": 2,
-  "versionName": "1.2",
+  "versionCode": 3,
+  "versionName": "1.3",
   "message": "¡Nueva versión disponible!\n\n- Mejoras de rendimiento.\n- Corrección de errores en el inicio.\n- Optimización de carga del Splash.",
   "updateUrl": "https://mforce2016.github.io/jforceapps.github.io/version.json"
 }
