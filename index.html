@@ -102,23 +102,21 @@
     }
     @keyframes splashFadeOut{to{opacity:0;visibility:hidden;}}
     #splash .logo{
-  font-size:3rem;
-  font-weight:900;
-  color:#fff;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 15px var(--accent);
-  /* Efecto de iluminación lateral */
-  background-size:200% 100%;
-  animation:glowPulse 3s infinite alternate, shine 2s linear infinite;
-}
-
-@keyframes shine {
-  0% { background-position: -100% 0; }
-  50% { background-position: 100% 0; }
-  100% { background-position: -100% 0; }
-}
+      font-size:3rem;
+      font-weight:900;
+      color:#fff;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 15px var(--accent);
+      background-size:200% 100%;
+      animation:glowPulse 3s infinite alternate, shine 2s linear infinite;
+    }
+    @keyframes shine {
+      0% { background-position: -100% 0; }
+      50% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
     #splash p{
       margin-top:1rem;
       font-size:1.2rem;
@@ -231,6 +229,69 @@
     }
     .whatsapp-float:hover{transform:scale(1.1);}
     .whatsapp-float svg{width:32px;height:32px;fill:#fff;}
+
+    /* 🔸 Ajustes para pantallas grandes (PC) */
+    @media (min-width: 900px) {
+      .container {
+        width: 85%;
+        max-width: 1200px;
+        padding-top: 8rem;
+      }
+
+      .hero {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+        gap: 2rem;
+      }
+
+      .hero img {
+        width: 180px;
+        height: 180px;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        max-width: 600px;
+      }
+
+      .accordion {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+      }
+
+      .category {
+        background: var(--card-bg);
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: var(--radius);
+        padding-bottom: 0.5rem;
+        box-shadow: 0 0 18px rgba(0,0,0,0.25);
+        transition: transform 0.3s ease;
+      }
+
+      .category:hover {
+        transform: translateY(-4px);
+      }
+
+      .cat-btn {
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .pay-block {
+        max-width: 480px;
+        margin: 2rem auto;
+      }
+
+      main.area {
+        padding: 2rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -249,15 +310,17 @@
     <header class="site-header">
       <div class="hero">
         <img src="logo.png" alt="JForce Apps Logo">
-        <h1>JForce Apps — Soluciones móviles</h1>
-        <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.</p>
+        <div>
+          <h1>JForce Apps — Soluciones móviles</h1>
+          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.</p>
+        </div>
       </div>
     </header>
 
     <main class="area">
       <h2>📱 Aplicaciones móviles</h2>
-
       <div class="accordion">
+        <!-- Categorías -->
         <!-- Seguridad -->
         <div class="category">
           <button class="cat-btn" data-target="seguridad">
