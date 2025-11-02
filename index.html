@@ -5,103 +5,210 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>JForce Apps</title>
   <style>
-    :root{
-      --bg: #0f1724;
-      --card: #ffffff;
+    :root {
       --accent: #00c2c7;
       --accent-2: #ff7a18;
-      --muted: #98a0ac;
-      --glass: rgba(255,255,255,0.06);
-      --max-width: 1100px;
+      --muted: #7a8699;
+      --transition: 1s cubic-bezier(.25, .8, .25, 1);
     }
-    *{box-sizing:border-box}
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:"Segoe UI",Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#071226 0%, #08172a 60%);
-      color:#e6eef6;
-      scroll-behavior:smooth;
+
+    /* 🎨 Colores para modo claro y oscuro */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6f8fc;
+        --text: #0a0a0a;
+        --card-bg: #ffffff;
+      }
     }
-    .container{width:95%; max-width:var(--max-width); margin:0 auto; padding:2rem 0;}
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: linear-gradient(180deg,#071226 0%, #08172a 60%);
+        --text: #e6eef6;
+        --card-bg: rgba(255,255,255,0.03);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideIn 1s ease forwards 0.8s;
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* HEADER */
-    header.site-header{display:flex; justify-content:center; margin-bottom:1.4rem;}
-    .hero{
-      width:100%; border-radius:14px; overflow:hidden;
-      box-shadow:0 10px 30px rgba(2,6,23,0.6), 0 2px 8px rgba(0,0,0,0.5);
-      background:linear-gradient(180deg, rgba(2,6,23,0.55), rgba(3,8,15,0.45));
-      display:flex; align-items:center; gap:1.4rem; padding:1.2rem;
+    header.site-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: fadeDown 1s ease forwards 0.3s;
     }
-    .hero-left{width:160px;height:160px;display:flex;align-items:center;justify-content:center;background:var(--glass);border-radius:12px;padding:8px;}
-    .hero-left img{width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.6));}
-    .hero-right{flex:1;}
-    .hero-right h1{margin:0;font-size:2rem;color:#fff;}
-    .hero-right p{margin:6px 0 0 0;color:var(--muted);font-size:0.98rem;}
-
-    .grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:1.3rem;}
-    @media(min-width:880px){.grid{grid-template-columns:1fr 360px;align-items:start;}}
-
-    main.area,aside.sidebar{
-      background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));
-      padding:1rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.45);
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .section-title h2{margin:0;font-size:1.3rem;color:#fff;}
-
-    /* ACCORDION */
-    .accordion{border-radius:10px;overflow:hidden;background:transparent;margin-top:1rem;}
-    .category{border-top:1px solid rgba(255,255,255,0.05);}
-    .category>button.cat-btn{
-      width:100%;background:transparent;border:0;color:#eaf6fb;text-align:left;
-      padding:14px 16px;font-size:1rem;display:flex;align-items:center;gap:0.8rem;
-      cursor:pointer;transition:background .18s ease;
+    .hero {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      padding: 1.2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: background var(--transition);
     }
-    .category>button.cat-btn:hover{background:rgba(255,255,255,0.03);}
-    .cat-logo{
-      width:48px;height:48px;border-radius:10px;
-      display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,var(--accent),#007787);
-      color:#012;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,0.5);
+    .hero-left img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      display: block;
+      animation: zoomIn 1s ease forwards;
     }
-
-    /* animación al abrir */
-    .cat-body{
-      max-height:0;
-      overflow:hidden;
-      padding:0 16px;
-      opacity:0;
-      transform:translateY(-10px);
-      transition:max-height .5s cubic-bezier(.2,.9,.2,1), opacity .4s ease, transform .4s ease;
-    }
-    .cat-body.open{
-      padding:12px 16px 18px 16px;
-      max-height:600px;
-      opacity:1;
-      transform:translateY(0);
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.7); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    /* APP */
-    .app-row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.03);}
-    .app-icon{width:64px;height:64px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.45);}
-    .app-info{flex:1;}
-    .app-info h3{margin:0;color:#0b2130;font-size:1rem;}
-    .app-info p{margin:6px 0 0 0;color:#54606a;font-size:0.9rem;}
-    .app-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
-    .btn-download{
-      background:linear-gradient(90deg,var(--accent-2),#ff9a51);
-      color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;
-      font-weight:700;box-shadow:0 8px 18px rgba(255,121,48,0.18);
-      cursor:pointer;border:0;transition:transform .2s ease;
+    .hero-right h1 {
+      margin: 0;
+      font-size: 2rem;
+      animation: slideText 1s ease forwards 0.6s;
+      opacity: 0;
     }
-    .btn-download:hover{transform:scale(1.05);}
-    .app-small{font-size:0.8rem;color:var(--muted);}
+    .hero-right p {
+      margin-top: 6px;
+      color: var(--muted);
+      animation: slideText 1s ease forwards 0.9s;
+      opacity: 0;
+    }
+    @keyframes slideText {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
 
-    .pay-block{text-align:center;padding:8px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));}
-    .qr{width:180px;border-radius:10px;border:4px solid rgba(255,255,255,0.04);display:block;margin:0 auto 10px auto;background:#fff;padding:8px;}
-    .pay-btn{display:inline-block;margin-top:6px;padding:10px 14px;background:linear-gradient(90deg,var(--accent),#007c85);color:white;border-radius:10px;text-decoration:none;font-weight:700;transition:transform .2s ease;}
-    .pay-btn:hover{transform:scale(1.05);}
-    footer{text-align:center;color:var(--muted);margin-top:1.5rem;font-size:0.9rem;}
+    /* CONTENT */
+    main.area {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      transition: background var(--transition), color var(--transition);
+      animation: fadeSlideIn 1s ease forwards 1.2s;
+    }
+
+    h2 { margin-top: 0; }
+
+    .accordion { margin-top: 1rem; border-radius: 10px; overflow: hidden; }
+    .category { border-top: 1px solid rgba(255,255,255,0.05); }
+
+    .cat-btn {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      color: inherit;
+      text-align: left;
+      padding: 14px 16px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .cat-btn:hover { background: rgba(255,255,255,0.05); }
+    .cat-logo {
+      width: 48px; height: 48px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--accent), #007787);
+      color: #fff; font-weight: 700;
+    }
+
+    .cat-body {
+      max-height: 0; overflow: hidden;
+      opacity: 0; transform: translateY(-10px);
+      transition: all 0.5s ease;
+      padding: 0 16px;
+    }
+    .cat-body.open {
+      max-height: 600px;
+      opacity: 1; transform: translateY(0);
+      padding: 12px 16px 18px;
+    }
+
+    .app-row {
+      display: flex; gap: 12px; align-items: center;
+      padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.05);
+    }
+    .app-icon {
+      width: 64px; height: 64px; border-radius: 10px;
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+    .app-info h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: #000; /* negro en modo claro */
+    }
+    @media (prefers-color-scheme: dark) {
+      .app-info h3 { color: #fff; } /* blanco en modo oscuro */
+    }
+
+    .app-info p {
+      margin: 6px 0 0 0; font-size: 0.9rem; color: var(--muted);
+    }
+    .app-actions {
+      display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+    }
+    .btn-download {
+      background: linear-gradient(90deg,var(--accent-2),#ff9a51);
+      color: #fff; padding: 8px 12px; border-radius: 8px;
+      text-decoration: none; font-weight: 700; border: 0; cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .btn-download:hover { transform: scale(1.05); }
+
+    /* PAYMENT */
+    .pay-block {
+      text-align: center; padding: 8px; border-radius: 10px;
+      background: var(--card-bg); margin-top: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .qr {
+      width: 180px; border-radius: 10px; display: block;
+      margin: 0 auto 10px; background: #fff; padding: 8px;
+    }
+    .pay-btn {
+      display: inline-block; margin-top: 6px;
+      padding: 10px 14px;
+      background: linear-gradient(90deg,var(--accent),#007c85);
+      color: white; border-radius: 10px; text-decoration: none; font-weight: 700;
+      transition: transform .2s ease;
+    }
+    .pay-btn:hover { transform: scale(1.05); }
+
+    footer { text-align: center; margin-top: 1.5rem; color: var(--muted); }
   </style>
 </head>
 <body>
@@ -112,89 +219,84 @@
           <img src="logo.png" alt="JForce Apps Logo">
         </div>
         <div class="hero-right">
-          <h1>JForce Apps — Soluciones móviles & de escritorio</h1>
-          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras — pago con Mercado Pago.</p>
+          <h1>JForce Apps — Soluciones móviles</h1>
+          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.</p>
         </div>
       </div>
     </header>
 
-    <div class="grid">
-      <main class="area">
-        <div class="section-title"><h2>Áreas & Categorías</h2></div>
+    <main class="area">
+      <h2>📱 Aplicaciones móviles</h2>
 
-        <h3 style="margin:6px 0 8px 0;color:#fff;">🖥️ Aplicaciones de escritorio</h3>
-        <p style="color:#aaa;margin-bottom:1rem;">Próximamente...</p>
-
-        <h3 style="margin:6px 0 8px 0;color:#fff;">📱 Aplicaciones móviles</h3>
-        <div class="accordion" id="mobileAccordion">
-
-          <!-- Seguridad -->
-          <div class="category">
-            <button class="cat-btn" data-target="mobile-seguridad">
-              <div class="cat-logo">PSA</div>
-              <div><div style="font-weight:700">Fuerzas de Seguridad</div>
-              <div style="font-size:0.86rem;color:var(--muted)">Apps oficiales y de gestión móvil</div></div>
-            </button>
-            <div class="cat-body" id="mobile-seguridad">
-              <div class="app-row">
-                <div class="app-icon"><img src="registrolao.png" alt="Registro LAO" style="width:48px;height:48px;object-fit:contain"></div>
-                <div class="app-info"><h3>Registro LAO</h3><p class="app-small">Registro y control de licencias para personal.</p></div>
-                <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button><div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div></div>
-              </div>
-              <div class="app-row">
-                <div class="app-icon"><img src="turnosgo.png" alt="TurnosGo" style="width:48px;height:48px;object-fit:contain"></div>
-                <div class="app-info"><h3>TurnosGo</h3><p class="app-small">Sistema de turnos ágil para dispositivos móviles.</p></div>
-                <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button><div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div></div>
-              </div>
+      <div class="accordion">
+        <!-- Seguridad -->
+        <div class="category">
+          <button class="cat-btn" data-target="seguridad">
+            <div class="cat-logo">PSA</div>
+            <div><div style="font-weight:700">Fuerzas de Seguridad</div>
+            <div style="font-size:0.86rem;color:var(--muted)">Apps oficiales y de gestión móvil</div></div>
+          </button>
+          <div class="cat-body" id="seguridad">
+            <div class="app-row">
+              <div class="app-icon"><img src="registrolao.png" alt="Registro LAO" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-info"><h3>Registro LAO</h3><p>Registro y control de licencias para personal.</p></div>
+              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button><div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div></div>
             </div>
-          </div>
-
-          <!-- Salud -->
-          <div class="category">
-            <button class="cat-btn" data-target="mobile-salud">
-              <div class="cat-logo" style="background:linear-gradient(135deg,#3ad7b8,#00a3c8)">HS</div>
-              <div><div style="font-weight:700">Salud</div>
-              <div style="font-size:0.86rem;color:var(--muted)">Apps para entrenadores y pacientes</div></div>
-            </button>
-            <div class="cat-body" id="mobile-salud">
-              <div class="app-row">
-                <div class="app-icon"><img src="fitcoach.png" alt="FitCoach" style="width:48px;height:48px;object-fit:contain"></div>
-                <div class="app-info"><h3>FitCoach</h3><p class="app-small">Planificación de entrenamientos y seguimiento.</p></div>
-                <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button><div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Entretenimiento -->
-          <div class="category">
-            <button class="cat-btn" data-target="mobile-entret">
-              <div class="cat-logo" style="background:linear-gradient(135deg,#ff6bb5,#ff8a5c)">EN</div>
-              <div><div style="font-weight:700">Entretenimiento</div>
-              <div style="font-size:0.86rem;color:var(--muted)">Utilidades y diversión</div></div>
-            </button>
-            <div class="cat-body" id="mobile-entret">
-              <div class="app-row">
-                <div class="app-icon"><img src="linterna.png" alt="Linterna Shake" style="width:48px;height:48px;object-fit:contain"></div>
-                <div class="app-info"><h3>Linterna Shake</h3><p class="app-small">Linterna instantánea con gesto de sacudir.</p></div>
-                <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button><div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div></div>
-              </div>
+            <div class="app-row">
+              <div class="app-icon"><img src="turnosgo.png" alt="TurnosGo" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-info"><h3>TurnosGo</h3><p>Sistema de turnos ágil para dispositivos móviles.</p></div>
+              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button><div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div></div>
             </div>
           </div>
         </div>
-      </main>
 
-      <aside class="sidebar">
-        <div class="pay-block">
-          <h3 style="margin:0 0 8px 0;color:#fff;">Pagos de Licencias</h3>
-          <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
-          <div><a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a></div>
-          <p style="color:#aaa;font-size:0.9rem;">Una vez abonada la licencia, enviá el comprobante a<br><a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a></p>
+        <!-- Salud -->
+        <div class="category">
+          <button class="cat-btn" data-target="salud">
+            <div class="cat-logo" style="background:linear-gradient(135deg,#3ad7b8,#00a3c8)">HS</div>
+            <div><div style="font-weight:700">Salud</div>
+            <div style="font-size:0.86rem;color:var(--muted)">Apps para entrenadores y pacientes</div></div>
+          </button>
+          <div class="cat-body" id="salud">
+            <div class="app-row">
+              <div class="app-icon"><img src="fitcoach.png" alt="FitCoach" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-info"><h3>FitCoach</h3><p>Planificación de entrenamientos y seguimiento.</p></div>
+              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button><div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div></div>
+            </div>
+          </div>
         </div>
-        <div style="margin-top:14px;text-align:center;">
-          <p id="contador" style="font-weight:700;color:var(--accent)">👀 Visitas totales: cargando...</p>
+
+        <!-- Entretenimiento -->
+        <div class="category">
+          <button class="cat-btn" data-target="entret">
+            <div class="cat-logo" style="background:linear-gradient(135deg,#ff6bb5,#ff8a5c)">EN</div>
+            <div><div style="font-weight:700">Entretenimiento</div>
+            <div style="font-size:0.86rem;color:var(--muted)">Utilidades y diversión</div></div>
+          </button>
+          <div class="cat-body" id="entret">
+            <div class="app-row">
+              <div class="app-icon"><img src="linterna.png" alt="Linterna Shake" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-info"><h3>Linterna Shake</h3><p>Linterna instantánea con gesto de sacudir.</p></div>
+              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button><div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div></div>
+            </div>
+          </div>
         </div>
-      </aside>
-    </div>
+      </div>
+
+      <!-- Pago -->
+      <div class="pay-block">
+        <h3>Pagos de Licencias</h3>
+        <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
+        <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a>
+        <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
+          Una vez abonada la licencia, enviá el comprobante a <br>
+          <a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a>
+        </p>
+      </div>
+
+      <p id="contador" style="text-align:center;margin-top:1rem;font-weight:700;color:var(--accent)">👀 Visitas totales: cargando...</p>
+    </main>
+
     <footer>© 2025 JForce Apps · Todos los derechos reservados</footer>
   </div>
 
@@ -244,7 +346,7 @@
 
   <!-- Accordion -->
   <script>
-    document.addEventListener('click',e=>{
+    document.addEventListener('click', e=>{
       const btn=e.target.closest('.cat-btn');
       if(!btn)return;
       const target=document.getElementById(btn.dataset.target);
