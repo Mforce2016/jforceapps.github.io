@@ -6,222 +6,251 @@
   <title>JForce Apps</title>
   <style>
     :root {
-      --accent: #00c2c7;
-      --accent-2: #ff7a18;
-      --muted: #7a8699;
-      --transition: 1s cubic-bezier(.25, .8, .25, 1);
+      --accent: #00f2ff;
+      --accent-2: #ff4ef8;
+      --muted: #9aa0b0;
+      --transition: 0.9s cubic-bezier(.25,.8,.25,1);
+      --radius: 14px;
     }
 
-    /* 🎨 Colores para modo claro y oscuro */
     @media (prefers-color-scheme: light) {
       :root {
-        --bg: #f6f8fc;
-        --text: #0a0a0a;
+        --bg: #f5f9ff;
+        --text: #0b0b0b;
         --card-bg: #ffffff;
       }
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: linear-gradient(180deg,#071226 0%, #08172a 60%);
-        --text: #e6eef6;
-        --card-bg: rgba(255,255,255,0.03);
+        --bg: linear-gradient(135deg,#060b20 0%,#0c112f 50%,#10152f 100%);
+        --text: #e9f0ff;
+        --card-bg: rgba(255,255,255,0.05);
       }
     }
 
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      height: 100%;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      scroll-behavior: smooth;
+    *{box-sizing:border-box;}
+    html,body{
+      margin:0;padding:0;
+      font-family:"Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      scroll-behavior:smooth;
+      overflow-x:hidden;
     }
 
-    .container {
-      width: 95%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 0;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeSlideIn 1s ease forwards 0.8s;
+    /* 🔹 Fondo animado */
+    body::before {
+      content:"";
+      position:fixed;inset:0;
+      background:radial-gradient(circle at 20% 30%, #0077ff22, transparent 50%),
+                 radial-gradient(circle at 80% 70%, #ff00ee22, transparent 50%);
+      animation:bgMove 10s infinite alternate;
+      z-index:-1;
+    }
+    @keyframes bgMove {
+      0%{background-position:20% 30%,80% 70%;}
+      100%{background-position:80% 40%,30% 80%;}
     }
 
-    @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .container{width:92%;max-width:1100px;margin:0 auto;padding:6rem 0 2rem;}
 
-    /* HEADER */
-    header.site-header {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1.4rem;
-      opacity: 0;
-      transform: translateY(-30px);
-      animation: fadeDown 1s ease forwards 0.3s;
+    /* 🔹 Navbar */
+    .navbar{
+      position:fixed;top:0;left:0;right:0;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0.7rem 1.2rem;
+      background:rgba(15,25,40,0.35);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+      box-shadow:0 0 12px rgba(0,255,255,0.15);
     }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-30px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+    .navbar-logo{
+      font-size:1.4rem;
+      font-weight:800;
+      color:#fff;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 12px var(--accent);
+      animation:glowPulse 3s infinite alternate, spin 6s linear infinite;
     }
+    @keyframes glowPulse{
+      0%{text-shadow:0 0 6px var(--accent);}
+      100%{text-shadow:0 0 20px var(--accent-2);}
+    }
+    @keyframes spin{
+      0%{transform:rotate(0deg);}
+      100%{transform:rotate(360deg);}
+    }
+    .navbar a{
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      transition:opacity .3s;
+    }
+    .navbar a:hover{opacity:0.7;}
 
-    .hero {
-      width: 100%;
-      border-radius: 14px;
-      overflow: hidden;
-      background: var(--card-bg);
-      display: flex;
-      align-items: center;
-      gap: 1.4rem;
-      padding: 1.2rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transition: background var(--transition);
+    /* 🔹 Splash Screen */
+    #splash{
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:radial-gradient(circle at 50% 30%, #081024, #030612);
+      z-index:2000;
+      color:#fff;
+      animation:splashFadeOut 1s ease 2.2s forwards;
     }
-    .hero-left img {
-      width: 140px;
-      height: 140px;
-      object-fit: contain;
-      display: block;
-      animation: zoomIn 1s ease forwards;
-    }
-    @keyframes zoomIn {
-      from { opacity: 0; transform: scale(0.7); }
-      to { opacity: 1; transform: scale(1); }
-    }
+    @keyframes splashFadeOut{to{opacity:0;visibility:hidden;}}
+    #splash .logo{
+  font-size:3rem;
+  font-weight:900;
+  color:#fff;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 15px var(--accent);
+  /* Efecto de iluminación lateral */
+  background-size:200% 100%;
+  animation:glowPulse 3s infinite alternate, shine 2s linear infinite;
+}
 
-    .hero-right h1 {
-      margin: 0;
-      font-size: 2rem;
-      animation: slideText 1s ease forwards 0.6s;
-      opacity: 0;
+@keyframes shine {
+  0% { background-position: -100% 0; }
+  50% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+    #splash p{
+      margin-top:1rem;
+      font-size:1.2rem;
+      color:#ccefff;
+      animation:fadeInText 1.5s ease forwards;
     }
-    .hero-right p {
-      margin-top: 6px;
-      color: var(--muted);
-      animation: slideText 1s ease forwards 0.9s;
-      opacity: 0;
-    }
-    @keyframes slideText {
-      from { opacity: 0; transform: translateX(40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+    @keyframes fadeInText{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-    /* CONTENT */
-    main.area {
-      background: var(--card-bg);
-      padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      transition: background var(--transition), color var(--transition);
-      animation: fadeSlideIn 1s ease forwards 1.2s;
-    }
 
-    h2 { margin-top: 0; }
+    /* 🔹 Header */
+    header.site-header{text-align:center;animation:fadeDown 1s ease forwards 0.3s;opacity:0;}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
+    .hero{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:0 0 25px rgba(0,255,255,0.2);
+      padding:1.2rem;
+      display:flex;flex-direction:column;align-items:center;gap:1rem;
+      transition:all .5s ease;
+    }
+    .hero img{width:160px;height:160px;object-fit:contain;animation:zoomIn 1s ease forwards;}
+    @keyframes zoomIn{from{opacity:0;transform:scale(0.7);}to{opacity:1;transform:scale(1);}}
+    .hero h1{
+      font-size:2rem;margin:0;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .hero p{color:var(--muted);margin:0;font-size:1rem;}
 
-    .accordion { margin-top: 1rem; border-radius: 10px; overflow: hidden; }
-    .category { border-top: 1px solid rgba(255,255,255,0.05); }
+    /* 🔹 Main */
+    main.area{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:1rem;
+      margin-top:1.5rem;
+      box-shadow:0 0 30px rgba(0,0,0,0.25);
+      animation:fadeSlideIn 1s ease forwards 1s;
+      opacity:0;
+    }
+    @keyframes fadeSlideIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+    h2{text-align:center;margin-top:0;}
 
-    .cat-btn {
-      width: 100%;
-      background: transparent;
-      border: 0;
-      color: inherit;
-      text-align: left;
-      padding: 14px 16px;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      cursor: pointer;
-      transition: background 0.2s ease;
+    /* 🔹 Accordion */
+    .accordion{margin-top:1rem;}
+    .category{border-top:1px solid rgba(255,255,255,0.06);}
+    .cat-btn{
+      width:100%;border:0;background:transparent;color:inherit;
+      display:flex;align-items:center;gap:1rem;text-align:left;
+      padding:16px;cursor:pointer;font-size:1.05rem;
+      transition:background 0.3s ease;
     }
-    .cat-btn:hover { background: rgba(255,255,255,0.05); }
-    .cat-logo {
-      width: 48px; height: 48px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--accent), #007787);
-      color: #fff; font-weight: 700;
+    .cat-btn:hover{background:rgba(255,255,255,0.04);}
+    .cat-icon{
+      width:52px;height:52px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      box-shadow:0 0 12px var(--accent);
+      animation:glowPulse 3s infinite alternate;
     }
+    .cat-icon svg{width:26px;height:26px;stroke:#fff;stroke-width:2;fill:none;}
 
-    .cat-body {
-      max-height: 0; overflow: hidden;
-      opacity: 0; transform: translateY(-10px);
-      transition: all 0.5s ease;
-      padding: 0 16px;
-    }
-    .cat-body.open {
-      max-height: 600px;
-      opacity: 1; transform: translateY(0);
-      padding: 12px 16px 18px;
-    }
+    .cat-body{max-height:0;overflow:hidden;opacity:0;transform:translateY(-10px);transition:all 0.5s ease;padding:0 16px;}
+    .cat-body.open{max-height:600px;opacity:1;transform:translateY(0);padding:12px 16px 18px;}
 
-    .app-row {
-      display: flex; gap: 12px; align-items: center;
-      padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.05);
+    /* 🔹 Apps */
+    .app-row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.05);}
+    .app-icon{width:64px;height:64px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 15px rgba(0,0,0,0.4);}
+    .app-info h3{margin:0;font-size:1rem;color:#000;}
+    @media(prefers-color-scheme:dark){.app-info h3{color:#fff;}}
+    .app-info p{margin:4px 0 0 0;color:var(--muted);font-size:0.9rem;}
+    .btn-download{
+      background:linear-gradient(90deg,var(--accent-2),#ff9a51);
+      color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;
+      border:0;cursor:pointer;box-shadow:0 0 15px rgba(255,118,255,0.4);
+      transition:all 0.3s ease;
+      animation:glowPulse 3s infinite alternate;
     }
-    .app-icon {
-      width: 64px; height: 64px; border-radius: 10px;
-      background: #fff; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-    }
-    .app-info h3 {
-      margin: 0;
-      font-size: 1rem;
-      color: #000; /* negro en modo claro */
-    }
-    @media (prefers-color-scheme: dark) {
-      .app-info h3 { color: #fff; } /* blanco en modo oscuro */
-    }
+    .btn-download:hover{transform:scale(1.07);}
 
-    .app-info p {
-      margin: 6px 0 0 0; font-size: 0.9rem; color: var(--muted);
+    /* 🔹 Pago */
+    .pay-block{
+      text-align:center;padding:16px;margin-top:1.5rem;
+      border-radius:var(--radius);
+      background:var(--card-bg);
+      box-shadow:0 0 20px rgba(0,255,255,0.15);
     }
-    .app-actions {
-      display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+    .qr{width:180px;margin:0 auto 10px;border-radius:10px;background:#fff;padding:8px;}
+    .pay-btn{
+      display:inline-block;padding:10px 16px;
+      border-radius:8px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;text-decoration:none;font-weight:700;
+      box-shadow:0 0 15px rgba(0,255,255,0.4);
+      transition:all 0.3s ease;
+      animation:glowPulse 3s infinite alternate;
     }
-    .btn-download {
-      background: linear-gradient(90deg,var(--accent-2),#ff9a51);
-      color: #fff; padding: 8px 12px; border-radius: 8px;
-      text-decoration: none; font-weight: 700; border: 0; cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .btn-download:hover { transform: scale(1.05); }
+    .pay-btn:hover{transform:scale(1.07);}
+    footer{text-align:center;margin-top:1.5rem;color:var(--muted);}
 
-    /* PAYMENT */
-    .pay-block {
-      text-align: center; padding: 8px; border-radius: 10px;
-      background: var(--card-bg); margin-top: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    /* 🔹 WhatsApp */
+    .whatsapp-float{
+      position:fixed;bottom:20px;right:20px;
+      width:60px;height:60px;border-radius:50%;
+      background:linear-gradient(135deg,#25d366,#1ebe57);
+      box-shadow:0 0 20px rgba(37,211,102,0.7);
+      display:flex;align-items:center;justify-content:center;
+      z-index:1000;
+      animation:glowPulse 3s infinite alternate;
+      transition:transform 0.3s ease;
     }
-    .qr {
-      width: 180px; border-radius: 10px; display: block;
-      margin: 0 auto 10px; background: #fff; padding: 8px;
-    }
-    .pay-btn {
-      display: inline-block; margin-top: 6px;
-      padding: 10px 14px;
-      background: linear-gradient(90deg,var(--accent),#007c85);
-      color: white; border-radius: 10px; text-decoration: none; font-weight: 700;
-      transition: transform .2s ease;
-    }
-    .pay-btn:hover { transform: scale(1.05); }
-
-    footer { text-align: center; margin-top: 1.5rem; color: var(--muted); }
+    .whatsapp-float:hover{transform:scale(1.1);}
+    .whatsapp-float svg{width:32px;height:32px;fill:#fff;}
   </style>
 </head>
 <body>
-  <div class="container">
+  <!-- Splash -->
+  <div id="splash">
+    <div class="logo">Jforce Apps</div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-logo">⚡️</div>
+    <a href="#top">Inicio</a>
+  </nav>
+
+  <div class="container" id="top">
     <header class="site-header">
       <div class="hero">
-        <div class="hero-left">
-          <img src="logo.png" alt="JForce Apps Logo">
-        </div>
-        <div class="hero-right">
-          <h1>JForce Apps — Soluciones móviles</h1>
-          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.</p>
-        </div>
+        <img src="logo.png" alt="JForce Apps Logo">
+        <h1>JForce Apps — Soluciones móviles</h1>
+        <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.</p>
       </div>
     </header>
 
@@ -232,9 +261,8 @@
         <!-- Seguridad -->
         <div class="category">
           <button class="cat-btn" data-target="seguridad">
-            <div class="cat-logo">PSA</div>
-            <div><div style="font-weight:700">Fuerzas de Seguridad</div>
-            <div style="font-size:0.86rem;color:var(--muted)">Apps oficiales y de gestión móvil</div></div>
+            <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3 9-8 10-5-1-8-5-8-10V6z"/></svg></div>
+            <div><strong>Fuerzas de Seguridad</strong><br><small style="color:var(--muted)">Apps oficiales y de gestión móvil</small></div>
           </button>
           <div class="cat-body" id="seguridad">
             <div class="app-row">
@@ -253,9 +281,8 @@
         <!-- Salud -->
         <div class="category">
           <button class="cat-btn" data-target="salud">
-            <div class="cat-logo" style="background:linear-gradient(135deg,#3ad7b8,#00a3c8)">HS</div>
-            <div><div style="font-weight:700">Salud</div>
-            <div style="font-size:0.86rem;color:var(--muted)">Apps para entrenadores y pacientes</div></div>
+            <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+            <div><strong>Salud</strong><br><small style="color:var(--muted)">Apps para entrenadores y pacientes</small></div>
           </button>
           <div class="cat-body" id="salud">
             <div class="app-row">
@@ -269,9 +296,8 @@
         <!-- Entretenimiento -->
         <div class="category">
           <button class="cat-btn" data-target="entret">
-            <div class="cat-logo" style="background:linear-gradient(135deg,#ff6bb5,#ff8a5c)">EN</div>
-            <div><div style="font-weight:700">Entretenimiento</div>
-            <div style="font-size:0.86rem;color:var(--muted)">Utilidades y diversión</div></div>
+            <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7v8l11-12h-8z"/></svg></div>
+            <div><strong>Entretenimiento</strong><br><small style="color:var(--muted)">Utilidades y diversión</small></div>
           </button>
           <div class="cat-body" id="entret">
             <div class="app-row">
@@ -289,7 +315,7 @@
         <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
         <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a>
         <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
-          Una vez abonada la licencia, enviá el comprobante a <br>
+          Ante consultas o activaciones:<br>
           <a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a>
         </p>
       </div>
@@ -299,6 +325,11 @@
 
     <footer>© 2025 JForce Apps · Todos los derechos reservados</footer>
   </div>
+
+  <!-- Botón WhatsApp -->
+  <a href="https://wa.me/5491124554076?text=Hola%20JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.5 2.1 8L0 32l8.2-2.1C10.8 31.3 13.3 32 16 32c8.8 0 16-7.2 16-16S24.8 0 16 0zm0 29c-2.4 0-4.8-.6-6.9-1.9l-.5-.3-4.8 1.2 1.3-4.7-.3-.5C3.6 20.6 3 18.3 3 16 3 8.8 8.8 3 16 3s13 5.8 13 13-5.8 13-13 13zm7.5-9.7c-.4-.2-2.5-1.3-2.8-1.4s-.7-.2-1 .2-1.1 1.4-1.3 1.7c-.2.2-.4.3-.8.1s-1.5-.5-2.9-1.8c-1.1-1-1.8-2.2-2-2.5s0-.6.2-.8.4-.4.6-.6c.2-.2.3-.3.5-.5s.2-.3.3-.5c.1-.2.1-.4 0-.6-.1-.2-1-2.4-1.4-3.3-.3-.8-.7-.7-.9-.7h-.8c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.3 3.5c.2.3 2.3 3.5 5.6 4.9.8.3 1.5.5 2 .6.8.2 1.5.2 2.1.1.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6s-.3-.3-.7-.5z"/></svg>
+  </a>
 
   <!-- Firebase -->
   <script type="module">
@@ -344,7 +375,6 @@
     window.registrarDescarga=registrarDescarga;
   </script>
 
-  <!-- Accordion -->
   <script>
     document.addEventListener('click', e=>{
       const btn=e.target.closest('.cat-btn');
