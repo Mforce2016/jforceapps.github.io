@@ -1,188 +1,437 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>JForce Apps</title>
   <style>
-    :root {
-      --color-principal: #004C91;
-      --color-secundario: #0277BD;
-      --color-fondo: #f8f9fa;
-      --color-texto: #222;
+    :root{
+      --bg: #0f1724;          /* fondo general */
+      --card: #ffffff;
+      --accent: #00c2c7;      /* turquesa */
+      --accent-2: #ff7a18;    /* naranja */
+      --muted: #98a0ac;
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.03);
+      --max-width: 1100px;
     }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: var(--color-fondo);
-      color: var(--color-texto);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background:linear-gradient(180deg,#071226 0%, #08172a 60%); color:#e6eef6}
+    .container{width:95%; max-width:var(--max-width); margin:0 auto; padding:2rem 0;}
+
+    /* HEADER */
+    header.site-header{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      margin-bottom:1.4rem;
     }
-    header {
-      width: 100%;
-      background: var(--color-principal);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
+    .hero{
+      width:100%;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6), 0 2px 8px rgba(0,0,0,0.5);
+      background:linear-gradient(180deg, rgba(2,6,23,0.55), rgba(3,8,15,0.45));
+      display:flex;
+      align-items:center;
+      gap:1.4rem;
+      padding:1.2rem;
     }
-    header img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(255,255,255,0.5);
-      margin-bottom: 0.8rem;
+    .hero-left{
+      width:160px;
+      height:160px;
+      flex:0 0 160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--glass);
+      border-radius:12px;
+      padding:8px;
     }
-    header h1 { margin: 0; font-size: 2rem; }
-    header p { font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.9; }
-    main {
-      width: 90%;
-      max-width: 800px;
-      margin-top: 2rem;
+    .hero-left img{ width:140px; height:140px; object-fit:contain; display:block; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6)); }
+    .hero-right{
+      flex:1;
+      padding-right:1rem;
     }
-    .app-card {
-      background: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      transition: transform 0.2s ease;
+    .hero-right h1{ margin:0; font-size:2rem; color:#fff; letter-spacing:0.4px; }
+    .hero-right p{ margin:6px 0 0 0; color:var(--muted); font-size:0.98rem; }
+
+    /* LAYOUT */
+    .grid {
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:1.25rem;
+      margin-top:1.3rem;
     }
-    .app-card:hover { transform: scale(1.02); }
-    .app-card h2 {
-      color: var(--color-principal);
-      margin-bottom: 0.5rem;
+    @media(min-width:880px){
+      .grid{ grid-template-columns: 1fr 360px; align-items:start; }
     }
-    .app-card img {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 0.5rem;
-      border-radius: 50%;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* MAIN COLUMN */
+    main.area{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      padding:1rem;
+      border-radius:12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      min-height:200px;
     }
-    .app-card img:hover {
-      transform: scale(1.2);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+
+    /* ACCORDION */
+    .section-title{ display:flex; align-items:center; gap:0.6rem; margin:0 0 0.8rem 0; }
+    .section-title h2{ margin:0; font-size:1.15rem; color:#fff; }
+    .accordion{ border-radius:10px; overflow:hidden; background:transparent; }
+    .category{
+      border-top:1px solid rgba(255,255,255,0.03);
+      display:flex; flex-direction:column;
     }
-    .boton {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.7rem 1.2rem;
-      background: var(--color-secundario);
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s;
+    .category > button.cat-btn{
+      display:flex;
+      align-items:center;
+      gap:0.8rem;
+      padding:14px 16px;
+      background:transparent;
+      border:0;
+      color:#eaf6fb;
+      font-size:1rem;
+      text-align:left;
+      width:100%;
+      cursor:pointer;
+      transition:background .18s ease;
     }
-    .boton:hover { background: #015c8a; }
-    .seccion { margin-top: 3rem; text-align: center; }
-    footer {
-      width: 100%;
-      text-align: center;
-      background: var(--color-principal);
-      color: white;
-      padding: 1rem;
-      margin-top: 3rem;
-      font-size: 0.9rem;
+    .category > button.cat-btn:hover{ background:rgba(255,255,255,0.02) }
+    .cat-logo{
+      width:48px; height:48px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,var(--accent), #007787);
+      color:#012; font-weight:700; box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
-    img.qr {
-      width: 160px;
-      margin-top: 1rem;
-      border: 2px solid #ddd;
-      border-radius: 8px;
+    .cat-body{
+      max-height:0; overflow:hidden; transition:max-height .32s cubic-bezier(.2,.9,.2,1);
+      padding:0 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.00), rgba(255,255,255,0.02));
     }
+    .cat-body.open{ padding:12px 16px 18px 16px; max-height:400px; }
+
+    /* APP CARD inside accordion */
+    .app-row{ display:flex; gap:12px; align-items:center; padding:10px 0; border-bottom:1px dashed rgba(255,255,255,0.03) }
+    .app-icon{ width:64px; height:64px; border-radius:10px; background:var(--card); display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+    .app-info{ flex:1; }
+    .app-info h3{ margin:0; color:#0b2130; font-size:1rem; }
+    .app-info p{ margin:6px 0 0 0; color:#54606a; font-size:0.9rem; }
+    .app-actions{ display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
+    .btn-download{
+      background: linear-gradient(90deg,var(--accent-2), #ff9a51);
+      color: #fff;
+      padding:8px 12px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow: 0 8px 18px rgba(255,121,48,0.18);
+      cursor:pointer;
+      border:0;
+    }
+    .app-small{ font-size:0.8rem; color:var(--muted); }
+
+    /* RIGHT COLUMN (sidebar) */
+    aside.sidebar{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:1rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+    }
+    .pay-block{ text-align:center; padding:8px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); }
+    .qr{ width:180px; border-radius:10px; border:4px solid rgba(255,255,255,0.04); display:block; margin:0 auto 10px auto; background:#fff; padding:8px; }
+    .pay-btn{ display:inline-block; margin-top:6px; padding:10px 14px; background:linear-gradient(90deg,var(--accent), #007c85); color:white; border-radius:10px; text-decoration:none; font-weight:700; }
+    .muted{ color:var(--muted); font-size:0.95rem; margin-top:8px }
+
+    footer{ text-align:center; color:var(--muted); margin-top:1.5rem; font-size:0.9rem }
+
+    /* small helpers */
+    .hidden{ display:none }
   </style>
 </head>
 <body>
+  <div class="container">
 
-  <header>
-    <img src="logo.png" alt="Logo JForce Apps">
-    <h1>JForce Apps</h1>
-    <p>Desarrollos móviles para productividad y gestión personal</p>
-  </header>
+    <!-- HEADER / HERO -->
+    <header class="site-header">
+      <div class="hero" role="banner">
+        <div class="hero-left">
+          <!-- Usa el nombre de archivo tal cual (si lo guardaste con otro nombre, cambialo aquí) -->
+          <img src="20251102_1047_Logotipo en 3D_remix_01k92d2g66f69r0ge7gedkbzgm.png" alt="JForce Apps Logo">
+        </div>
+        <div class="hero-right">
+          <h1>JForce Apps — Soluciones móviles & de escritorio</h1>
+          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras — pago con Mercado Pago.</p>
+        </div>
+      </div>
+    </header>
 
-  <main>
-    <!-- Registro LAO -->
-    <section class="app-card">
-      <img src="registrolao.png" alt="Icono Registro LAO">
-      <h2>Registro LAO - Trial (version 1.4)</h2>
-      <p>Gestione y controle los días de licencia y vacaciones fácilmente desde su dispositivo.</p>
-      <a href="#" class="boton" onclick="registrarDescarga('RegistroLAO')">Descargar APK</a>
-      <p id="desc_RegistroLAO">⬇️ Descargas: cargando...</p>
-    </section>
+    <div class="grid">
+      <!-- MAIN: Areas (accordion) -->
+      <main class="area" aria-labelledby="areas-title">
+        <div class="section-title">
+          <h2 id="areas-title">Áreas & Categorías</h2>
+        </div>
 
-    <!-- TurnosGo -->
-    <section class="app-card">
-      <img src="turnosgo.png" alt="Icono TurnosGo">
-      <h2>TurnosGo - Free (version 2.2)</h2>
-      <p>Organice y consulte turnos laborales con una interfaz simple, moderna y eficiente.</p>
-      <a href="#" class="boton" onclick="registrarDescarga('TurnosGo')">Descargar APK</a>
-      <p id="desc_TurnosGo">⬇️ Descargas: cargando...</p>
-    </section>
+        <!-- Acordeón: Aplicaciones de Escritorio -->
+        <div style="margin-bottom:14px;">
+          <h3 style="margin:6px 0 8px 0; color:#fff;">🖥️ Aplicaciones de escritorio</h3>
+          <div class="accordion" id="desktopAccordion">
+            <!-- Categoria: Fuerzas de Seguridad -->
+            <div class="category">
+              <button class="cat-btn" data-target="desktop-seguridad">
+                <div class="cat-logo">PSA</div>
+                <div>
+                  <div style="font-weight:700">Fuerzas de Seguridad</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Soluciones para organismos y control</div>
+                </div>
+              </button>
+              <div class="cat-body" id="desktop-seguridad">
+                <!-- Apps (RegistroLAO, TurnosGo) -->
+                <div class="app-row">
+                  <div class="app-icon"><img src="registrolao.png" alt="Registro LAO" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>Registro LAO — Escritorio</h3>
+                    <p class="app-small">Control de licencias y ausencias — gestión corporativa.</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button>
+                    <div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div>
+                  </div>
+                </div>
 
-    <!-- Linterna Shake -->
-    <section class="app-card">
-      <img src="linterna.png" alt="Icono Linterna Shake">
-      <h2>Linterna Shake - Free (version1.2)</h2>
-      <p>Iluminación inmediata con solo agitar. Compacta, ecológica y lista para cualquier situación.</p>
-      <a href="#" class="boton" onclick="registrarDescarga('LinternaShake')">Descargar APK</a>
-      <p id="desc_LinternaShake">⬇️ Descargas: cargando...</p>
-    </section>
+                <div class="app-row">
+                  <div class="app-icon"><img src="turnosgo.png" alt="TurnosGo" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>TurnosGo — Escritorio</h3>
+                    <p class="app-small">Administración y seguimiento de turnos.</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button>
+                    <div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div>
+                  </div>
+                </div>
 
-    <!-- FitCoach -->
-    <section class="app-card">
-      <img src="fitcoach.png" alt="Icono FitCoach">
-      <h2>FitCoach - Trial(version 2.1)</h2>
-      <p>Planifique entrenamientos, registre progreso y alcance sus objetivos de salud.</p>
-      <a href="#" class="boton" onclick="registrarDescarga('FitCoach')">Descargar APK</a>
-      <p id="desc_FitCoach">⬇️ Descargas: cargando...</p>
-    </section>
+              </div>
+            </div>
 
-    <!-- Pagos -->
-    <section class="seccion">
-      <h2>Pagos de Licencias Mensuales</h2>
-      <p>Escanee el código QR o use el botón para activar su licencia mensual.</p>
-      <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
-      <br>
-      <a href="#" class="boton" onclick="window.open('https://mpago.la/1RvEaba','_blank')">Ir a Mercado Pago</a>
-      <h2> Alias: JforceApps</h2>
-      <p style="margin-top:1rem; font-size:0.9rem; color:#333;">
-        Una vez abonada la licencia, envíe el comprobante al correo de contacto indicando para qué app solicita el código. 
-        Una vez verificado, se procederá a la asignación del código activador.
-      </p>
-    </section>
+            <!-- Categoria: Salud -->
+            <div class="category">
+              <button class="cat-btn" data-target="desktop-salud">
+                <div class="cat-logo" style="background:linear-gradient(135deg,#3ad7b8,#00a3c8)">HS</div>
+                <div>
+                  <div style="font-weight:700">Salud</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Apps para profesionales y pacientes</div>
+                </div>
+              </button>
+              <div class="cat-body" id="desktop-salud">
+                <div class="app-row">
+                  <div class="app-icon"><img src="fitcoach.png" alt="FitCoach" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>FitCoach — Escritorio (Próx.)</h3>
+                    <p class="app-small">Versión de escritorio en desarrollo. Próximamente...</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" disabled style="opacity:0.6; cursor:default;">Próximamente</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <!-- Contacto -->
-    <section class="seccion">
-      <h2>Contacto</h2>
-      <p>¿Consultas o soporte técnico?</p>
-      <p><a href="mailto:jforceapps@gmail.com" class="boton">jforceapps@gmail.com</a></p>
-    </section>
+            <!-- Categoria: Educación -->
+            <div class="category">
+              <button class="cat-btn" data-target="desktop-educacion">
+                <div class="cat-logo" style="background:linear-gradient(135deg,#6b8cff,#2a5be6)">ED</div>
+                <div>
+                  <div style="font-weight:700">Educación</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Herramientas para aulas y docentes</div>
+                </div>
+              </button>
+              <div class="cat-body" id="desktop-educacion">
+                <div style="padding:12px 0 6px 0; color:var(--muted)">Próximamente...</div>
+              </div>
+            </div>
 
-    <p id="contador">Cargando visitas...</p>
-  </main>
+            <!-- Categoria: Entretenimiento -->
+            <div class="category">
+              <button class="cat-btn" data-target="desktop-entret">
+                <div class="cat-logo" style="background:linear-gradient(135deg,#ff6bb5,#ff8a5c)">EN</div>
+                <div>
+                  <div style="font-weight:700">Entretenimiento</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Utilidades y diversión</div>
+                </div>
+              </button>
+              <div class="cat-body" id="desktop-entret">
+                <div class="app-row">
+                  <div class="app-icon"><img src="linterna.png" alt="Linterna Shake" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>Linterna Shake — Escritorio (Próx.)</h3>
+                    <p class="app-small">Adaptación para escritorio en preparación.</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" disabled style="opacity:0.6; cursor:default;">Próximamente</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <footer>
-    © 2025 JForce Apps · Todos los derechos reservados
-  </footer>
+          </div>
+        </div>
 
-  <!-- 🔥 INTEGRACIÓN FIREBASE -->
+        <!-- Acordeón: Aplicaciones Móviles -->
+        <div>
+          <h3 style="margin:6px 0 8px 0; color:#fff;">📱 Aplicaciones móviles</h3>
+          <div class="accordion" id="mobileAccordion">
+            <!-- Seguridad -->
+            <div class="category">
+              <button class="cat-btn" data-target="mobile-seguridad">
+                <div class="cat-logo">PSA</div>
+                <div>
+                  <div style="font-weight:700">Fuerzas de Seguridad</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Apps oficiales y de gestión móvil</div>
+                </div>
+              </button>
+              <div class="cat-body" id="mobile-seguridad">
+                <div class="app-row">
+                  <div class="app-icon"><img src="registrolao.png" alt="Registro LAO" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>Registro LAO</h3>
+                    <p class="app-small">Registro y control de licencias para personal.</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button>
+                    <div class="app-small" id="status_RegistroLAO_mobile">⬇️ Descargas: cargando...</div>
+                  </div>
+                </div>
+
+                <div class="app-row">
+                  <div class="app-icon"><img src="turnosgo.png" alt="TurnosGo" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>TurnosGo</h3>
+                    <p class="app-small">Sistema de turnos ágil para dispositivos móviles.</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button>
+                    <div class="app-small" id="status_TurnosGo_mobile">⬇️ Descargas: cargando...</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Salud -->
+            <div class="category">
+              <button class="cat-btn" data-target="mobile-salud">
+                <div class="cat-logo" style="background:linear-gradient(135deg,#3ad7b8,#00a3c8)">HS</div>
+                <div>
+                  <div style="font-weight:700">Salud</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Apps para entrenadores y pacientes</div>
+                </div>
+              </button>
+              <div class="cat-body" id="mobile-salud">
+                <div class="app-row">
+                  <div class="app-icon"><img src="fitcoach.png" alt="FitCoach" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>FitCoach</h3>
+                    <p class="app-small">Planificación de entrenamientos y seguimiento.</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button>
+                    <div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Educación -->
+            <div class="category">
+              <button class="cat-btn" data-target="mobile-educacion">
+                <div class="cat-logo" style="background:linear-gradient(135deg,#6b8cff,#2a5be6)">ED</div>
+                <div>
+                  <div style="font-weight:700">Educación</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Herramientas para aulas y docentes</div>
+                </div>
+              </button>
+              <div class="cat-body" id="mobile-educacion">
+                <div style="padding:12px 0 6px 0; color:var(--muted)">Próximamente...</div>
+              </div>
+            </div>
+
+            <!-- Entretenimiento -->
+            <div class="category">
+              <button class="cat-btn" data-target="mobile-entret">
+                <div class="cat-logo" style="background:linear-gradient(135deg,#ff6bb5,#ff8a5c)">EN</div>
+                <div>
+                  <div style="font-weight:700">Entretenimiento</div>
+                  <div style="font-size:0.86rem; color:var(--muted)">Utilidades y diversión</div>
+                </div>
+              </button>
+              <div class="cat-body" id="mobile-entret">
+                <div class="app-row">
+                  <div class="app-icon"><img src="linterna.png" alt="Linterna Shake" style="width:48px;height:48px;object-fit:contain"></div>
+                  <div class="app-info">
+                    <h3>Linterna Shake</h3>
+                    <p class="app-small">Linterna instantánea con gesto de sacudir.</p>
+                  </div>
+                  <div class="app-actions">
+                    <button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button>
+                    <div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </main>
+
+      <!-- SIDEBAR: Pago y contacto -->
+      <aside class="sidebar">
+        <div class="pay-block">
+          <h3 style="margin:0 0 8px 0; color:#fff;">Pagos de Licencias</h3>
+          <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
+          <div>
+            <a href="#" class="pay-btn" onclick="window.open('https://mpago.la/tu_enlace_real','_blank')">Pagar con Mercado Pago</a>
+          </div>
+          <p class="muted">Una vez abonada la licencia, podés enviar el comprobante a <br><a href="mailto:jforceapps@gmail.com" style="color:var(--accent); text-decoration:none;">jforceapps@gmail.com</a> indicando la app.</p>
+        </div>
+
+        <div style="margin-top:14px; text-align:center;">
+          <h4 style="margin:0 0 8px 0; color:#fff;">Estadísticas</h4>
+          <p id="contador" style="font-weight:700; color:var(--accent)"></p>
+        </div>
+
+        <div style="margin-top:14px; text-align:center;">
+          <p style="margin:0; color:var(--muted)">Contacto</p>
+          <a href="mailto:jforceapps@gmail.com" class="btn-download" style="display:inline-block; margin-top:8px; background: linear-gradient(90deg,var(--accent), #007c85);">jforceapps@gmail.com</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © 2025 JForce Apps · Todos los derechos reservados
+    </footer>
+
+  </div>
+
+  <!-- 🔥 INTEGRACIÓN FIREBASE Y LÓGICA DE DESCARGAS (mantuve tu código) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, doc, getDoc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, updateDoc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    // ⚙️ CONFIG PERSONAL (COPIAR DESDE FIREBASE)
-  const firebaseConfig = {
-  apiKey: "AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
-  authDomain: "jforceapps-a6ded.firebaseapp.com",
-  projectId: "jforceapps-a6ded",
-  storageBucket: "jforceapps-a6ded.firebasestorage.app",
-  messagingSenderId: "423134593625",
-  appId: "1:423134593625:web:506c32165696f293682748"
-};
+    // ⚙️ Tu config de Firebase (ya estaba en tu index original)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
+      authDomain: "jforceapps-a6ded.firebaseapp.com",
+      projectId: "jforceapps-a6ded",
+      storageBucket: "jforceapps-a6ded.firebasestorage.app",
+      messagingSenderId: "423134593625",
+      appId: "1:423134593625:web:506c32165696f293682748"
+    };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
@@ -190,7 +439,9 @@
     async function incrementarContador(tipo, id) {
       const ref = doc(db, tipo, id);
       const snap = await getDoc(ref);
-      if (!snap.exists()) await setDoc(ref, { contador: 0 });
+      if (!snap.exists()) {
+        await setDoc(ref, { contador: 0 });
+      }
       await updateDoc(ref, { contador: increment(1) });
     }
 
@@ -198,29 +449,95 @@
       const ref = doc(db, tipo, id);
       const snap = await getDoc(ref);
       if (snap.exists()) {
-        document.getElementById(elemento).textContent = 
+        document.getElementById(elemento).textContent =
           (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
+      } else {
+        document.getElementById(elemento).textContent = (tipo === "visitas" ? "👀 Visitas totales: 0" : "⬇️ Descargas: 0");
       }
     }
 
     async function registrarVisita() {
       await incrementarContador("visitas", "web");
-      mostrarContador("visitas", "web", "contador");
+      // mostrar contador general
+      const ref = doc(db, "visitas", "web");
+      const snap = await getDoc(ref);
+      if (snap.exists()) document.getElementById("contador").textContent = "👀 Visitas totales: " + snap.data().contador;
     }
 
-    async function registrarDescarga(app) {
-      await incrementarContador("descargas", app);
-      mostrarContador("descargas", app, "desc_" + app);
-      window.location.href = app.toLowerCase() + ".apk";
+    // función usada por los botones "Descargar APK"
+    async function registrarDescarga(appName) {
+      try {
+        // incrementar contador y mostrar
+        await incrementarContador("descargas", appName);
+        // actualizar los displays de descargas (varios ids posibles)
+        const ids = [
+          "desc_" + appName,
+          "status_" + appName,
+          "status_" + appName + "_mobile",
+        ];
+        for (const id of ids) {
+          const ref = doc(db, "descargas", appName);
+          const snap = await getDoc(ref);
+          if (snap.exists()) {
+            const contador = snap.data().contador;
+            const el = document.getElementById(id);
+            if (el) el.textContent = "⬇️ Descargas: " + contador;
+          }
+        }
+        // Redirigir a la APK (asume que el archivo appname.apk existe en tu servidor)
+        const fileName = appName.toLowerCase() + ".apk";
+        window.location.href = fileName;
+      } catch (err) {
+        console.error(err);
+        alert("Error al iniciar descarga: " + err.message);
+      }
     }
 
-    window.onload = async () => {
-      registrarVisita();
-      const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
-      for (const app of apps) await mostrarContador("descargas", app, "desc_" + app);
-    };
-
+    // Exponer la función globalmente para los onclick
     window.registrarDescarga = registrarDescarga;
+
+    // Al cargar la página, mostrar contadores
+    window.onload = async () => {
+      await registrarVisita();
+      const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
+      for (const appn of apps) {
+        // mostrar contadores en los distintos elementos si existen
+        const ref = doc(db, "descargas", appn);
+        const snap = await getDoc(ref);
+        const ids = [
+          "desc_" + appn, "status_" + appn, "status_" + appn + "_mobile"
+        ];
+        let cont = 0;
+        if (snap.exists()) cont = snap.data().contador;
+        for (const id of ids) {
+          const el = document.getElementById(id);
+          if (el) el.textContent = "⬇️ Descargas: " + cont;
+        }
+      }
+    };
+  </script>
+
+  <!-- ACCORDION SIMPLE (abrir/cerrar categorias) -->
+  <script>
+    // delegamos clicks para abrir/cerrar categorías
+    document.addEventListener('click', function(e){
+      const btn = e.target.closest('.cat-btn');
+      if (!btn) return;
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+      const body = document.getElementById(targetId);
+      if (!body) return;
+      const currentlyOpen = body.classList.contains('open');
+      // Cerrar todos en el mismo accordion padre
+      const parentAccordion = btn.closest('.accordion');
+      if (parentAccordion) {
+        parentAccordion.querySelectorAll('.cat-body').forEach(cb => {
+          cb.classList.remove('open');
+        });
+      }
+      if (!currentlyOpen) body.classList.add('open');
+      else body.classList.remove('open');
+    });
   </script>
 
 </body>
