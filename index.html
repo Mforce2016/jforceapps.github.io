@@ -3,7 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JForce Apps</title>
+  <title>JForce Apps — Soluciones móviles</title>
+  <meta name="description" content="JForce Apps ofrece soluciones móviles de gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.">
+  <meta name="author" content="JForce Apps">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.jforceapps.com.ar">
+
+  <!-- 🔹 Favicon dinámico -->
+  <link rel="icon" href="favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="favicon-dark.png" media="(prefers-color-scheme: dark)">
+
+  <!-- 🔹 Firebase preconnect -->
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+
   <style>
     :root {
       --accent: #00f2ff;
@@ -89,42 +102,6 @@
       transition:opacity .3s;
     }
     .navbar a:hover{opacity:0.7;}
-
-    /* 🔹 Splash Screen */
-    #splash{
-      position:fixed;
-      top:0;left:0;right:0;bottom:0;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      background:radial-gradient(circle at 50% 30%, #081024, #030612);
-      z-index:2000;
-      color:#fff;
-      animation:splashFadeOut 1s ease 2.2s forwards;
-    }
-    @keyframes splashFadeOut{to{opacity:0;visibility:hidden;}}
-    #splash .logo{
-      font-size:3rem;
-      font-weight:900;
-      color:#fff;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 0 15px var(--accent);
-      background-size:200% 100%;
-      animation:glowPulse 3s infinite alternate, shine 2s linear infinite;
-    }
-    @keyframes shine {
-      0% { background-position: -100% 0; }
-      50% { background-position: 100% 0; }
-      100% { background-position: -100% 0; }
-    }
-    #splash p{
-      margin-top:1rem;
-      font-size:1.2rem;
-      color:#ccefff;
-      animation:fadeInText 1.5s ease forwards;
-    }
-    @keyframes fadeInText{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
 
     /* 🔹 Header */
     header.site-header{text-align:center;animation:fadeDown 1s ease forwards 0.3s;opacity:0;}
@@ -230,7 +207,7 @@
     .whatsapp-float:hover{transform:scale(1.1);}
     .whatsapp-float svg{width:32px;height:32px;fill:#fff;}
 
-    /* 🔸 Ajustes para pantallas grandes (PC) */
+    /* 🔸 Ajustes PC */
     @media (min-width: 900px) {
       .container {
         width: 85%;
@@ -295,11 +272,6 @@
   </style>
 </head>
 <body>
-  <!-- Splash -->
-  <div id="splash">
-    <div class="logo">Jforce Apps</div>
-  </div>
-
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-logo">⚡️</div>
@@ -309,7 +281,7 @@
   <div class="container" id="top">
     <header class="site-header">
       <div class="hero">
-        <img src="logo.png" alt="JForce Apps Logo">
+        <img src="logo.png" alt="JForce Apps Logo" loading="lazy">
         <div>
           <h1>JForce Apps — Soluciones móviles</h1>
           <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.</p>
@@ -320,7 +292,6 @@
     <main class="area">
       <h2>📱 Aplicaciones móviles</h2>
       <div class="accordion">
-        <!-- Categorías -->
         <!-- Seguridad -->
         <div class="category">
           <button class="cat-btn" data-target="seguridad">
@@ -329,12 +300,12 @@
           </button>
           <div class="cat-body" id="seguridad">
             <div class="app-row">
-              <div class="app-icon"><img src="registrolao.png" alt="Registro LAO" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-icon"><img src="registrolao.png" alt="Registro LAO" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
               <div class="app-info"><h3>Registro LAO</h3><p>Registro y control de licencias para personal.</p></div>
               <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button><div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div></div>
             </div>
             <div class="app-row">
-              <div class="app-icon"><img src="turnosgo.png" alt="TurnosGo" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-icon"><img src="turnosgo.png" alt="TurnosGo" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
               <div class="app-info"><h3>TurnosGo</h3><p>Sistema de turnos ágil para dispositivos móviles.</p></div>
               <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button><div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div></div>
             </div>
@@ -345,11 +316,11 @@
         <div class="category">
           <button class="cat-btn" data-target="salud">
             <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-            <div><strong>Salud</strong><br><small style="color:var(--muted)">Apps para entrenadores y pacientes</small></div>
+            <div><strong>Salud</strong><br><small style="color:var(--muted)">Apps para entrenadores y personal de salud</small></div>
           </button>
           <div class="cat-body" id="salud">
             <div class="app-row">
-              <div class="app-icon"><img src="fitcoach.png" alt="FitCoach" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-icon"><img src="fitcoach.png" alt="FitCoach" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
               <div class="app-info"><h3>FitCoach</h3><p>Planificación de entrenamientos y seguimiento.</p></div>
               <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button><div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div></div>
             </div>
@@ -364,7 +335,7 @@
           </button>
           <div class="cat-body" id="entret">
             <div class="app-row">
-              <div class="app-icon"><img src="linterna.png" alt="Linterna Shake" style="width:48px;height:48px;object-fit:contain"></div>
+              <div class="app-icon"><img src="linterna.png" alt="Linterna Shake" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
               <div class="app-info"><h3>Linterna Shake</h3><p>Linterna instantánea con gesto de sacudir.</p></div>
               <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button><div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div></div>
             </div>
@@ -375,7 +346,7 @@
       <!-- Pago -->
       <div class="pay-block">
         <h3>Pagos de Licencias</h3>
-        <img src="qr-mercadopago.png" alt="QR Mercado Pago" class="qr">
+        <img src="qr-mercadopago.png" alt="QR Mercado Pago" loading="lazy" class="qr">
         <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a>
         <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
           Ante consultas o activaciones:<br>
