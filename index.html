@@ -238,87 +238,125 @@
   </nav>
 
   <div class="container" id="top">
-    <header class="site-header">
-      <div class="hero">
-        <img src="logo.webp" alt="JForce Apps Logo" loading="lazy">
-        <div>
-          <h1>JForce Apps — Soluciones móviles</h1>
-          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras. Aplicaciones móviles y de escritorio por encargo.</p>
-        </div>
-      </div>
-    </header>
+      <header class="site-header">
+          <div class="hero">
+              <img src="logo.webp" alt="JForce Apps Logo" loading="lazy">
+              <div>
+                  <h1>JForce Apps — Soluciones móviles</h1>
+                  <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras. Aplicaciones móviles y de escritorio por encargo.</p>
+              </div>
+          </div>
+      </header>
 
-    <main class="area">
-      <h2>📱 Aplicaciones móviles</h2>
+      <main class="area">
+          <h2>📱 Aplicaciones móviles</h2>
 
-      <div class="app-card">
-        <div class="app-header-inline">
-          <img src="registrolao.webp" alt="Registro LAO" onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">
-          <h3 onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">Registro LAO</h3>
-        </div>
-        <p>Registro y control de licencias para personal.</p>
-        <button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button>
-        <div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div>
-      </div>
+          <!-- 🟢 REGISTRO LAO -->
+          <div class="app-card">
+              <div class="app-header-inline">
+                  <img src="registrolao.webp" alt="Registro LAO" onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">
+                  <h3 onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">Registro LAO</h3>
+              </div>
+              <ul>
+                  <li>Organizá tus días de descanso de forma simple, rápida y visual. Con Registro de Vacaciones, podés llevar el control completo de tus vacaciones laborales y días disponibles, todo desde tu celular.</li>
+              </ul>
+              <p><b>✨ Funciones principales</b></p>
+              <ul>
+                  <li>📅 Registro de períodos de vacaciones: guardá tus fechas de inicio y fin fácilmente.</li>
+                  <li>⏱️ Cálculo automático de días restantes: el sistema descuenta automáticamente los días tomados.</li>
+                  <li>🗂️ Historial completo: visualizá todos los períodos registrados con sus respectivas fechas.</li>
+                  <li>📸 Adjuntá comprobantes: agregá una imagen del papel firmado o constancia oficial (opcional).</li>
+                  <li>⚙️ Configuración flexible: modificá los días totales o tus años de servicio en cualquier momento.</li>
+                  <li>🌈 Interfaz moderna y clara: diseñada para ser cómoda y profesional.</li>
+              </ul>
+              <p>Registro y control de licencias para personal.</p>
+              <div class="app-actions">
+                  <button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button>
+                  <div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div>
+              </div>
+          </div>
 
-      <div class="app-card">
-        <div class="app-header-inline">
-          <img src="turnosgo.webp" alt="TurnosGo" onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">
-          <h3 onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">TurnosGo</h3>
-        </div>
-        <ul>
-          <li>📅 Gestión de turnos: guarda fácilmente tus turnos laborales mes a mes.</li>
-          <li>➕ Refuerzos y adicionales: agrega extras sin complicaciones y mantén todo registrado.</li>
-          <li>📝 Observaciones: añadí notas o comentarios para cada día.</li>
-          <li>📊 Vista clara y organizada: visualiza tus turnos en un calendario simple y práctico.</li>
-          <li>🔔 Notificaciones de recordatorio: recibí alertas para no olvidar tus refuerzos o cambios de horario.</li>
-          <li>🎨 Modo oscuro: elegí entre modo claro u oscuro para mayor comodidad visual.</li>
-          <li>💾 Datos locales: toda tu información se guarda en tu dispositivo, sin necesidad de conexión a internet ni registros externos.</li>
-        </ul>
-        <p><b>👨‍💼 Ideal para:</b></p>
-        <ul>
-          <li>Personal de seguridad</li>
-          <li>Policías y fuerzas de seguridad</li>
-          <li>Médicos, enfermeros y personal de salud</li>
-        </ul>
-        <button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button>
-        <div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div>
-      </div>
+          <!-- 🟣 TURNOSGO -->
+          <div class="app-card">
+              <div class="app-header-inline">
+                  <img src="turnosgo.webp" alt="TurnosGo" onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">
+                  <h3 onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">TurnosGo</h3>
+              </div>
+              <ul>
+                  <li>📅 Gestión de turnos: guarda fácilmente tus turnos laborales mes a mes.</li>
+                  <li>➕ Refuerzos y adicionales: agrega extras sin complicaciones y mantené todo registrado.</li>
+                  <li>📝 Observaciones: añadí notas o comentarios para cada día.</li>
+                  <li>📊 Vista clara y organizada: visualizá tus turnos en un calendario simple y práctico.</li>
+                  <li>🔔 Notificaciones: recibí alertas para no olvidar tus refuerzos o cambios de horario.</li>
+                  <li>🎨 Modo oscuro: elegí entre modo claro u oscuro para mayor comodidad visual.</li>
+                  <li>💾 Datos locales: toda tu información se guarda en tu dispositivo, sin conexión a internet.</li>
+              </ul>
+              <p><b>👨‍💼 Ideal para:</b></p>
+              <ul>
+                  <li>Personal de seguridad</li>
+                  <li>Policías y fuerzas de seguridad</li>
+                  <li>Médicos, enfermeros y personal de salud</li>
+              </ul>
+              <div class="app-actions">
+                  <button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button>
+                  <div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div>
+              </div>
+          </div>
 
-      <div class="app-card">
-        <div class="app-header-inline">
-          <img src="fitcoach.webp" alt="FitCoach" onclick="abrirModal('FitCoach','Planificación de entrenamientos y seguimiento.','fit')">
-          <h3 onclick="abrirModal('FitCoach','Planificación de entrenamientos y seguimiento.','fit')">FitCoach</h3>
-        </div>
-        <p>Planificación de entrenamientos y seguimiento.</p>
-        <button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button>
-        <div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div>
-      </div>
+          <!-- 🟡 FITCOACH -->
+          <div class="app-card">
+              <div class="app-header-inline">
+                  <img src="fitcoach.webp" alt="FitCoach" onclick="abrirModal('FitCoach','Planificación de entrenamientos y seguimiento.','fit')">
+                  <h3 onclick="abrirModal('FitCoach','Planificación de entrenamientos y seguimiento.','fit')">FitCoach</h3>
+              </div>
+              <ul>
+                  <li>💪 Creá rutinas personalizadas de entrenamiento.</li>
+                  <li>🍎 Planificá tus sesiones según tus objetivos.</li>
+                  <li>📊 Visualización moderna y clara de tus avances.</li>
+              </ul>
+              <p>Planificación de entrenamientos y seguimiento.</p>
+              <div class="app-actions">
+                  <button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button>
+                  <div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div>
+              </div>
+          </div>
 
-      <div class="app-card">
-        <div class="app-header-inline">
-          <img src="linterna.webp" alt="Linterna Shake" onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">
-          <h3 onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">Linterna Shake</h3>
-        </div>
-        <p>Linterna instantánea con gesto de sacudir.</p>
-        <button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button>
-        <div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div>
-      </div>
+          <!-- 🔦 LINTERNA SHAKE -->
+          <div class="app-card">
+              <div class="app-header-inline">
+                  <img src="linterna.webp" alt="Linterna Shake" onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">
+                  <h3 onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">Linterna Shake</h3>
+              </div>
+              <ul>
+                  <li>💡 Activá la linterna con solo sacudir tu teléfono.</li>
+                  <li>⚡ Encendido ultra rápido.</li>
+                  <li>🔋 Optimizada para bajo consumo de batería.</li>
+                  <li>🎨 Interfaz minimalista y moderna.</li>
+                  <li>📱 Compatible con la mayoría de dispositivos Android.</li>
+              </ul>
+              <p>Linterna instantánea con gesto de sacudir.</p>
+              <div class="app-actions">
+                  <button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button>
+                  <div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div>
+              </div>
+          </div>
 
-      <div class="pay-block">
-        <h3>Pagos de Licencias</h3>
-        <img src="qr-mercadopago.webp" alt="QR Mercado Pago" loading="lazy" class="qr">
-        <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a>
-        <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
-          Ante consultas o activaciones:<br>
-          <a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a>
-        </p>
-      </div>
+          <!-- 🧾 BLOQUE DE PAGO -->
+          <div class="pay-block">
+              <h3>Pagos de Licencias</h3>
+              <img src="qr-mercadopago.webp" alt="QR Mercado Pago" loading="lazy" class="qr">
+              <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a>
+              <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
+                  Ante consultas o activaciones:<br>
+                  <a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a>
+              </p>
+          </div>
 
-      <p id="contador" style="text-align:center;margin-top:1rem;font-weight:700;color:var(--accent)">👀 Visitas totales: cargando...</p>
-    </main>
+          <p id="contador" style="text-align:center;margin-top:1rem;font-weight:700;color:var(--accent)">👀 Visitas totales: cargando...</p>
+      </main>
 
-    <footer>© 2025 JForce Apps · Todos los derechos reservados</footer>
+
+      <footer>© 2025 JForce Apps · Todos los derechos reservados</footer>
   </div>
 
   <!-- Modal -->
