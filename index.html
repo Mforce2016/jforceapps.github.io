@@ -4,16 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>JForce Apps — Soluciones móviles</title>
-  <meta name="description" content="JForce Apps ofrece soluciones móviles de gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.">
+  <meta name="description" content="Gestión, salud, educación y utilidades. Licencias rápidas y seguras. Aplicaciones móviles y de escritorio por encargo.">
   <meta name="author" content="JForce Apps">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.jforceapps.com.ar">
 
-  <!-- 🔹 Favicon dinámico -->
-  <link rel="icon" href="favicon-light.png" media="(prefers-color-scheme: light)">
-  <link rel="icon" href="favicon-dark.png" media="(prefers-color-scheme: dark)">
-
-  <!-- 🔹 Firebase preconnect -->
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
 
@@ -51,7 +46,6 @@
       overflow-x:hidden;
     }
 
-    /* 🔹 Fondo animado */
     body::before {
       content:"";
       position:fixed;inset:0;
@@ -67,7 +61,6 @@
 
     .container{width:92%;max-width:1100px;margin:0 auto;padding:6rem 0 2rem;}
 
-    /* 🔹 Navbar */
     .navbar{
       position:fixed;top:0;left:0;right:0;
       display:flex;align-items:center;justify-content:space-between;
@@ -86,6 +79,7 @@
       -webkit-text-fill-color:transparent;
       text-shadow:0 0 12px var(--accent);
       animation:glowPulse 3s infinite alternate, spin 6s linear infinite;
+      cursor:pointer;
     }
     @keyframes glowPulse{
       0%{text-shadow:0 0 6px var(--accent);}
@@ -95,15 +89,7 @@
       0%{transform:rotate(0deg);}
       100%{transform:rotate(360deg);}
     }
-    .navbar a{
-      color:var(--text);
-      text-decoration:none;
-      font-weight:600;
-      transition:opacity .3s;
-    }
-    .navbar a:hover{opacity:0.7;}
 
-    /* 🔹 Header */
     header.site-header{text-align:center;animation:fadeDown 1s ease forwards 0.3s;opacity:0;}
     @keyframes fadeDown{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
     .hero{
@@ -112,10 +98,8 @@
       box-shadow:0 0 25px rgba(0,255,255,0.2);
       padding:1.2rem;
       display:flex;flex-direction:column;align-items:center;gap:1rem;
-      transition:all .5s ease;
     }
-    .hero img{width:160px;height:160px;object-fit:contain;animation:zoomIn 1s ease forwards;}
-    @keyframes zoomIn{from{opacity:0;transform:scale(0.7);}to{opacity:1;transform:scale(1);}}
+    .hero img{width:160px;height:160px;object-fit:contain;}
     .hero h1{
       font-size:2rem;margin:0;
       background:linear-gradient(90deg,var(--accent),var(--accent-2));
@@ -123,230 +107,207 @@
     }
     .hero p{color:var(--muted);margin:0;font-size:1rem;}
 
-    /* 🔹 Main */
     main.area{
       background:var(--card-bg);
       border-radius:var(--radius);
       padding:1rem;
       margin-top:1.5rem;
       box-shadow:0 0 30px rgba(0,0,0,0.25);
-      animation:fadeSlideIn 1s ease forwards 1s;
-      opacity:0;
     }
-    @keyframes fadeSlideIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-    h2{text-align:center;margin-top:0;}
 
-    /* 🔹 Accordion */
-    .accordion{margin-top:1rem;}
-    .category{border-top:1px solid rgba(255,255,255,0.06);}
-    .cat-btn{
-      width:100%;border:0;background:transparent;color:inherit;
-      display:flex;align-items:center;gap:1rem;text-align:left;
-      padding:16px;cursor:pointer;font-size:1.05rem;
-      transition:background 0.3s ease;
+    /* 🟦 app-card horizontal con icono a la altura del título */
+    .app-card{
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      padding:1rem 0;
+      border-bottom:1px dashed rgba(255,255,255,0.1);
     }
-    .cat-btn:hover{background:rgba(255,255,255,0.04);}
-    .cat-icon{
-      width:52px;height:52px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      box-shadow:0 0 12px var(--accent);
-      animation:glowPulse 3s infinite alternate;
+    .app-header-inline{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    .cat-icon svg{width:26px;height:26px;stroke:#fff;stroke-width:2;fill:none;}
+    .app-header-inline img{
+      width:64px;
+      height:64px;
+      border-radius:14px;
+      box-shadow:0 0 15px #00bfff;
+      transition:transform .3s ease, box-shadow .3s ease;
+      cursor:pointer;
+    }
+    .app-header-inline img:hover{
+      transform:rotate(8deg) scale(1.08);
+      box-shadow:0 0 25px #39f;
+    }
+    .app-header-inline h3{
+      margin:0;
+      color:#39f;
+      text-shadow:0 0 10px #39f;
+      cursor:pointer;
+    }
+    .app-card p, .app-card li{color:var(--muted);}
+    .app-card ul{margin:6px 0 0 1rem;}
 
-    .cat-body{max-height:0;overflow:hidden;opacity:0;transform:translateY(-10px);transition:all 0.5s ease;padding:0 16px;}
-    .cat-body.open{max-height:600px;opacity:1;transform:translateY(0);padding:12px 16px 18px;}
-
-    /* 🔹 Apps */
-    .app-row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.05);}
-    .app-icon{width:64px;height:64px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 15px rgba(0,0,0,0.4);}
-    .app-info h3{margin:0;font-size:1rem;color:#000;}
-    @media(prefers-color-scheme:dark){.app-info h3{color:#fff;}}
-    .app-info p{margin:4px 0 0 0;color:var(--muted);font-size:0.9rem;}
     .btn-download{
       background:linear-gradient(90deg,var(--accent-2),#ff9a51);
-      color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;
-      border:0;cursor:pointer;box-shadow:0 0 15px rgba(255,118,255,0.4);
-      transition:all 0.3s ease;
-      animation:glowPulse 3s infinite alternate;
+      color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;border:0;cursor:pointer;
+      box-shadow:0 0 15px rgba(255,118,255,0.4);
+      transition:transform .3s ease;
     }
     .btn-download:hover{transform:scale(1.07);}
+    .app-small{font-size:0.85rem;color:var(--muted);margin-top:4px;}
 
-    /* 🔹 Pago */
     .pay-block{
-      text-align:center;padding:16px;margin-top:1.5rem;
+      text-align:center;
+      padding:16px;
+      margin-top:1.5rem;
       border-radius:var(--radius);
       background:var(--card-bg);
       box-shadow:0 0 20px rgba(0,255,255,0.15);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
     }
-    .qr{width:180px;margin:0 auto 10px;border-radius:10px;background:#fff;padding:8px;}
+    .qr{width:180px;margin:0 auto 10px;border-radius:10px;background:#fff;padding:8px;display:block;}
     .pay-btn{
       display:inline-block;padding:10px 16px;
       border-radius:8px;
       background:linear-gradient(90deg,var(--accent),var(--accent-2));
       color:#fff;text-decoration:none;font-weight:700;
       box-shadow:0 0 15px rgba(0,255,255,0.4);
-      transition:all 0.3s ease;
-      animation:glowPulse 3s infinite alternate;
+      transition:transform 0.3s ease;
     }
     .pay-btn:hover{transform:scale(1.07);}
     footer{text-align:center;margin-top:1.5rem;color:var(--muted);}
 
-    /* 🔹 WhatsApp */
-    .whatsapp-float{
-      position:fixed;bottom:20px;right:20px;
-      width:60px;height:60px;border-radius:50%;
-      background:linear-gradient(135deg,#25d366,#1ebe57);
-      box-shadow:0 0 20px rgba(37,211,102,0.7);
-      display:flex;align-items:center;justify-content:center;
-      z-index:1000;
-      animation:glowPulse 3s infinite alternate;
-      transition:transform 0.3s ease;
+    /* Modal */
+    .modal-content img {
+      display: block;
+      margin: 12px auto;
+      max-width: 90%;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.2);
     }
-    .whatsapp-float:hover{transform:scale(1.1);}
-    .whatsapp-float svg{width:32px;height:32px;fill:#fff;}
 
-    /* 🔸 Ajustes PC */
-    @media (min-width: 900px) {
-      .container {
-        width: 85%;
-        max-width: 1200px;
-        padding-top: 8rem;
-      }
+    .modal{
+      position:fixed;inset:0;background:rgba(0,0,0,0.8);
+      display:flex;align-items:center;justify-content:center;
+      visibility:hidden;opacity:0;transition:opacity .4s;
+      z-index:2000;
+    }
+    .modal.active{visibility:visible;opacity:1;}
+    .modal-content{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:1rem;
+      max-width:700px;
+      width:90%;
+      box-shadow:0 0 25px rgba(0,255,255,0.3);
+      position:relative;
+      text-align:center;
+    }
+    .close-btn{
+      position:absolute;top:10px;right:15px;color:var(--accent);
+      font-size:1.5rem;cursor:pointer;
+    }
+    .modal-controls{
+      display:flex;justify-content:space-between;margin-top:8px;
+    }
+    .modal-controls button{
+      background:none;border:1px solid var(--accent);
+      color:var(--accent);border-radius:6px;padding:4px 10px;cursor:pointer;
+    }
 
-      .hero {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        text-align: left;
-        gap: 2rem;
-      }
-
-      .hero img {
-        width: 180px;
-        height: 180px;
-      }
-
-      .hero h1 {
-        font-size: 2.4rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-        max-width: 600px;
-      }
-
-      .accordion {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
-      }
-
-      .category {
-        background: var(--card-bg);
-        border: 1px solid rgba(255,255,255,0.05);
-        border-radius: var(--radius);
-        padding-bottom: 0.5rem;
-        box-shadow: 0 0 18px rgba(0,0,0,0.25);
-        transition: transform 0.3s ease;
-      }
-
-      .category:hover {
-        transform: translateY(-4px);
-      }
-
-      .cat-btn {
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-
-      .pay-block {
-        max-width: 480px;
-        margin: 2rem auto;
-      }
-
-      main.area {
-        padding: 2rem;
-      }
+    @media (min-width:900px){
+      .container{width:85%;max-width:1200px;padding-top:8rem;}
+      .hero{flex-direction:row;text-align:left;gap:2rem;}
+      .hero img{width:180px;height:180px;}
+      .hero h1{font-size:2.4rem;}
+      .pay-block{max-width:480px;margin:2rem auto;}
+      main.area{padding:2rem;}
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
   <nav class="navbar">
-    <div class="navbar-logo">⚡️</div>
-    <a href="#top">Inicio</a>
+    <div class="navbar-logo" id="rayito">⚡️</div>
   </nav>
 
   <div class="container" id="top">
     <header class="site-header">
       <div class="hero">
-        <img src="logo.png" alt="JForce Apps Logo" loading="lazy">
+        <img src="logo.webp" alt="JForce Apps Logo" loading="lazy">
         <div>
           <h1>JForce Apps — Soluciones móviles</h1>
-          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras con Mercado Pago.</p>
+          <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras. Aplicaciones móviles y de escritorio por encargo.</p>
         </div>
       </div>
     </header>
 
     <main class="area">
       <h2>📱 Aplicaciones móviles</h2>
-      <div class="accordion">
-        <!-- Seguridad -->
-        <div class="category">
-          <button class="cat-btn" data-target="seguridad">
-            <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3 9-8 10-5-1-8-5-8-10V6z"/></svg></div>
-            <div><strong>Fuerzas de Seguridad</strong><br><small style="color:var(--muted)">Apps oficiales y de gestión móvil</small></div>
-          </button>
-          <div class="cat-body" id="seguridad">
-            <div class="app-row">
-              <div class="app-icon"><img src="registrolao.png" alt="Registro LAO" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
-              <div class="app-info"><h3>Registro LAO</h3><p>Registro y control de licencias para personal.</p></div>
-              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button><div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div></div>
-            </div>
-            <div class="app-row">
-              <div class="app-icon"><img src="turnosgo.png" alt="TurnosGo" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
-              <div class="app-info"><h3>TurnosGo</h3><p>Sistema de turnos ágil para dispositivos móviles.</p></div>
-              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button><div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div></div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Salud -->
-        <div class="category">
-          <button class="cat-btn" data-target="salud">
-            <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-            <div><strong>Salud</strong><br><small style="color:var(--muted)">Apps para entrenadores y personal de salud</small></div>
-          </button>
-          <div class="cat-body" id="salud">
-            <div class="app-row">
-              <div class="app-icon"><img src="fitcoach.png" alt="FitCoach" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
-              <div class="app-info"><h3>FitCoach</h3><p>Planificación de entrenamientos y seguimiento.</p></div>
-              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button><div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div></div>
-            </div>
-          </div>
+      <div class="app-card">
+        <div class="app-header-inline">
+          <img src="registrolao.webp" alt="Registro LAO" onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">
+          <h3 onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">Registro LAO</h3>
         </div>
-
-        <!-- Entretenimiento -->
-        <div class="category">
-          <button class="cat-btn" data-target="entret">
-            <div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7v8l11-12h-8z"/></svg></div>
-            <div><strong>Entretenimiento</strong><br><small style="color:var(--muted)">Utilidades y diversión</small></div>
-          </button>
-          <div class="cat-body" id="entret">
-            <div class="app-row">
-              <div class="app-icon"><img src="linterna.png" alt="Linterna Shake" loading="lazy" style="width:48px;height:48px;object-fit:contain"></div>
-              <div class="app-info"><h3>Linterna Shake</h3><p>Linterna instantánea con gesto de sacudir.</p></div>
-              <div class="app-actions"><button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button><div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div></div>
-            </div>
-          </div>
-        </div>
+        <p>Registro y control de licencias para personal.</p>
+        <button class="btn-download" onclick="registrarDescarga('RegistroLAO')">Descargar APK</button>
+        <div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div>
       </div>
 
-      <!-- Pago -->
+      <div class="app-card">
+        <div class="app-header-inline">
+          <img src="turnosgo.webp" alt="TurnosGo" onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">
+          <h3 onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">TurnosGo</h3>
+        </div>
+        <ul>
+          <li>📅 Gestión de turnos: guarda fácilmente tus turnos laborales mes a mes.</li>
+          <li>➕ Refuerzos y adicionales: agrega extras sin complicaciones y mantén todo registrado.</li>
+          <li>📝 Observaciones: añadí notas o comentarios para cada día.</li>
+          <li>📊 Vista clara y organizada: visualiza tus turnos en un calendario simple y práctico.</li>
+          <li>🔔 Notificaciones de recordatorio: recibí alertas para no olvidar tus refuerzos o cambios de horario.</li>
+          <li>🎨 Modo oscuro: elegí entre modo claro u oscuro para mayor comodidad visual.</li>
+          <li>💾 Datos locales: toda tu información se guarda en tu dispositivo, sin necesidad de conexión a internet ni registros externos.</li>
+        </ul>
+        <p><b>👨‍💼 Ideal para:</b></p>
+        <ul>
+          <li>Personal de seguridad</li>
+          <li>Policías y fuerzas de seguridad</li>
+          <li>Médicos, enfermeros y personal de salud</li>
+        </ul>
+        <button class="btn-download" onclick="registrarDescarga('TurnosGo')">Descargar APK</button>
+        <div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header-inline">
+          <img src="fitcoach.webp" alt="FitCoach" onclick="abrirModal('FitCoach','Planificación de entrenamientos y seguimiento.','fit')">
+          <h3 onclick="abrirModal('FitCoach','Planificación de entrenamientos y seguimiento.','fit')">FitCoach</h3>
+        </div>
+        <p>Planificación de entrenamientos y seguimiento.</p>
+        <button class="btn-download" onclick="registrarDescarga('FitCoach')">Descargar APK</button>
+        <div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header-inline">
+          <img src="linterna.webp" alt="Linterna Shake" onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">
+          <h3 onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">Linterna Shake</h3>
+        </div>
+        <p>Linterna instantánea con gesto de sacudir.</p>
+        <button class="btn-download" onclick="registrarDescarga('LinternaShake')">Descargar APK</button>
+        <div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div>
+      </div>
+
       <div class="pay-block">
         <h3>Pagos de Licencias</h3>
-        <img src="qr-mercadopago.png" alt="QR Mercado Pago" loading="lazy" class="qr">
+        <img src="qr-mercadopago.webp" alt="QR Mercado Pago" loading="lazy" class="qr">
         <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a>
         <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
           Ante consultas o activaciones:<br>
@@ -360,16 +321,27 @@
     <footer>© 2025 JForce Apps · Todos los derechos reservados</footer>
   </div>
 
-  <!-- Botón WhatsApp -->
+  <!-- Modal -->
+  <div class="modal" id="modalApp">
+    <div class="modal-content">
+      <span class="close-btn" onclick="cerrarModal()">✖</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <img id="modalImg" src="" alt="">
+      <div class="modal-controls">
+        <button onclick="prevImg()">⬅️</button>
+        <button onclick="nextImg()">➡️</button>
+      </div>
+    </div>
+  </div>
+
   <a href="https://wa.me/5491124554076?text=Hola%20JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
-    <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.5 2.1 8L0 32l8.2-2.1C10.8 31.3 13.3 32 16 32c8.8 0 16-7.2 16-16S24.8 0 16 0zm0 29c-2.4 0-4.8-.6-6.9-1.9l-.5-.3-4.8 1.2 1.3-4.7-.3-.5C3.6 20.6 3 18.3 3 16 3 8.8 8.8 3 16 3s13 5.8 13 13-5.8 13-13 13zm7.5-9.7c-.4-.2-2.5-1.3-2.8-1.4s-.7-.2-1 .2-1.1 1.4-1.3 1.7c-.2.2-.4.3-.8.1s-1.5-.5-2.9-1.8c-1.1-1-1.8-2.2-2-2.5s0-.6.2-.8.4-.4.6-.6c.2-.2.3-.3.5-.5s.2-.3.3-.5c.1-.2.1-.4 0-.6-.1-.2-1-2.4-1.4-3.3-.3-.8-.7-.7-.9-.7h-.8c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.3 3.5c.2.3 2.3 3.5 5.6 4.9.8.3 1.5.5 2 .6.8.2 1.5.2 2.1.1.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6s-.3-.3-.7-.5z"/></svg>
+    <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.5 2.1 8L0 32l8.2-2.1C10.8 31.3 13.3 32 16 32c8.8 0 16-7.2 16-16S24.8 0 16 0z"/></svg>
   </a>
 
-  <!-- Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, doc, getDoc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
+    import { getFirestore, doc, getDoc, updateDoc, setDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
     const firebaseConfig = {
       apiKey:"AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
       authDomain:"jforceapps-a6ded.firebaseapp.com",
@@ -379,46 +351,157 @@
       appId:"1:423134593625:web:506c32165696f293682748"
     };
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+        const db = getFirestore(app);
 
-    async function incrementarContador(tipo,id){
-      const ref=doc(db,tipo,id);
-      const snap=await getDoc(ref);
-      if(!snap.exists())await setDoc(ref,{contador:0});
-      await updateDoc(ref,{contador:increment(1)});
-    }
-
-    async function registrarVisita(){
-      await incrementarContador("visitas","web");
-      const ref=doc(db,"visitas","web");
-      const snap=await getDoc(ref);
-      if(snap.exists())document.getElementById("contador").textContent="👀 Visitas totales: "+snap.data().contador;
-    }
-
-    async function registrarDescarga(appName){
-      await incrementarContador("descargas",appName);
-      const ref=doc(db,"descargas",appName);
-      const snap=await getDoc(ref);
-      if(snap.exists()){
-        document.getElementById("status_"+appName).textContent="⬇️ Descargas: "+snap.data().contador;
+    // 🔹 Contador de visitas en tiempo real
+    const contadorRef = doc(db, "stats", "visitas");
+    onSnapshot(contadorRef, (snap) => {
+      if (snap.exists()) {
+        document.getElementById("contador").textContent =
+          "👀 Visitas totales: " + snap.data().count.toLocaleString();
       }
-      window.location.href=appName.toLowerCase()+".apk";
-    }
-
-    window.onload=registrarVisita;
-    window.registrarDescarga=registrarDescarga;
-  </script>
-
-  <script>
-    document.addEventListener('click', e=>{
-      const btn=e.target.closest('.cat-btn');
-      if(!btn)return;
-      const target=document.getElementById(btn.dataset.target);
-      if(!target)return;
-      const isOpen=target.classList.contains('open');
-      btn.closest('.accordion').querySelectorAll('.cat-body').forEach(el=>el.classList.remove('open'));
-      if(!isOpen)target.classList.add('open');
     });
+    updateDoc(contadorRef, { count: increment(1) }).catch(async () => {
+      await setDoc(contadorRef, { count: 1 });
+    });
+
+    // 🔹 Descargar contador en tiempo real
+    const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"];
+    apps.forEach(name => {
+      const ref = doc(db, "descargas", name);
+      onSnapshot(ref, snap => {
+        if (snap.exists()) {
+          document.getElementById(`status_${name}`).textContent =
+            `⬇️ Descargas: ${snap.data().count}`;
+        }
+      });
+    });
+
+    // 🔹 Registrar descarga
+    window.registrarDescarga = async function (appName) {
+      const ref = doc(db, "descargas", appName);
+      await updateDoc(ref, { count: increment(1) }).catch(async () => {
+        await setDoc(ref, { count: 1 });
+      });
+      alert(`✅ Gracias por descargar ${appName}!`);
+    };
+
+    // 🔹 Modal con detección dinámica de capturas existentes
+const modal = document.getElementById("modalApp");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const modalImg = document.getElementById("modalImg");
+
+let imgIndex = 0;
+let imgList = [];
+
+// Carga dinámica: solo agrega imágenes que existen realmente
+async function cargarCapturas(carpeta) {
+  const existentes = [];
+  for (let i = 1; i <= 6; i++) { // hasta 6 por si querés más adelante
+    const url = `${carpeta}${i}.webp`;
+    try {
+      const res = await fetch(url, { method: "HEAD" });
+      if (res.ok) existentes.push(url);
+    } catch (_) {}
+  }
+  return existentes;
+}
+
+window.abrirModal = async function (titulo, descripcion, carpeta) {
+  modal.classList.add("active");
+  modalTitle.textContent = titulo;
+  modalDesc.textContent = descripcion;
+
+  imgList = await cargarCapturas(carpeta);
+
+  if (imgList.length > 0) {
+    imgIndex = 0;
+    modalImg.src = imgList[imgIndex];
+  } else {
+    modalImg.src = "noimage.webp"; // opcional: imagen por defecto si no hay capturas
+  }
+};
+
+window.cerrarModal = function () {
+  modal.classList.remove("active");
+};
+
+window.nextImg = function () {
+  if (!imgList.length) return;
+  imgIndex = (imgIndex + 1) % imgList.length;
+  modalImg.src = imgList[imgIndex];
+};
+
+window.prevImg = function () {
+  if (!imgList.length) return;
+  imgIndex = (imgIndex - 1 + imgList.length) % imgList.length;
+  modalImg.src = imgList[imgIndex];
+};
+
+    // 🔹 Efecto de rayo flotante y giratorio
+    const rayito = document.getElementById("rayito");
+    rayito.style.position = "absolute";
+    rayito.style.top = "2rem";
+    rayito.style.left = "50%";
+    rayito.style.transform = "translateX(-50%)";
+    rayito.style.fontSize = "2.2rem";
+    rayito.style.animation = "float 3s ease-in-out infinite, spin 6s linear infinite";
+
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes float {
+        0% { transform: translate(-50%, -10px) rotate(0deg); }
+        50% { transform: translate(-50%, 10px) rotate(180deg); }
+        100% { transform: translate(-50%, -10px) rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+
+// 🔹 Cargar automáticamente capturas si existen en carpeta
+const carpetas = {
+  lao: "Registro LAO",
+  turnos: "TurnosGo",
+  fit: "FitCoach",
+  linterna: "Linterna Shake"
+};
+
+Object.keys(carpetas).forEach(key => {
+  for (let i = 1; i <= 3; i++) {
+    const img = new Image();
+    img.src = `${key}${i}.webp`;
+    img.onload = () => console.log(`✅ Captura cargada: ${img.src}`);
+    img.onerror = () => console.log(`⚠️ No existe: ${img.src}`);
+  }
+});
+
   </script>
+
+  <style>
+    /* WhatsApp flotante */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+      z-index: 1500;
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+    .whatsapp-float svg {
+      fill: #fff;
+      width: 28px;
+      height: 28px;
+    }
+  </style>
 </body>
 </html>
