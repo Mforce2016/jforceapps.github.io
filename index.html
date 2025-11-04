@@ -149,12 +149,18 @@
     .app-card p, .app-card li{color:var(--muted);}
     .app-card ul{margin:6px 0 0 1rem;}
 
-    .btn-download{
-      background:linear-gradient(90deg,var(--accent-2),#ff9a51);
-      color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;border:0;cursor:pointer;
-      box-shadow:0 0 15px rgba(255,118,255,0.4);
-      transition:transform .3s ease;
-    }
+      .btn-download {
+          background: linear-gradient(90deg,var(--accent-2),#ff9a51);
+          color: #fff;
+          padding: 8px 14px;
+          border-radius: 8px;
+          font-weight: 700;
+          border: 0;
+          cursor: pointer;
+          box-shadow: 0 0 15px rgba(255,118,255,0.4);
+          transition: transform .3s ease;
+          margin-bottom: 12px; /*separa el botón del contador */
+      }
     .btn-download:hover{transform:scale(1.07);}
     .app-small{font-size:0.85rem;color:var(--muted);margin-top:4px;}
 
@@ -272,7 +278,7 @@
                 <p>Registro y control de licencias para personal.</p>
                 <div class="app-actions">
                     <a href="registrolao.apk" download class="btn-download">⬇️ Descargar APK</a>
-                    <div class="app-small" id="status_RegistroLAO">⬇️ Descargas: cargando...</div>
+                    <div class="app-small" id="status_RegistroLAO"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
             </div>
 
@@ -299,7 +305,7 @@
                 </ul>
                 <div class="app-actions">
                     <a href="turnosgo.apk" download class="btn-download">⬇️ Descargar APK</a>
-                    <div class="app-small" id="status_TurnosGo">⬇️ Descargas: cargando...</div>
+                    <div class="app-small" id="status_TurnosGo"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
             </div>
 
@@ -317,7 +323,7 @@
                 <p>Planificación de entrenamientos y seguimiento.</p>
                 <div class="app-actions">
                     <a href="fitcoach.apk" download class="btn-download">⬇️ Descargar APK</a>
-                    <div class="app-small" id="status_FitCoach">⬇️ Descargas: cargando...</div>
+                    <div class="app-small" id="status_FitCoach"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
             </div>
 
@@ -337,7 +343,7 @@
                 <p>Linterna instantánea con gesto de sacudir.</p>
                 <div class="app-actions">
                     <a href="linterna.apk" download class="btn-download">⬇️ Descargar APK</a>
-                    <div class="app-small" id="status_LinternaShake">⬇️ Descargas: cargando...</div>
+                    <div class="app-small" id="status_LinternaShake"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
             </div>
 
