@@ -148,21 +148,43 @@
     }
     .app-card p, .app-card li{color:var(--muted);}
     .app-card ul{margin:6px 0 0 1rem;}
+      .app-actions {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-top: 0.8rem;
+      }
 
+      /* 🔹 Enlace con estilo de botón */
       .btn-download {
-          background: linear-gradient(90deg,var(--accent-2),#ff9a51);
+          background: linear-gradient(90deg, var(--accent-2), #ff9a51);
           color: #fff;
-          padding: 8px 14px;
+          padding: 8px 16px;
           border-radius: 8px;
           font-weight: 700;
-          border: 0;
+          text-decoration: none; /* ✨ elimina subrayado */
           cursor: pointer;
-          box-shadow: 0 0 15px rgba(255,118,255,0.4);
-          transition: transform .3s ease;
-          margin-bottom: 12px; /*separa el botón del contador */
+          box-shadow: 0 0 12px rgba(255,118,255,0.35);
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px; /* separa ícono del texto */
+          margin-bottom: 8px; /* 🔥 separa del contador */
       }
-    .btn-download:hover{transform:scale(1.07);}
-    .app-small{font-size:0.85rem;color:var(--muted);margin-top:4px;}
+
+          .btn-download:hover {
+              transform: scale(1.07);
+              box-shadow: 0 0 25px rgba(255,118,255,0.6);
+          }
+
+      /* 🔸 Contador */
+      .app-small {
+          font-size: 0.9rem;
+          color: var(--muted);
+          display: flex;
+          align-items: center;
+          gap: 4px;
+      }
 
     .pay-block{
       text-align:center;
@@ -275,7 +297,6 @@
                     <li>⚙️ Configuración flexible: modificá los días totales o tus años de servicio en cualquier momento.</li>
                     <li>🌈 Interfaz moderna y clara: diseñada para ser cómoda y profesional.</li>
                 </ul>
-                <p>Registro y control de licencias para personal.</p>
                 <div class="app-actions">
                     <a href="registrolao.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_RegistroLAO"><b>⬇️ Descargas: cargando...</b></div>
@@ -316,11 +337,25 @@
                     <h3 onclick="abrirModal('FitCoach','Planificación de entrenamientos y seguimiento.','fit')">FitCoach</h3>
                 </div>
                 <ul>
-                    <li>💪 Creá rutinas personalizadas de entrenamiento.</li>
-                    <li>🍎 Planificá tus sesiones según tus objetivos.</li>
-                    <li>📊 Visualización moderna y clara de tus avances.</li>
+                    <li>👨‍🏫 Registro de profesores: crea tu cuenta de entrenador personal de forma rápida y segura.</li>
+                    <li>👥 Gestión de alumnos: guarda sus datos físicos, plan contratado y progreso individual.</li>
+                    <li>📅 Rutinas personalizadas: organiza ejercicios por día, zona muscular y tipo de entrenamiento.</li>
+                    <li>🏋️‍♂️ Ejercicios con animaciones: cada ejercicio incluye un GIF demostrativo para asegurar la técnica correcta (próxima actualización).</li>
+                    <li>📝 Observaciones: añade notas o indicaciones específicas para cada rutina o ejercicio.</li>
+                    <li>☁️ Sincronización en la nube: todos los datos se guardan automáticamente con Firebase Firestore.</li>
+                    <li>📱 Interfaz moderna: diseño limpio y fácil de usar, adaptable a cualquier dispositivo Android.</li>
+                    <li>🔒 Acceso seguro: inicio de sesión con email y contraseña para proteger tus datos.</li>
                 </ul>
-                <p>Planificación de entrenamientos y seguimiento.</p>
+
+                <p><b>💪 Ideal para:</b></p>
+                <ul>
+                    <li>Entrenadores personales</li>
+                    <li>Profesores de educación física</li>
+                    <li>Gimnasios y centros de entrenamiento</li>
+                    <li>Alumnos que desean seguir su rutina con guía visual</li>
+                </ul>
+
+                <p><b>🚀 FitCoach — Entrena mejor, enseña más fácil.</b></p>
                 <div class="app-actions">
                     <a href="fitcoach.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_FitCoach"><b>⬇️ Descargas: cargando...</b></div>
@@ -340,7 +375,6 @@
                     <li>🎨 Interfaz minimalista y moderna.</li>
                     <li>📱 Compatible con la mayoría de dispositivos Android.</li>
                 </ul>
-                <p>Linterna instantánea con gesto de sacudir.</p>
                 <div class="app-actions">
                     <a href="linterna.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_LinternaShake"><b>⬇️ Descargas: cargando...</b></div>
