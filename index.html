@@ -384,7 +384,7 @@
       apiKey:"AIzaSyAQglZKEz1XOmb-nSpLGypyQJPF75-x7Rk",
       authDomain:"jforceapps-a6ded.firebaseapp.com",
       projectId:"jforceapps-a6ded",
-      storageBucket:"jforceapps-a6ded.firebasestorage.app",
+      storageBucket: "jforceapps-a6ded.appspot.com",
       messagingSenderId:"423134593625",
       appId:"1:423134593625:web:506c32165696f293682748"
     };
@@ -416,13 +416,28 @@
     });
 
     // 🔹 Registrar descarga
-    window.registrarDescarga = async function (appName) {
-      const ref = doc(db, "descargas", appName);
-      await updateDoc(ref, { count: increment(1) }).catch(async () => {
-        await setDoc(ref, { count: 1 });
-      });
-      alert(`✅ Gracias por descargar ${appName}!`);
-    };
+      window.registrarDescarga = async function (appName) {
+          const ref = doc(db, "descargas", appName);
+          await updateDoc(ref, { count: increment(1) }).catch(async () => {
+              await setDoc(ref, { count: 1 });
+          });
+          alert(`✅ Gracias por descargar ${appName}!`);
+
+          // ✅ Ruta de descarga (ajustá según tu GitHub Pages)
+          const urls = {
+              RegistroLAO: "https://mforce2016.github.io/jforceapps.github.io/fitcoach.apk",
+              TurnosGo: "https://mforce2016.github.io/jforceapps.github.io/turnosgo.apk",
+              FitCoach: "https://mforce2016.github.io/jforceapps.github.io/fitcoach.apk",
+              LinternaShake: "https://mforce2016.github.io/jforceapps.github.io/linternashake.apk"
+          };
+
+          // ✅ Redirige para iniciar la descarga
+          if (urls[appName]) {
+              window.location.href = urls[appName];
+          } else {
+              alert(`No se encontró el archivo de ${appName}`);
+          }
+      };
 
     // 🔹 Modal con detección dinámica de capturas existentes
 const modal = document.getElementById("modalApp");
