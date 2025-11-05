@@ -258,84 +258,6 @@
       .pay-block{max-width:480px;margin:2rem auto;}
       main.area{padding:2rem;}
     }
-
-    /* Valoraciones */
-.app-review {
-  margin-top: 10px;
-  padding: 10px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.1);
-}
-.app-review h4 { margin: 0 0 6px; color: var(--accent); }
-.review-name, .review-comment {
-  width: 100%;
-  margin-bottom: 6px;
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(0,0,0,0.1);
-  color: var(--text);
-  font-size: 0.9rem;
-}
-.review-stars {
-  margin-bottom: 6px;
-}
-.review-stars span {
-  font-size: 1.4rem;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-.review-stars span.active { color: gold; }
-.review-btn {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-.review-btn:hover { transform: scale(1.05); }
-.review-status { margin-top: 4px; font-size: 0.85rem; color: var(--muted); }
-
-	/* Reseñas visibles debajo */
-.review-list {
-  margin-top: 8px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 8px;
-}
-
-.review-item {
-  background: rgba(255,255,255,0.03);
-  padding: 6px 8px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-}
-
-.review-item strong {
-  color: var(--accent);
-  font-size: 0.9rem;
-}
-
-.review-item .stars {
-  color: gold;
-  font-size: 1rem;
-  margin-right: 6px;
-}
-
-.review-item p {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.review-average {
-  font-weight: bold;
-  color: gold;
-  margin-bottom: 6px;
-}
   </style>
 </head>
 <body>
@@ -355,7 +277,7 @@
         </header>
 
         <main class="area">
-            <h2>📱 Aplicaciones móviles - Versión Android</h2>
+            <h2>📱 Aplicaciones móviles</h2>
 
             <!-- 🟢 REGISTRO LAO -->
             <div class="app-card">
@@ -376,24 +298,9 @@
                     <li>🌈 Interfaz moderna y clara: diseñada para ser cómoda y profesional.</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="registrolao.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="registrolao.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_RegistroLAO"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
-		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-		        <div class="app-review" data-app="RegistroLAO">
-  		        <h4>⭐ Valorá esta app</h4>
-  		        <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-  		        <div class="review-stars">
-    		        <span data-star="1">★</span>
-    		        <span data-star="2">★</span>
-    		        <span data-star="3">★</span>
-    		        <span data-star="4">★</span>
-    		        <span data-star="5">★</span>
-  		        </div>
-  		        <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-  		        <button class="review-btn">Enviar valoración</button>
-  		        <div class="review-status"></div>
-		        </div>
             </div>
 
             <!-- 🟣 TURNOSGO -->
@@ -418,24 +325,9 @@
                     <li>Médicos, enfermeros y personal de salud</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="turnosgo.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="turnosgo.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_TurnosGo"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
-		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-		        <div class="app-review" data-app="TurnosGo">
-  		        <h4>⭐ Valorá esta app</h4>
-  		        <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-  		        <div class="review-stars">
-    		        <span data-star="1">★</span>
-    		        <span data-star="2">★</span>
-    		        <span data-star="3">★</span>
-    		        <span data-star="4">★</span>
-    		        <span data-star="5">★</span>
-  		        </div>
-  		        <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-  		        <button class="review-btn">Enviar valoración</button>
-  		        <div class="review-status"></div>
-		        </div>
             </div>
 
             <!-- 🟡 FITCOACH -->
@@ -465,24 +357,9 @@
 
                 <p><b>🚀 FitCoach — Entrena mejor, enseña más fácil.</b></p>
                 <div class="app-actions">
-                    <a href="fitcoach.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="fitcoach.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_FitCoach"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
-		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-		        <div class="app-review" data-app="FitCoach">
-  		        <h4>⭐ Valorá esta app</h4>
-  		        <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-  		        <div class="review-stars">
-    		        <span data-star="1">★</span>
-    		        <span data-star="2">★</span>
-    		        <span data-star="3">★</span>
-    		        <span data-star="4">★</span>
-    		        <span data-star="5">★</span>
-  		        </div>
-  		        <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-  		        <button class="review-btn">Enviar valoración</button>
-  		        <div class="review-status"></div>
-		        </div>
             </div>
 
             <!-- 🔦 LINTERNA SHAKE -->
@@ -499,31 +376,16 @@
                     <li>📱 Compatible con la mayoría de dispositivos Android.</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="linterna.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="linterna.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_LinternaShake"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
-		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-		        <div class="app-review" data-app="LinternaShake">
-  		        <h4>⭐ Valorá esta app</h4>
-  		        <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-  		        <div class="review-stars">
-    		        <span data-star="1">★</span>
-    		        <span data-star="2">★</span>
-    		        <span data-star="3">★</span>
-    		        <span data-star="4">★</span>
-    		        <span data-star="5">★</span>
-  		        </div>
-  		        <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-  		        <button class="review-btn">Enviar valoración</button>
-  		        <div class="review-status"></div>
-		        </div>
             </div>
 
             <!-- 🧾 BLOQUE DE PAGO -->
             <div class="pay-block">
                 <h3>Pagos de Licencias</h3>
                 <img src="qr-mercadopago.webp" alt="QR Mercado Pago" loading="lazy" class="qr">
-                <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Abonar licencia con Mercado Pago</a>
+                <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Pagar con Mercado Pago</a>
                 <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
                     Ante consultas o activaciones:<br>
                     <a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a>
@@ -534,6 +396,8 @@
                 👀 Visitas totales: cargando...
             </p>
         </main>
+
+
 
         <footer>© 2025 JForce Apps · Todos los derechos reservados</footer>
     </div>
@@ -559,7 +423,7 @@
     <!-- 🔥 FIREBASE - Contadores y descargas -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getFirestore, doc, getDoc, updateDoc, setDoc, increment, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
         // ⚙️ CONFIG FIREBASE
         const firebaseConfig = {
@@ -603,7 +467,7 @@
         async function registrarDescarga(app) {
             await incrementarContador("descargas", app);
             mostrarContador("descargas", app, "status_" + app);
-            // 🔻 Ruta de descarga desde GitHub Pages
+            // 🔻 Ruta de descarga desde tu GitHub Pages
             const urls = {
                 RegistroLAO: "https://mforce2016.github.io/jforceapps.github.io/registrolao.apk",
                 TurnosGo: "https://mforce2016.github.io/jforceapps.github.io/turnosgo.apk",
@@ -640,7 +504,7 @@
         // Carga dinámica: solo agrega imágenes que existen realmente
         async function cargarCapturas(carpeta) {
         const existentes = [];
-        for (let i = 1; i <= 6; i++) { // hasta 6 modificar más adelante
+        for (let i = 1; i <= 6; i++) { // hasta 6 por si querés más adelante
         const url = `${carpeta}${i}.webp`;
         try {
         const res = await fetch(url, { method: "HEAD" });
@@ -716,92 +580,6 @@
         img.onerror = () => console.log(`⚠️ No existe: ${img.src}`);
         }
         });
-
-        // 🔹 Enviar valoraciones
-
-        document.querySelectorAll(".app-review").forEach(section => {
-          const appName = section.dataset.app;
-          const stars = section.querySelectorAll(".review-stars span");
-          let selected = 0;
-
-          stars.forEach(star => {
-            star.addEventListener("click", () => {
-              selected = parseInt(star.dataset.star);
-              stars.forEach(s => s.classList.toggle("active", parseInt(s.dataset.star) <= selected));
-            });
-          });
-
-          const btn = section.querySelector(".review-btn");
-          btn.addEventListener("click", async () => {
-            const nombre = section.querySelector(".review-name").value.trim();
-            const comentario = section.querySelector(".review-comment").value.trim();
-            const status = section.querySelector(".review-status");
-
-            if (selected === 0 || comentario === "") {
-              status.textContent = "⚠️ Elegí estrellas y escribí un comentario.";
-              return;
-            }
-
-            try {
-              await addDoc(collection(db, "valoraciones", appName, "comentarios"), {
-                nombre: nombre || "Anónimo",
-                estrellas: selected,
-                comentario,
-                fecha: serverTimestamp()
-              });
-              status.textContent = "✅ Valoración enviada. ¡Gracias!";
-              section.querySelector(".review-name").value = "";
-              section.querySelector(".review-comment").value = "";
-              stars.forEach(s => s.classList.remove("active"));
-              selected = 0;
-            } catch (e) {
-              console.error("Error al guardar valoración:", e);
-              status.textContent = "❌ Error al enviar. Intentalo nuevamente.";
-            }
-          });
-        });
-
-        // 🔹 Mostrar comentarios y promedio de estrellas
-        async function mostrarValoraciones() {
-          const secciones = document.querySelectorAll(".app-review");
-
-          for (const section of secciones) {
-            const appName = section.dataset.app;
-            const contenedor = document.createElement("div");
-            contenedor.classList.add("review-list");
-            section.appendChild(contenedor);
-
-            const q = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
-            let total = 0, suma = 0;
-
-            q.forEach(doc => {
-              const d = doc.data();
-              suma += d.estrellas;
-              total++;
-              const item = document.createElement("div");
-              item.classList.add("review-item");
-              item.innerHTML = `
-                <div><span class="stars">${"★".repeat(d.estrellas)}${"☆".repeat(5 - d.estrellas)}</span>
-                <strong>${d.nombre || "Anónimo"}</strong></div>
-                <p>${d.comentario}</p>
-              `;
-              contenedor.appendChild(item);
-            });
-
-            if (total > 0) {
-              const promedio = (suma / total).toFixed(1);
-              const avg = document.createElement("div");
-              avg.classList.add("review-average");
-              avg.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
-              section.insertBefore(avg, section.querySelector(".review-name"));
-            } else {
-              contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Aún no hay comentarios.</p>`;
-            }
-          }
-        }
-
-        // Ejecutar al cargar
-        mostrarValoraciones();
 
     </script>
 
