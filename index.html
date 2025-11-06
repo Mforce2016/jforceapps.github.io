@@ -576,40 +576,59 @@
         const db = getFirestore(app);
 
         // 🔹 Incrementa contador en Firestore
-        async function incrementarContador(tipo, id) {
-            const ref = doc(db, tipo, id);
-            const snap = await getDoc(ref);
-            if (!snap.exists()) await setDoc(ref, { contador: 0 });
-            await updateDoc(ref, { contador: increment(1) });
-        }
+        // 🔥 --- FUNCIONES FIRESTORE ---
 
-        async function mostrarContador(tipo, id, elemento) {
-            const ref = doc(db, tipo, id);
-            const snap = await getDoc(ref);
-            if (snap.exists()) {
-                document.getElementById(elemento).textContent =
-                    (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
+        async function incrementarContador(tipo, id) {
+            try {
+                const ref = doc(db, tipo, id);
+                const snap = await getDoc(ref);
+
+                if (!snap.exists()) {
+                    // Si no existe, lo creamos en 1
+                    await setDoc(ref, { contador: 1 });
+                } else {
+                    // Si existe, incrementamos en 1
+                    await updateDoc(ref, { contador: increment(1) });
+                }
+            } catch (e) {
+                console.error("Error al incrementar contador:", e);
             }
         }
 
-        // 🔹 Registrar visita de página
-        async function registrarVisita() {
-            await incrementarContador("visitas", "web");
-            mostrarContador("visitas", "web", "contador");
+        async function mostrarContador(tipo, id, elemento) {
+            try {
+                const ref = doc(db, tipo, id);
+                const snap = await getDoc(ref);
+                const el = document.getElementById(elemento);
+
+                if (snap.exists()) {
+                    const cantidad = snap.data().contador || 0;
+                    el.innerHTML = `<b>${tipo === "visitas" ? "👀 Visitas totales:" : "⬇️ Descargas:"} ${cantidad}</b>`;
+                } else {
+                    el.innerHTML = `<b>${tipo === "visitas" ? "👀 Visitas totales:" : "⬇️ Descargas:"} 0</b>`;
+                }
+            } catch (e) {
+                console.error("Error al mostrar contador:", e);
+                document.getElementById(elemento).innerHTML = "<b>Error al cargar contador</b>";
+            }
         }
 
-        // 🔥 FUNCIONES DE DESCARGAS
-        async function registrarDescarga(appId) {
+        // 🔹 Registrar descarga (click en botón)
+        window.registrarDescarga = async function (appId) {
             await incrementarContador("descargas", appId);
             mostrarContador("descargas", appId, `status_${appId}`);
         }
 
-        // 🔹 Inicializa y muestra los contadores de todas las apps
-        const apps = ["LinternaShake", "TurnosGo", "FitCoach", "RegistroLAO"]; // 🔧 agregá tus apps aquí
+        // 🔹 Registrar visita general (si querés seguir usándolo)
+        window.registrarVisita = async function () {
+            await incrementarContador("visitas", "web");
+            mostrarContador("visitas", "web", "contador");
+        }
 
-        apps.forEach(appId => {
-            mostrarContador("descargas", appId, `status_${appId}`);
-        });
+        // 🔹 Mostrar contadores al iniciar
+        const apps = ["LinternaShake"]; // 🔧 agregá tus apps aquí
+        apps.forEach(appId => mostrarContador("descargas", appId, `status_${appId}`));
+
    
 
         // 🔹 Modal con detección dinámica de capturas existentes
