@@ -574,7 +574,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 🔹 Incrementa contador en Firestore (versión segura)
+        // 🔹 Incrementa contador en Firestore
         async function incrementarContador(tipo, id) {
             const ref = doc(db, tipo, id);
             const snap = await getDoc(ref);
@@ -598,13 +598,11 @@
         }
 
         async function registrarDescarga(app) {
-            const ref = doc(db, "descargas", app);
-            const snap = await getDoc(ref);
-            if (!snap.exists()) await setDoc(ref, { contador: 0 });
-            await updateDoc(ref, { contador: increment(1) });
-
-            await new Promise(r => setTimeout(r, 500)); // pequeño buffer
-            window.location.href = app.toLowerCase() + ".apk";
+            await incrementarContador("descargas", app);
+            mostrarContador("descargas", app, "desc_" + app);
+            setTimeout(() => {
+                window.location.href = app.toLowerCase() + ".apk";
+            }, 800); // 0.8 segundos suele bastar
         }
 
         window.onload = async () => {
