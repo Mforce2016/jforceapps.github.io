@@ -599,40 +599,12 @@
 
         // 🔹 Registrar descarga
         async function registrarDescarga(app) {
-            const urls = {
-                RegistroLAO: "https://mforce2016.github.io/jforceapps.github.io/registrolao.apk",
-                TurnosGo: "https://mforce2016.github.io/jforceapps.github.io/turnosgo.apk",
-                FitCoach: "https://mforce2016.github.io/jforceapps.github.io/fitcoach.apk",
-                LinternaShake: "https://mforce2016.github.io/jforceapps.github.io/linternashake.apk"
-            };
-
-            try {
-                console.log(`[descarga] Iniciando registro para ${app}`);
-                // 1) Incrementar contador (set merge con FieldValue.increment)
-                const ref = doc(db, "descargas", app);
-                await setDoc(ref, { contador: increment(1) }, { merge: true });
-
-                // 2) Actualizar UI (intentar leer el doc y mostrar)
-                const snap = await getDoc(ref);
-                const contador = snap.exists() ? (snap.data().contador || 0) : 0;
-                const elemId = "status_" + app;
-                const el = document.getElementById(elemId);
-                if (el) el.textContent = `⬇️ Descargas: ${contador}`;
-
-                // 3) Abrir descarga en nueva pestaña para no interrumpir la escritura
-                if (urls[app]) {
-                    // abrir en nueva pestaña (mejor que cambiar location, el usuario mantiene la página)
-                    window.open(urls[app], "_blank");
-                    console.log(`[descarga] Abriendo URL: ${urls[app]}`);
-                } else {
-                    alert(`No se encontró el archivo de descarga para ${app}`);
-                }
-            } catch (err) {
-                console.error("Error en registrarDescarga:", err);
-                alert("No se pudo registrar la descarga. Revisá la consola para más detalles.");
-            }
-        }
-
+  await incrementarContador("descargas", app);
+  mostrarContador("descargas", app, "desc_" + app);
+  setTimeout(() => {
+    window.location.href = app.toLowerCase() + ".apk";
+  }, 800); // 0.8 segundos suele bastar
+}
 
         // 🔹 Cargar contadores al inicio
         window.onload = async () => {
