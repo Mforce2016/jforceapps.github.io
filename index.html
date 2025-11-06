@@ -260,82 +260,82 @@
     }
 
     /* Valoraciones */
-.app-review {
-  margin-top: 10px;
-  padding: 10px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.1);
-}
-.app-review h4 { margin: 0 0 6px; color: var(--accent); }
-.review-name, .review-comment {
-  width: 100%;
-  margin-bottom: 6px;
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(0,0,0,0.1);
-  color: var(--text);
-  font-size: 0.9rem;
-}
-.review-stars {
-  margin-bottom: 6px;
-}
-.review-stars span {
-  font-size: 1.4rem;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-.review-stars span.active { color: gold; }
-.review-btn {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-.review-btn:hover { transform: scale(1.05); }
-.review-status { margin-top: 4px; font-size: 0.85rem; color: var(--muted); }
+    .app-review {
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    }
+    .app-review h4 { margin: 0 0 6px; color: var(--accent); }
+    .review-name, .review-comment {
+      width: 100%;
+      margin-bottom: 6px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.1);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .review-stars {
+      margin-bottom: 6px;
+    }
+    .review-stars span {
+      font-size: 1.4rem;
+      color: #666;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .review-stars span.active { color: gold; }
+    .review-btn {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .review-btn:hover { transform: scale(1.05); }
+    .review-status { margin-top: 4px; font-size: 0.85rem; color: var(--muted); }
 
-	/* Reseñas visibles debajo */
-.review-list {
-  margin-top: 8px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 8px;
-}
+	    /* Reseñas visibles debajo */
+    .review-list {
+      margin-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 8px;
+    }
 
-.review-item {
-  background: rgba(255,255,255,0.03);
-  padding: 6px 8px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-}
+    .review-item {
+      background: rgba(255,255,255,0.03);
+      padding: 6px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
 
-.review-item strong {
-  color: var(--accent);
-  font-size: 0.9rem;
-}
+    .review-item strong {
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
 
-.review-item .stars {
-  color: gold;
-  font-size: 1rem;
-  margin-right: 6px;
-}
+    .review-item .stars {
+      color: gold;
+      font-size: 1rem;
+      margin-right: 6px;
+    }
 
-.review-item p {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
+    .review-item p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
 
-.review-average {
-  font-weight: bold;
-  color: gold;
-  margin-bottom: 6px;
-}
+    .review-average {
+      font-weight: bold;
+      color: gold;
+      margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -574,12 +574,23 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 🔹 Incrementa contador en Firestore
+        // 🔹 Incrementa contador en Firestore (versión segura)
         async function incrementarContador(tipo, id) {
             const ref = doc(db, tipo, id);
-            const snap = await getDoc(ref);
-            if (!snap.exists()) await setDoc(ref, { contador: 0 });
-            await updateDoc(ref, { contador: increment(1) });
+
+            try {
+                const snap = await getDoc(ref);
+
+                if (!snap.exists()) {
+                    // si no existe, lo crea con contador = 1
+                    await setDoc(ref, { contador: 1 });
+                } else {
+                    // si ya existe, solo lo incrementa
+                    await updateDoc(ref, { contador: increment(1) });
+                }
+            } catch (e) {
+                console.error("⚠️ Error al incrementar contador:", e);
+            }
         }
 
         // 🔹 Muestra el contador en pantalla
@@ -688,17 +699,79 @@
         rayito.style.left = "50%";
         rayito.style.transform = "translateX(-50%)";
         rayito.style.fontSize = "2.2rem";
+        rayito.style.cursor = "pointer";
         rayito.style.animation = "float 3s ease-in-out infinite, spin 6s linear infinite";
 
         const style = document.createElement("style");
         style.textContent = `
         @keyframes float {
-        0% { transform: translate(-50%, -10px) rotate(0deg); }
-        50% { transform: translate(-50%, 10px) rotate(180deg); }
-        100% { transform: translate(-50%, -10px) rotate(360deg); }
+          0% { transform: translate(-50%, -10px) rotate(0deg); }
+          50% { transform: translate(-50%, 10px) rotate(180deg); }
+          100% { transform: translate(-50%, -10px) rotate(360deg); }
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes recorrerPantalla {
+          0% {
+            clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+          }
+          25% {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          }
+          50% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+          }
+          75% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+          }
+          100% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            opacity: 0;
+          }
         }
         `;
         document.head.appendChild(style);
+
+        // 🔹 Evento: al presionar el rayo → efecto de vuelta eléctrica
+        rayito.addEventListener("click", () => {
+            // ✨ Crea un contenedor que cubrirá toda la pantalla
+            const borde = document.createElement("div");
+            borde.style.position = "fixed";
+            borde.style.top = "0";
+            borde.style.left = "0";
+            borde.style.width = "100vw";
+            borde.style.height = "100vh";
+            borde.style.pointerEvents = "none";
+            borde.style.zIndex = "9999";
+
+            // ✨ Crea la “línea eléctrica”
+            const linea = document.createElement("div");
+            linea.style.position = "absolute";
+            linea.style.top = "0";
+            linea.style.left = "0";
+            linea.style.width = "100%";
+            linea.style.height = "100%";
+            linea.style.border = "4px solid #ffff00";
+            linea.style.borderRadius = "10px";
+            linea.style.boxShadow = "0 0 30px 10px rgba(255,255,150,0.7)";
+            linea.style.background = "linear-gradient(90deg, #fff700, #ff9a00, #ff00ff)";
+            linea.style.animation = "recorrerPantalla 1.6s linear forwards";
+
+            borde.appendChild(linea);
+            document.body.appendChild(borde);
+
+            // ✨ Rayo brilla más mientras recorre
+            rayito.style.filter = "brightness(2)";
+            setTimeout(() => rayito.style.filter = "brightness(1)", 1200);
+
+            // 🔹 Elimina el borde después de animar
+            setTimeout(() => borde.remove(), 1600);
+        });
+
 
         // 🔹 Cargar automáticamente capturas si existen en carpeta
         const carpetas = {
