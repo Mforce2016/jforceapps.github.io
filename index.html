@@ -260,82 +260,82 @@
     }
 
     /* Valoraciones */
-.app-review {
-  margin-top: 10px;
-  padding: 10px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.1);
-}
-.app-review h4 { margin: 0 0 6px; color: var(--accent); }
-.review-name, .review-comment {
-  width: 100%;
-  margin-bottom: 6px;
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(0,0,0,0.1);
-  color: var(--text);
-  font-size: 0.9rem;
-}
-.review-stars {
-  margin-bottom: 6px;
-}
-.review-stars span {
-  font-size: 1.4rem;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-.review-stars span.active { color: gold; }
-.review-btn {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-.review-btn:hover { transform: scale(1.05); }
-.review-status { margin-top: 4px; font-size: 0.85rem; color: var(--muted); }
+    .app-review {
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    }
+    .app-review h4 { margin: 0 0 6px; color: var(--accent); }
+    .review-name, .review-comment {
+      width: 100%;
+      margin-bottom: 6px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.1);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .review-stars {
+      margin-bottom: 6px;
+    }
+    .review-stars span {
+      font-size: 1.4rem;
+      color: #666;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .review-stars span.active { color: gold; }
+    .review-btn {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .review-btn:hover { transform: scale(1.05); }
+    .review-status { margin-top: 4px; font-size: 0.85rem; color: var(--muted); }
 
-	/* Reseñas visibles debajo */
-.review-list {
-  margin-top: 8px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 8px;
-}
+	    /* Reseñas visibles debajo */
+    .review-list {
+      margin-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 8px;
+    }
 
-.review-item {
-  background: rgba(255,255,255,0.03);
-  padding: 6px 8px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-}
+    .review-item {
+      background: rgba(255,255,255,0.03);
+      padding: 6px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
 
-.review-item strong {
-  color: var(--accent);
-  font-size: 0.9rem;
-}
+    .review-item strong {
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
 
-.review-item .stars {
-  color: gold;
-  font-size: 1rem;
-  margin-right: 6px;
-}
+    .review-item .stars {
+      color: gold;
+      font-size: 1rem;
+      margin-right: 6px;
+    }
 
-.review-item p {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
+    .review-item p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
 
-.review-average {
-  font-weight: bold;
-  color: gold;
-  margin-bottom: 6px;
-}
+    .review-average {
+      font-weight: bold;
+      color: gold;
+      margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -376,7 +376,7 @@
                     <li>🌈 Interfaz moderna y clara: diseñada para ser cómoda y profesional.</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="registrolao.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="#" class="btn-download" onclick="registrarDescarga('RegistroLAO'); return false;">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_RegistroLAO"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -418,7 +418,7 @@
                     <li>Médicos, enfermeros y personal de salud</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="turnosgo.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="#" class="btn-download" onclick="registrarDescarga('TurnosGo'); return false;">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_TurnosGo"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -465,7 +465,7 @@
 
                 <p><b>🚀 FitCoach — Entrena mejor, enseña más fácil.</b></p>
                 <div class="app-actions">
-                    <a href="fitcoach.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="#" class="btn-download" onclick="registrarDescarga('FitCoach'); return false;">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_FitCoach"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -499,7 +499,7 @@
                     <li>📱 Compatible con la mayoría de dispositivos Android.</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="linterna.apk" download class="btn-download">⬇️ Descargar APP</a>
+                    <a href="#" class="btn-download" onclick="registrarDescarga('LinternaShake'); return false;">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_LinternaShake"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -574,7 +574,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 🔹 Incrementa contador en Firestore
+        // 🔹 Incrementa contador en Firestore (versión segura)
         async function incrementarContador(tipo, id) {
             const ref = doc(db, tipo, id);
             const snap = await getDoc(ref);
@@ -582,14 +582,12 @@
             await updateDoc(ref, { contador: increment(1) });
         }
 
-        // 🔹 Muestra el contador en pantalla
         async function mostrarContador(tipo, id, elemento) {
             const ref = doc(db, tipo, id);
             const snap = await getDoc(ref);
             if (snap.exists()) {
-                const contador = snap.data().contador || 0;
                 document.getElementById(elemento).textContent =
-                    (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + contador;
+                    (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
             }
         }
 
@@ -599,29 +597,16 @@
             mostrarContador("visitas", "web", "contador");
         }
 
-        // 🔹 Registrar descarga y abrir APK
         async function registrarDescarga(app) {
             await incrementarContador("descargas", app);
-            mostrarContador("descargas", app, "status_" + app);
-            // 🔻 Ruta de descarga desde GitHub Pages
-            const urls = {
-                RegistroLAO: "https://mforce2016.github.io/jforceapps.github.io/registrolao.apk",
-                TurnosGo: "https://mforce2016.github.io/jforceapps.github.io/turnosgo.apk",
-                FitCoach: "https://mforce2016.github.io/jforceapps.github.io/fitcoach.apk",
-                LinternaShake: "https://mforce2016.github.io/jforceapps.github.io/linternashake.apk"
-            };
-            if (urls[app]) {
-                window.location.href = urls[app];
-            } else {
-                alert(`No se encontró el archivo de descarga para ${app}`);
-            }
+            mostrarContador("descargas", app, "desc_" + app);
+            window.location.href = app.toLowerCase() + ".apk";
         }
 
-        // 🔹 Cargar contadores al inicio
         window.onload = async () => {
             registrarVisita();
-            const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"];
-            for (const app of apps) await mostrarContador("descargas", app, "status_" + app);
+            const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
+            for (const app of apps) await mostrarContador("descargas", app, "desc_" + app);
         };
 
         // Hacer pública la función para usarla desde botones
@@ -693,36 +678,36 @@
 
         const style = document.createElement("style");
         style.textContent = `
-@keyframes float {
-  0% { transform: translate(-50%, -10px) rotate(0deg); }
-  50% { transform: translate(-50%, 10px) rotate(180deg); }
-  100% { transform: translate(-50%, -10px) rotate(360deg); }
-}
+        @keyframes float {
+          0% { transform: translate(-50%, -10px) rotate(0deg); }
+          50% { transform: translate(-50%, 10px) rotate(180deg); }
+          100% { transform: translate(-50%, -10px) rotate(360deg); }
+        }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
 
-@keyframes recorrerPantalla {
-  0% {
-    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-  }
-  25% {
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  }
-  50% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
-  }
-  75% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-  100% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    opacity: 0;
-  }
-}
-`;
+        @keyframes recorrerPantalla {
+          0% {
+            clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+          }
+          25% {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          }
+          50% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+          }
+          75% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+          }
+          100% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            opacity: 0;
+          }
+        }
+        `;
         document.head.appendChild(style);
 
         // 🔹 Evento: al presionar el rayo → efecto de vuelta eléctrica
@@ -761,6 +746,7 @@
             // 🔹 Elimina el borde después de animar
             setTimeout(() => borde.remove(), 1600);
         });
+
 
         // 🔹 Cargar automáticamente capturas si existen en carpeta
         const carpetas = {
