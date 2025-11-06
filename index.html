@@ -376,7 +376,7 @@
                     <li>🌈 Interfaz moderna y clara: diseñada para ser cómoda y profesional.</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="#" class="btn-download" onclick="registrarDescarga('RegistroLAO'); return false;">⬇️ Descargar APP</a>
+                    <a href="registrolao.apk" download class="btn-download">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_RegistroLAO"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -418,7 +418,7 @@
                     <li>Médicos, enfermeros y personal de salud</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="#" class="btn-download" onclick="registrarDescarga('TurnosGo'); return false;">⬇️ Descargar APP</a>
+                    <a href="turnosgo.apk" download class="btn-download">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_TurnosGo"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -465,7 +465,7 @@
 
                 <p><b>🚀 FitCoach — Entrena mejor, enseña más fácil.</b></p>
                 <div class="app-actions">
-                    <a href="#" class="btn-download" onclick="registrarDescarga('FitCoach'); return false;">⬇️ Descargar APP</a>
+                    <a href="fitcoach.apk" download class="btn-download">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_FitCoach"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -499,7 +499,7 @@
                     <li>📱 Compatible con la mayoría de dispositivos Android.</li>
                 </ul>
                 <div class="app-actions">
-                    <a href="#" class="btn-download" onclick="registrarDescarga('LinternaShake'); return false;">⬇️ Descargar APP</a>
+                    <a href="linterna.apk" download class="btn-download">⬇️ Descargar APK</a>
                     <div class="app-small" id="status_LinternaShake"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
 		        <!-- 🔹 Bloque de valoraciones debajo de cada app -->
@@ -577,17 +577,17 @@
         // 🔹 Incrementa contador en Firestore (versión segura)
         async function incrementarContador(tipo, id) {
             const ref = doc(db, tipo, id);
-            await setDoc(ref, { contador: increment(1) }, { merge: true });
+            const snap = await getDoc(ref);
+            if (!snap.exists()) await setDoc(ref, { contador: 0 });
+            await updateDoc(ref, { contador: increment(1) });
         }
 
-        // 🔹 Muestra el contador en pantalla
         async function mostrarContador(tipo, id, elemento) {
             const ref = doc(db, tipo, id);
             const snap = await getDoc(ref);
             if (snap.exists()) {
-                const contador = snap.data().contador || 0;
                 document.getElementById(elemento).textContent =
-                    (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + contador;
+                    (tipo === "visitas" ? "👀 Visitas totales: " : "⬇️ Descargas: ") + snap.data().contador;
             }
         }
 
@@ -597,20 +597,26 @@
             mostrarContador("visitas", "web", "contador");
         }
 
-        // 🔹 Registrar descarga
         async function registrarDescarga(app) {
-  await incrementarContador("descargas", app);
-  mostrarContador("descargas", app, "desc_" + app);
-  setTimeout(() => {
-    window.location.href = app.toLowerCase() + ".apk";
-  }, 800); // 0.8 segundos suele bastar
-}
+            try {
+                await incrementarContador("descargas", app);
+                await mostrarContador("descargas", app, "desc_" + app);
+                console.log("✅ Contador incrementado para", app);
 
-        // 🔹 Cargar contadores al inicio
+                // Espera breve para asegurar escritura antes de redirigir
+                setTimeout(() => {
+                    window.location.href = app.toLowerCase() + ".apk";
+                }, 800);
+            } catch (e) {
+                console.error("❌ Error al registrar descarga:", e);
+                alert("Ocurrió un error al registrar la descarga. Intentalo nuevamente.");
+            }
+        }
+
         window.onload = async () => {
             registrarVisita();
-            const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"];
-            for (const app of apps) await mostrarContador("descargas", app, "status_" + app);
+            const apps = ["RegistroLAO", "TurnosGo", "LinternaShake", "FitCoach"];
+            for (const app of apps) await mostrarContador("descargas", app, "desc_" + app);
         };
 
         // Hacer pública la función para usarla desde botones
@@ -629,7 +635,7 @@
         // Carga dinámica: solo agrega imágenes que existen realmente
         async function cargarCapturas(carpeta) {
         const existentes = [];
-        for (let i = 1; i <= 6; i++) { // hasta 6 modificar más adelante
+        for (let i = 1; i <= 10; i++) { // hasta 10 modificar más adelante
         const url = `${carpeta}${i}.webp`;
         try {
         const res = await fetch(url, { method: "HEAD" });
