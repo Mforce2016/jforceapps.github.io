@@ -598,11 +598,20 @@
         }
 
         async function registrarDescarga(app) {
-            await incrementarContador("descargas", app);
-            mostrarContador("descargas", app, "desc_" + app);
-            setTimeout(() => {
-                window.location.href = app.toLowerCase() + ".apk";
-            }, 800); // 0.8 segundos suele bastar
+            try {
+                const ref = doc(db, "descargas", app);
+                const snap = await getDoc(ref);
+                if (!snap.exists()) await setDoc(ref, { contador: 0 });
+                await updateDoc(ref, { contador: increment(1) });
+                console.log("✅ Contador incrementado para", app);
+
+                // Espera de 800ms para asegurar que el incremento llegue antes de salir de la página
+                setTimeout(() => {
+                    window.location.href = app.toLowerCase() + ".apk";
+                }, 800);
+            } catch (e) {
+                console.error("❌ Error al registrar descarga:", e);
+            }
         }
 
         window.onload = async () => {
