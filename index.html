@@ -577,21 +577,9 @@
         // 🔹 Incrementa contador en Firestore (versión segura)
         async function incrementarContador(tipo, id) {
             const ref = doc(db, tipo, id);
-
-            try {
-                const snap = await getDoc(ref);
-
-                if (!snap.exists()) {
-                    // si no existe, lo crea con contador = 1
-                    await setDoc(ref, { contador: 1 });
-                } else {
-                    // si ya existe, solo lo incrementa
-                    await updateDoc(ref, { contador: increment(1) });
-                }
-            } catch (e) {
-                console.error("⚠️ Error al incrementar contador:", e);
-            }
+            await setDoc(ref, { contador: increment(1) }, { merge: true });
         }
+
 
         // 🔹 Muestra el contador en pantalla
         async function mostrarContador(tipo, id, elemento) {
@@ -755,7 +743,8 @@
             linea.style.left = "0";
             linea.style.width = "100%";
             linea.style.height = "100%";
-            linea.style.border = "4px solid #ffff00";
+            linea.style.border = "4px solid cyan";
+            linea.style.boxShadow = "0 0 25px 8px rgba(0,255,255,0.7)";
             linea.style.borderRadius = "10px";
             linea.style.boxShadow = "0 0 30px 10px rgba(255,255,150,0.7)";
             linea.style.background = "linear-gradient(90deg, #fff700, #ff9a00, #ff00ff)";
