@@ -598,19 +598,13 @@
         }
 
         async function registrarDescarga(app) {
-            try {
-                await incrementarContador("descargas", app);
-                await mostrarContador("descargas", app, "desc_" + app);
-                console.log("✅ Contador incrementado para", app);
+            const ref = doc(db, "descargas", app);
+            const snap = await getDoc(ref);
+            if (!snap.exists()) await setDoc(ref, { contador: 0 });
+            await updateDoc(ref, { contador: increment(1) });
 
-                // Espera breve para asegurar escritura antes de redirigir
-                setTimeout(() => {
-                    window.location.href = app.toLowerCase() + ".apk";
-                }, 800);
-            } catch (e) {
-                console.error("❌ Error al registrar descarga:", e);
-                alert("Ocurrió un error al registrar la descarga. Intentalo nuevamente.");
-            }
+            await new Promise(r => setTimeout(r, 500)); // pequeño buffer
+            window.location.href = app.toLowerCase() + ".apk";
         }
 
         window.onload = async () => {
