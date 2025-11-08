@@ -553,7 +553,7 @@
         </div>
     </div>
 
-    <a href="https://wa.me/5491124554076?text=Hola%20JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <a href="https://wa.me/5491124554076?text=JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
         <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.5 2.1 8L0 32l8.2-2.1C10.8 31.3 13.3 32 16 32c8.8 0 16-7.2 16-16S24.8 0 16 0z" /></svg>
     </a>
 
@@ -613,21 +613,29 @@
             }
         }
 
+        // 🔹 Registrar visita de página
+        async function registrarVisita() {
+            await incrementarContador("visitas", "web");
+            mostrarContador("visitas", "web", "contador");
+        }
+
+
+
         // 🔹 Registrar descarga (click en botón)
         window.registrarDescarga = async function (appId) {
             await incrementarContador("descargas", appId);
             mostrarContador("descargas", appId, `status_${appId}`);
         }
 
-        // 🔹 Registrar visita general (si querés seguir usándolo)
-        window.registrarVisita = async function () {
-            await incrementarContador("visitas", "web");
-            mostrarContador("visitas", "web", "contador");
-        }
-
-        // 🔹 Mostrar contadores al iniciar
-        const apps = ["LinternaShake"]; // 🔧 agregá tus apps aquí
-        apps.forEach(appId => mostrarContador("descargas", appId, `status_${appId}`));
+        // 🔹 Cargar contadores al inicio
+        window.onload = async () => {
+            registrarVisita();
+            const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"];
+            for (const app of apps) await mostrarContador("descargas", app, "status_" + app);
+        };
+        // 🔹 Mostrar contadores al iniciar ultima version
+        //const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"]; // 🔧 agregá tus apps aquí
+        //apps.forEach(appId => mostrarContador("descargas", appId, `status_${appId}`));
 
    
 
