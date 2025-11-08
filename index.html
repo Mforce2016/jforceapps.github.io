@@ -818,7 +818,7 @@
                 comentario,
                 fecha: serverTimestamp()
               });
-              status.textContent = "✅ Valoración enviada. ¡Gracias!";
+              status.textContent = "✅ Gracias por tu apoyo!!";
               section.querySelector(".review-name").value = "";
               section.querySelector(".review-comment").value = "";
               stars.forEach(s => s.classList.remove("active"));
@@ -830,7 +830,7 @@
           });
         });
 
-        // 🔹 Mostrar comentarios y promedio de estrellas (con botón "Ver más")
+        // 🔹 Mostrar comentarios y promedio de estrellas (mínimos cambios, paginación simple)
         async function mostrarValoraciones() {
             const secciones = document.querySelectorAll(".app-review");
 
@@ -840,16 +840,22 @@
                 contenedor.classList.add("review-list");
                 section.appendChild(contenedor);
 
-                const promedioContainer = document.createElement("div");
-                promedioContainer.classList.add("review-average");
-                section.insertBefore(promedioContainer, section.querySelector(".review-name"));
-
-                // Variables de paginación
+                // ----- PAGINACIÓN SIMPLE -----
                 let ultimoDoc = null;
                 const cantidadPorPagina = 5; // 🔢 Cambiá este número si querés mostrar más por tanda
 
-                // Función interna para cargar comentarios
-                async function cargarComentarios(mas = false) {
+                // Crear botón "Ver más comentarios"
+                const btnVerMas = document.createElement("button");
+                btnVerMas.textContent = "Ver más comentarios";
+                btnVerMas.classList.add("review-more");
+                btnVerMas.style.marginTop = "8px";
+                // ocultamos hasta saber si hay más
+                btnVerMas.style.display = "none";
+                section.appendChild(btnVerMas);
+
+                // función que carga una tanda (primera o siguientes)
+                async function cargarTanda(mas = false) {
+                    // construir query (ordenados por fecha desc, limitados)
                     let q;
                     if (mas && ultimoDoc) {
                         q = query(
@@ -867,16 +873,17 @@
                     }
 
                     const snapshot = await getDocs(q);
-                    if (snapshot.empty && !mas) {
+
+                    // si es la primera carga y no hay docs
+                    if (!mas && snapshot.empty) {
                         contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Aún no hay comentarios.</p>`;
+                        btnVerMas.style.display = "none";
                         return;
                     }
 
-                    let total = 0, suma = 0;
+                    // agregar cada comentario al contenedor
                     snapshot.forEach(doc => {
                         const d = doc.data();
-                        suma += d.estrellas;
-                        total++;
                         const item = document.createElement("div");
                         item.classList.add("review-item");
                         item.innerHTML = `
@@ -887,36 +894,47 @@
                         contenedor.appendChild(item);
                     });
 
-                    // Actualizar el último documento para la paginación
+                    // actualizar último documento para la siguiente tanda
                     ultimoDoc = snapshot.docs[snapshot.docs.length - 1];
 
-                    // Calcular promedio total (vuelve a consultar todos para obtener el promedio global)
-                    const todos = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
-                    todos.forEach(d => (suma += d.data().estrellas, total++));
-                    const promedio = (suma / total).toFixed(1);
-                    promedioContainer.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
-
-                    // Mostrar u ocultar el botón según haya más comentarios
+                    // si la tanda completa fue menor que la cantidadPorPagina, no hay más
                     if (snapshot.size < cantidadPorPagina) {
                         btnVerMas.style.display = "none";
                     } else {
                         btnVerMas.style.display = "block";
                     }
+
+                    // ----- actualizar promedio global -----
+                    // Para mantener el mismo comportamiento que tenías (promedio sobre todos los comentarios),
+                    // volvemos a leer todos los documentos y calculamos promedio.
+                    // (Si querés optimizar, podés mantener contadores en Firestore).
+                    const all = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
+                    let suma = 0, total = 0;
+                    all.forEach(d => {
+                        suma += d.data().estrellas;
+                        total++;
+                    });
+
+                    // remover avg anterior si existiera
+                    const existingAvg = section.querySelector(".review-average");
+                    if (existingAvg) existingAvg.remove();
+
+                    if (total > 0) {
+                        const promedio = (suma / total).toFixed(1);
+                        const avg = document.createElement("div");
+                        avg.classList.add("review-average");
+                        avg.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
+                        section.insertBefore(avg, section.querySelector(".review-name"));
+                    }
                 }
 
-                // Crear botón "Ver más comentarios"
-                const btnVerMas = document.createElement("button");
-                btnVerMas.textContent = "Ver más comentarios";
-                btnVerMas.classList.add("review-more");
-                btnVerMas.style.marginTop = "8px";
-                btnVerMas.addEventListener("click", () => cargarComentarios(true));
-                section.appendChild(btnVerMas);
+                // evento del botón ver más
+                btnVerMas.addEventListener("click", () => cargarTanda(true));
 
-                // Cargar los primeros comentarios
-                cargarComentarios();
+                // cargar primera tanda
+                await cargarTanda(false);
             }
         }
-
         // Ejecutar al cargar
         mostrarValoraciones();
 
