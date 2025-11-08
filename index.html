@@ -633,12 +633,7 @@
             const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"];
             for (const app of apps) await mostrarContador("descargas", app, "status_" + app);
         };
-        // 🔹 Mostrar contadores al iniciar ultima version
-        //const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"]; // 🔧 agregá tus apps aquí
-        //apps.forEach(appId => mostrarContador("descargas", appId, `status_${appId}`));
-
-   
-
+     
         // 🔹 Modal con detección dinámica de capturas existentes
         const modal = document.getElementById("modalApp");
         const modalTitle = document.getElementById("modalTitle");
@@ -835,43 +830,91 @@
           });
         });
 
-        // 🔹 Mostrar comentarios y promedio de estrellas
+        // 🔹 Mostrar comentarios y promedio de estrellas (con botón "Ver más")
         async function mostrarValoraciones() {
-          const secciones = document.querySelectorAll(".app-review");
+            const secciones = document.querySelectorAll(".app-review");
 
-          for (const section of secciones) {
-            const appName = section.dataset.app;
-            const contenedor = document.createElement("div");
-            contenedor.classList.add("review-list");
-            section.appendChild(contenedor);
+            for (const section of secciones) {
+                const appName = section.dataset.app;
+                const contenedor = document.createElement("div");
+                contenedor.classList.add("review-list");
+                section.appendChild(contenedor);
 
-            const q = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
-            let total = 0, suma = 0;
+                const promedioContainer = document.createElement("div");
+                promedioContainer.classList.add("review-average");
+                section.insertBefore(promedioContainer, section.querySelector(".review-name"));
 
-            q.forEach(doc => {
-              const d = doc.data();
-              suma += d.estrellas;
-              total++;
-              const item = document.createElement("div");
-              item.classList.add("review-item");
-              item.innerHTML = `
-                <div><span class="stars">${"★".repeat(d.estrellas)}${"☆".repeat(5 - d.estrellas)}</span>
-                <strong>${d.nombre || "Anónimo"}</strong></div>
-                <p>${d.comentario}</p>
-              `;
-              contenedor.appendChild(item);
-            });
+                // Variables de paginación
+                let ultimoDoc = null;
+                const cantidadPorPagina = 5; // 🔢 Cambiá este número si querés mostrar más por tanda
 
-            if (total > 0) {
-              const promedio = (suma / total).toFixed(1);
-              const avg = document.createElement("div");
-              avg.classList.add("review-average");
-              avg.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
-              section.insertBefore(avg, section.querySelector(".review-name"));
-            } else {
-              contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Aún no hay comentarios.</p>`;
+                // Función interna para cargar comentarios
+                async function cargarComentarios(mas = false) {
+                    let q;
+                    if (mas && ultimoDoc) {
+                        q = query(
+                            collection(db, "valoraciones", appName, "comentarios"),
+                            orderBy("fecha", "desc"),
+                            startAfter(ultimoDoc),
+                            limit(cantidadPorPagina)
+                        );
+                    } else {
+                        q = query(
+                            collection(db, "valoraciones", appName, "comentarios"),
+                            orderBy("fecha", "desc"),
+                            limit(cantidadPorPagina)
+                        );
+                    }
+
+                    const snapshot = await getDocs(q);
+                    if (snapshot.empty && !mas) {
+                        contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Aún no hay comentarios.</p>`;
+                        return;
+                    }
+
+                    let total = 0, suma = 0;
+                    snapshot.forEach(doc => {
+                        const d = doc.data();
+                        suma += d.estrellas;
+                        total++;
+                        const item = document.createElement("div");
+                        item.classList.add("review-item");
+                        item.innerHTML = `
+          <div><span class="stars">${"★".repeat(d.estrellas)}${"☆".repeat(5 - d.estrellas)}</span>
+          <strong>${d.nombre || "Anónimo"}</strong></div>
+          <p>${d.comentario}</p>
+        `;
+                        contenedor.appendChild(item);
+                    });
+
+                    // Actualizar el último documento para la paginación
+                    ultimoDoc = snapshot.docs[snapshot.docs.length - 1];
+
+                    // Calcular promedio total (vuelve a consultar todos para obtener el promedio global)
+                    const todos = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
+                    todos.forEach(d => (suma += d.data().estrellas, total++));
+                    const promedio = (suma / total).toFixed(1);
+                    promedioContainer.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
+
+                    // Mostrar u ocultar el botón según haya más comentarios
+                    if (snapshot.size < cantidadPorPagina) {
+                        btnVerMas.style.display = "none";
+                    } else {
+                        btnVerMas.style.display = "block";
+                    }
+                }
+
+                // Crear botón "Ver más comentarios"
+                const btnVerMas = document.createElement("button");
+                btnVerMas.textContent = "Ver más comentarios";
+                btnVerMas.classList.add("review-more");
+                btnVerMas.style.marginTop = "8px";
+                btnVerMas.addEventListener("click", () => cargarComentarios(true));
+                section.appendChild(btnVerMas);
+
+                // Cargar los primeros comentarios
+                cargarComentarios();
             }
-          }
         }
 
         // Ejecutar al cargar
