@@ -560,7 +560,7 @@
     <!-- 🔥 FIREBASE - Contadores y descargas -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getFirestore, doc, getDoc, updateDoc, setDoc, increment, collection, getDocs, addDoc, serverTimestamp, , query, orderBy, limit, startAfter } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, updateDoc, setDoc, increment, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
         // ⚙️ CONFIG FIREBASE
         const firebaseConfig = {
@@ -633,7 +633,12 @@
             const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"];
             for (const app of apps) await mostrarContador("descargas", app, "status_" + app);
         };
-     
+        // 🔹 Mostrar contadores al iniciar ultima version
+        //const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"]; // 🔧 agregá tus apps aquí
+        //apps.forEach(appId => mostrarContador("descargas", appId, `status_${appId}`));
+
+   
+
         // 🔹 Modal con detección dinámica de capturas existentes
         const modal = document.getElementById("modalApp");
         const modalTitle = document.getElementById("modalTitle");
@@ -818,7 +823,7 @@
                 comentario,
                 fecha: serverTimestamp()
               });
-              status.textContent = "✅ Gracias por tu apoyo!!";
+              status.textContent = "✅ Valoración enviada. ¡Gracias!";
               section.querySelector(".review-name").value = "";
               section.querySelector(".review-comment").value = "";
               stars.forEach(s => s.classList.remove("active"));
@@ -830,245 +835,47 @@
           });
         });
 
-        // 🔹 Mostrar comentarios y promedio de estrellas (mínimos cambios, paginación simple)
+        // 🔹 Mostrar comentarios y promedio de estrellas
         async function mostrarValoraciones() {
-            const secciones = document.querySelectorAll(".app-review");
+          const secciones = document.querySelectorAll(".app-review");
 
-            for (const section of secciones) {
-                const appName = section.dataset.app;
-                const contenedor = document.createElement("div");
-                contenedor.classList.add("review-list");
-                section.appendChild(contenedor);
+          for (const section of secciones) {
+            const appName = section.dataset.app;
+            const contenedor = document.createElement("div");
+            contenedor.classList.add("review-list");
+            section.appendChild(contenedor);
 
-                // ----- PAGINACIÓN SIMPLE -----
-                let ultimoDoc = null;
-                const cantidadPorPagina = 5; // 🔢 Cambiá este número si querés mostrar más por tanda
+            const q = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
+            let total = 0, suma = 0;
 
-                // Crear botón "Ver más comentarios"
-                const btnVerMas = document.createElement("button");
-                btnVerMas.textContent = "Ver más comentarios";
-                btnVerMas.classList.add("review-more");
-                btnVerMas.style.marginTop = "8px";
-                // ocultamos hasta saber si hay más
-                btnVerMas.style.display = "none";
-                section.appendChild(btnVerMas);
+            q.forEach(doc => {
+              const d = doc.data();
+              suma += d.estrellas;
+              total++;
+              const item = document.createElement("div");
+              item.classList.add("review-item");
+              item.innerHTML = `
+                <div><span class="stars">${"★".repeat(d.estrellas)}${"☆".repeat(5 - d.estrellas)}</span>
+                <strong>${d.nombre || "Anónimo"}</strong></div>
+                <p>${d.comentario}</p>
+              `;
+              contenedor.appendChild(item);
+            });
 
-                // función que carga una tanda (primera o siguientes)
-                async function cargarTanda(mas = false) {
-                    // construir query (ordenados por fecha desc, limitados)
-                    let q;
-                    if (mas && ultimoDoc) {
-                        q = query(
-                            collection(db, "valoraciones", appName, "comentarios"),
-                            orderBy("fecha", "desc"),
-                            startAfter(ultimoDoc),
-                            limit(cantidadPorPagina)
-                        );
-                    } else {
-                        q = query(
-                            collection(db, "valoraciones", appName, "comentarios"),
-                            orderBy("fecha", "desc"),
-                            limit(cantidadPorPagina)
-                        );
-                    }
-
-                    const snapshot = await getDocs(q);
-
-                    // si es la primera carga y no hay docs
-                    if (!mas && snapshot.empty) {
-                        contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Aún no hay comentarios.</p>`;
-                        btnVerMas.style.display = "none";
-                        return;
-                    }
-
-                    // agregar cada comentario al contenedor
-                    snapshot.forEach(doc => {
-                        const d = doc.data();
-                        const item = document.createElement("div");
-                        item.classList.add("review-item");
-                        item.innerHTML = `
-          <div><span class="stars">${"★".repeat(d.estrellas)}${"☆".repeat(5 - d.estrellas)}</span>
-          <strong>${d.nombre || "Anónimo"}</strong></div>
-          <p>${d.comentario}</p>
-        `;
-                        contenedor.appendChild(item);
-                    });
-
-                    // actualizar último documento para la siguiente tanda
-                    ultimoDoc = snapshot.docs[snapshot.docs.length - 1];
-
-                    // si la tanda completa fue menor que la cantidadPorPagina, no hay más
-                    if (snapshot.size < cantidadPorPagina) {
-                        btnVerMas.style.display = "none";
-                    } else {
-                        btnVerMas.style.display = "block";
-                    }
-
-                    // ----- actualizar promedio global -----
-                    // Para mantener el mismo comportamiento que tenías (promedio sobre todos los comentarios),
-                    // volvemos a leer todos los documentos y calculamos promedio.
-                    // (Si querés optimizar, podés mantener contadores en Firestore).
-                    const all = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
-                    let suma = 0, total = 0;
-                    all.forEach(d => {
-                        suma += d.data().estrellas;
-                        total++;
-                    });
-
-                    // remover avg anterior si existiera
-                    const existingAvg = section.querySelector(".review-average");
-                    if (existingAvg) existingAvg.remove();
-
-                    if (total > 0) {
-                        const promedio = (suma / total).toFixed(1);
-                        const avg = document.createElement("div");
-                        avg.classList.add("review-average");
-                        avg.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
-                        section.insertBefore(avg, section.querySelector(".review-name"));
-                    }
-                }
-
-                // evento del botón ver más
-                btnVerMas.addEventListener("click", () => cargarTanda(true));
-
-                // cargar primera tanda
-                await cargarTanda(false);
+            if (total > 0) {
+              const promedio = (suma / total).toFixed(1);
+              const avg = document.createElement("div");
+              avg.classList.add("review-average");
+              avg.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
+              section.insertBefore(avg, section.querySelector(".review-name"));
+            } else {
+              contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Aún no hay comentarios.</p>`;
             }
+          }
         }
+
         // Ejecutar al cargar
-        mostrarValoraciones// 🔹 Mostrar comentarios y promedio de estrellas (versión robusta, cambios mínimos)
-        async function mostrarValoraciones() {
-            const secciones = document.querySelectorAll(".app-review");
-
-            for (const section of secciones) {
-                const appName = section.dataset.app;
-                // contenedor de lista (si ya existe, lo limpiamos)
-                let contenedor = section.querySelector(".review-list");
-                if (!contenedor) {
-                    contenedor = document.createElement("div");
-                    contenedor.classList.add("review-list");
-                    section.appendChild(contenedor);
-                } else {
-                    contenedor.innerHTML = "";
-                }
-
-                // contenedor para promedio (si ya existe, lo limpiamos)
-                let promedioContainer = section.querySelector(".review-average");
-                if (!promedioContainer) {
-                    promedioContainer = document.createElement("div");
-                    promedioContainer.classList.add("review-average");
-                    // Si existe un input/nodo .review-name lo dejamos antes, si no lo ponemos arriba
-                    const referenceNode = section.querySelector(".review-name");
-                    if (referenceNode) section.insertBefore(promedioContainer, referenceNode);
-                    else section.insertBefore(promedioContainer, section.firstChild);
-                } else {
-                    promedioContainer.innerHTML = "";
-                }
-
-                // ----- PAGINACIÓN SIMPLE -----
-                let ultimoDoc = null;
-                const cantidadPorPagina = 5; // 🔢 Cambiá este número si querés más por tanda
-
-                // Crear botón "Ver más comentarios" (si ya existe no lo duplicamos)
-                let btnVerMas = section.querySelector(".review-more");
-                if (!btnVerMas) {
-                    btnVerMas = document.createElement("button");
-                    btnVerMas.textContent = "Ver más comentarios";
-                    btnVerMas.classList.add("review-more");
-                    btnVerMas.style.marginTop = "8px";
-                    btnVerMas.style.display = "none"; // oculto hasta saber si hay más
-                    section.appendChild(btnVerMas);
-                } else {
-                    btnVerMas.style.display = "none";
-                }
-
-                // Función para cargar una tanda
-                async function cargarTanda(mas = false) {
-                    try {
-                        let q;
-                        if (mas && ultimoDoc) {
-                            q = query(
-                                collection(db, "valoraciones", appName, "comentarios"),
-                                orderBy("fecha", "desc"),
-                                startAfter(ultimoDoc),
-                                limit(cantidadPorPagina)
-                            );
-                        } else {
-                            q = query(
-                                collection(db, "valoraciones", appName, "comentarios"),
-                                orderBy("fecha", "desc"),
-                                limit(cantidadPorPagina)
-                            );
-                        }
-
-                        const snapshot = await getDocs(q);
-
-                        // primera carga y vacío
-                        if (!mas && snapshot.empty) {
-                            contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Aún no hay comentarios.</p>`;
-                            btnVerMas.style.display = "none";
-                            // actualizar promedio a cero/ninguno
-                            promedioContainer.innerHTML = `<span style="color:var(--muted);font-size:0.9rem;">Aún no hay valoraciones.</span>`;
-                            return;
-                        }
-
-                        // agregar los documentos de la tanda
-                        snapshot.forEach(doc => {
-                            const d = doc.data();
-                            const item = document.createElement("div");
-                            item.classList.add("review-item");
-                            item.innerHTML = `
-                              <div><span class="stars">${"★".repeat(d.estrellas)}${"☆".repeat(5 - d.estrellas)}</span>
-                              <strong>${d.nombre || "Anónimo"}</strong></div>
-                              <p>${d.comentario}</p>
-                             `;
-                            contenedor.appendChild(item);
-                        });
-
-                        // actualizar ultimoDoc si hubo docs en snapshot
-                        if (snapshot.docs.length > 0) {
-                            ultimoDoc = snapshot.docs[snapshot.docs.length - 1];
-                        }
-
-                        // mostrar/ocultar botón según si vinieron cantidadPorPagina resultados
-                        if (snapshot.size < cantidadPorPagina) {
-                            btnVerMas.style.display = "none";
-                        } else {
-                            btnVerMas.style.display = "block";
-                        }
-
-                        // ----- actualizar promedio global -----
-                        // Leemos todos los comentarios para calcular promedio (comportamiento original)
-                        const allSnap = await getDocs(collection(db, "valoraciones", appName, "comentarios"));
-                        let suma = 0, total = 0;
-                        allSnap.forEach(d => {
-                            suma += (d.data().estrellas || 0);
-                            total++;
-                        });
-                        if (total > 0) {
-                            const promedio = (suma / total).toFixed(1);
-                            promedioContainer.innerHTML = `⭐ Promedio: ${promedio} / 5 (${total} valoraciones)`;
-                        } else {
-                            promedioContainer.innerHTML = `<span style="color:var(--muted);font-size:0.9rem;">Aún no hay valoraciones.</span>`;
-                        }
-                    } catch (err) {
-                        console.error("Error al cargar valoraciones:", err);
-                        contenedor.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">Error al cargar comentarios.</p>`;
-                        btnVerMas.style.display = "none";
-                    }
-                }
-
-                // evento del botón ver más
-                btnVerMas.addEventListener("click", () => cargarTanda(true));
-
-                // cargar primera tanda
-                await cargarTanda(false);
-            }
-        }
-
-        // Ejecutar al cargar (si antes ya lo llamabas, está OK dejarlo)
         mostrarValoraciones();
-
 
     </script>
 
