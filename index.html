@@ -364,7 +364,7 @@
                     <h3 onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">Registro LAO</h3>
                 </div>
                 <ul>
-                    <li>Organizá tus días de descanso de forma simple, rápida y visual. Con Registro de Vacaciones, podés llevar el control completo de tus vacaciones laborales y días disponibles, todo desde tu celular.</li>
+                    <li>Organizá tus días de descanso de forma simple, rápida y visual. Con esta app, podés llevar el control completo de tus vacaciones y días disponibles, todo desde tu celular.</li>
                 </ul>
                 <p><b>✨ Funciones principales</b></p>
                 <ul>
@@ -633,11 +633,6 @@
             const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"];
             for (const app of apps) await mostrarContador("descargas", app, "status_" + app);
         };
-        // 🔹 Mostrar contadores al iniciar ultima version
-        //const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake"]; // 🔧 agregá tus apps aquí
-        //apps.forEach(appId => mostrarContador("descargas", appId, `status_${appId}`));
-
-   
 
         // 🔹 Modal con detección dinámica de capturas existentes
         const modal = document.getElementById("modalApp");
