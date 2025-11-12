@@ -608,9 +608,9 @@
 
                 if (snap.exists()) {
                     const cantidad = snap.data().contador || 0;
-                    el.innerHTML = `<b>${tipo === "visitas" ? "👀 Visitas totales:" : "⬇️ Descargas:"} ${cantidad}</b>`;
+                    el.innerHTML = `<b>${tipo === "visitas" ? "Visitas totales:" : "⬇️ Descargas:"} ${cantidad}</b>`;
                 } else {
-                    el.innerHTML = `<b>${tipo === "visitas" ? "👀 Visitas totales:" : "⬇️ Descargas:"} 0</b>`;
+                    el.innerHTML = `<b>${tipo === "visitas" ? "Visitas totales:" : "⬇️ Descargas:"} 0</b>`;
                 }
             } catch (e) {
                 console.error("Error al mostrar contador:", e);
@@ -910,3 +910,4 @@
 </body>
 
 </html>
+
