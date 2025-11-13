@@ -1,6 +1,6 @@
 {
-  "versionCode": 4,
-  "versionName": "1.4",
-  "message": "¡Nueva versión disponible!\n\n- Mejoras de rendimiento.\n- Corrección de errores en el inicio.\n- Carga de imagen para el registro.",
+  "versionCode": 5,
+  "versionName": "1.5",
+  "message": "¡Nueva versión disponible!\n\n- Mejoras de rendimiento.\n- Cambio de interfaz.",
   "updateUrl": "https://mforce2016.github.io/jforceapps.github.io/registrolao.apk"
 }
