@@ -172,10 +172,40 @@
           margin-bottom: 8px; /* 🔥 separa del contador */
       }
 
-          .btn-download:hover {
-              transform: scale(1.07);
-              box-shadow: 0 0 25px rgba(255,118,255,0.6);
-          }
+    	.btn-download:hover {
+        	 transform: scale(1.07);
+             box-shadow: 0 0 25px rgba(255,118,255,0.6);
+        }
+
+		  /* Contenedor para poner ambos botones lado a lado */
+		.app-actions {
+		    display: flex;
+		    gap: 10px;
+		    flex-wrap: wrap;
+		    align-items: center;
+		}
+	
+		/* Nuevo botón APK */
+		.btn-apk {
+		    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+		    color: #fff;
+		    padding: 8px 16px;
+		    border-radius: 8px;
+		    font-weight: 700;
+		    text-decoration: none;
+		    cursor: pointer;
+		    box-shadow: 0 0 12px rgba(96,165,250,0.35);
+		    transition: transform 0.25s ease, box-shadow 0.25s ease;
+		    display: inline-flex;
+		    align-items: center;
+		    gap: 6px;
+		}
+		
+		.btn-apk:hover {
+		    transform: scale(1.07);
+		    box-shadow: 0 0 25px rgba(96,165,250,0.6);
+		}
+
 
       /* 🔸 Contador */
       .app-small {
@@ -916,5 +946,6 @@
 </body>
 
 </html>
+
 
 
