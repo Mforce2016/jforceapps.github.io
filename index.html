@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
+  <meta name="color-scheme" content="dark">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>JForce Apps — Soluciones móviles</title>
   <meta name="description" content="Gestión, salud, educación y utilidades. Licencias rápidas y seguras. Aplicaciones móviles y de escritorio por encargo.">
@@ -21,19 +22,15 @@
       --radius: 14px;
     }
 
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f5f9ff;
-        --text: #0b0b0b;
-        --card-bg: #ffffff;
-      }
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
+    :root {
         --bg: linear-gradient(135deg,#060b20 0%,#0c112f 50%,#10152f 100%);
         --text: #e9f0ff;
         --card-bg: rgba(255,255,255,0.05);
-      }
+        --accent: #00f2ff;
+        --accent-2: #ff4ef8;
+        --muted: #9aa0b0;
+        --transition: 0.9s cubic-bezier(.25,.8,.25,1);
+        --radius: 14px;
     }
 
     *{box-sizing:border-box;}
@@ -418,7 +415,7 @@
                 <!-- 🔹 Bloque de valoraciones debajo de cada app -->
                 <div class="app-review" data-app="RegistroLAO">
                     <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email">
+                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
                     <div class="review-stars">
                         <span data-star="1">★</span>
                         <span data-star="2">★</span>
@@ -466,7 +463,7 @@
                 <!-- 🔹 Bloque de valoraciones debajo de cada app -->
                 <div class="app-review" data-app="TurnosGo">
                     <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email">
+                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
                     <div class="review-stars">
                         <span data-star="1">★</span>
                         <span data-star="2">★</span>
@@ -513,7 +510,7 @@
                 <!-- 🔹 Bloque de valoraciones debajo de cada app -->
                 <div class="app-review" data-app="FitCoach">
                     <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email">
+                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
                     <div class="review-stars">
                         <span data-star="1">★</span>
                         <span data-star="2">★</span>
@@ -540,20 +537,14 @@
                     <li>🎨 Interfaz minimalista y moderna.</li>
                     <li>📱 Compatible con la mayoría de dispositivos Android.</li>
                 </ul>
-				<div class="app-actions">
-                    <a href="https://play.google.com/store/apps/details?id=com.masterForce.linternasacudida&pli=1"
-                       target="_blank"
-                       class="btn-download"
-                       onclick="registrarDescarga('LinternaShake')">
-                        📲 Descargar en Google Play
-                    </a>
-                    <a href="linterna.apk" download class="btn-download" onclick="registrarDescarga('LinternaShake')">⬇️ Descargar Directa</a>
+                <div class="app-actions">
+                    <a href="linterna.apk" download class="btn-download" onclick="registrarDescarga('LinternaShake')">⬇️ Descargar APP</a>
                     <div class="app-small" id="status_LinternaShake"><b>⬇️ Descargas: cargando...</b></div>
                 </div>
                 <!-- 🔹 Bloque de valoraciones debajo de cada app -->
                 <div class="app-review" data-app="LinternaShake">
                     <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email">
+                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
                     <div class="review-stars">
                         <span data-star="1">★</span>
                         <span data-star="2">★</span>
@@ -571,176 +562,56 @@
             <h2>🖥️ Programas para PC - Escritorio</h2>
 
             <!-- 🖥️ Comparador Avanzado de columnas Excel -->
-			<div class="app-card">
-			    <div class="app-header-inline">
-			        <img src="comparar_excel.webp"
-			             alt="Comparador avanzado de Excel"
-			             onclick="abrirModal(
+            <div class="app-card">
+                <div class="app-header-inline">
+                    <img src="comparar_excel.webp"
+                         alt="Comparador avanzado de Excel"
+                         onclick="abrirModal(
 			        'Comparador avanzado de Excel',
 			        'Herramienta de escritorio para comparar columnas entre archivos Excel, detectar registros faltantes y generar reportes automáticos.'
 			        'Comparador avanzado de Excel'
 			     )">
-			
-			        <h3 onclick="abrirModal(
-			        'Comparador avanzado de Excel',
-			        'Herramienta de escritorio para comparar columnas entre archivos Excel, detectar registros faltantes y generar reportes automáticos.',
-			        'compararExcel'
-			     )">
-			            Comparador Excel
-			        </h3>
-			    </div>
-			
-			    <ul>
-			        <li>📊 Comparación de columnas entre múltiples archivos Excel.</li>
-			        <li>📘 Archivo base + 📗 archivo a verificar.</li>
-			        <li>🧠 Detección inteligente de encabezados (ignora mayúsculas, espacios y variaciones).</li>
-			        <li>📑 Soporte para múltiples hojas por archivo.</li>
-			        <li>📎 Copia automática de una columna adicional asociada.</li>
-			        <li>📄 Generación de Excel con registros no encontrados.</li>
-			        <li>📈 Barra de progreso en tiempo real.</li>
-			        <li>🗂️ Gestor integrado de archivos generados.</li>
-			    </ul>
-			
-			    <p><b>🖥️ Plataforma:</b> Windows</p>
-			    <p><b>🛠️ Tecnología:</b> Python · Tkinter · Pandas</p>
-			
-			    <div class="app-actions">
-			        <a href="Instalador_Comparador_Datos_Excel_v1.0.zip"
-			           download
-			           class="btn-download"
-			           onclick="registrarDescarga('compararExcel')">
-			            ⬇️ Descargar Programa
-			        </a>
-			
-			        <div class="app-small" id="status_compararExcel">
-			            <b>⬇️ Descargas: cargando...</b>
-			        </div>
-			    </div>
-			
-			    <!-- ⭐ VALORACIONES -->
-			    <div class="app-review" data-app="compararExcel">
-			        <h4>⭐ Valorá este programa</h4>
-			        <input type="text" class="review-name" placeholder="Tu nombre o email">
-			        <div class="review-stars">
-			            <span data-star="1">★</span>
-			            <span data-star="2">★</span>
-			            <span data-star="3">★</span>
-			            <span data-star="4">★</span>
-			            <span data-star="5">★</span>
-			        </div>
-			        <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-			        <button class="review-btn">Enviar valoración</button>
-			        <div class="review-status"></div>
-			    </div>
-			</div>
-
-			<!-- 🖥️ PDF Watermark Pro -->
-			<div class="app-card">
-			    <div class="app-header-inline">
-			        <img src="pdf_watermark_pro.webp"
-			             alt="PDF Watermark Pro"
-			             onclick="abrirModal(
-			        'PDF Watermark Pro',
-			        'Aplicación de escritorio para proteger documentos PDF mediante marcas de agua personalizadas con texto y logo, incluyendo vista previa y control de licencias.',
-			        'pdfWatermarkPro'
-			     )">
-			
-			        <h3 onclick="abrirModal(
-			        'PDF Watermark Pro',
-			        'Aplicación de escritorio para proteger documentos PDF mediante marcas de agua personalizadas con texto y logo, incluyendo vista previa y control de licencias.',
-			        'pdfWatermarkPro'
-			     )">
-			            PDF Watermark Pro
-			        </h3>
-			    </div>
-			
-			    <ul>
-			        <li>🖋️ Aplicación de marcas de agua con texto personalizado.</li>
-			        <li>🖼️ Soporte para logo o imagen opcional (PNG / JPG).</li>
-			        <li>📄 Marca de agua aplicada en todas las páginas del PDF.</li>
-			        <li>👁️ Vista previa del documento antes de generar el PDF final.</li>
-			        <li>📊 Barra de progreso con porcentaje en tiempo real.</li>
-			        <li>📁 No modifica el archivo original.</li>
-			        <li>🔐 Sistema de activación por licencia.</li>
-			        <li>⚡ Funcionamiento 100% offline.</li>
-			    </ul>
-			
-			    <p><b>🖥️ Plataforma:</b> Windows</p>
-			    <p><b>🛠️ Tecnología:</b> Python · Tkinter · PyPDF · ReportLab</p>
-			
-			    <div class="app-actions">
-			        <a href="Instalador_PDF_Watermark_Pro.zip"
-			           download
-			           class="btn-download"
-			           onclick="registrarDescarga('pdfWatermarkPro')">
-			            ⬇️ Descargar Programa
-			        </a>
-			
-			        <div class="app-small" id="status_pdfWatermarkPro">
-			            <b>⬇️ Descargas: cargando...</b>
-			        </div>
-			    </div>
-			
-			    <!-- ⭐ VALORACIONES -->
-			    <div class="app-review" data-app="pdfWatermarkPro">
-			        <h4>⭐ Valorá este programa</h4>
-			        <input type="text" class="review-name" placeholder="Tu nombre o email">
-			        <div class="review-stars">
-			            <span data-star="1">★</span>
-			            <span data-star="2">★</span>
-			            <span data-star="3">★</span>
-			            <span data-star="4">★</span>
-			            <span data-star="5">★</span>
-			        </div>
-			        <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-			        <button class="review-btn">Enviar valoración</button>
-			        <div class="review-status"></div>
-			    </div>
-			</div>
-
-            <!-- 🖥️ My Word -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="My_Word.webp"
-                         alt="My Word"
-                         onclick="abrirModal(
-               'My Word',
-               'Editor de texto de escritorio desarrollado en Python, similar a Word, con herramientas avanzadas de edición y formato.',
-               'My Word'
-            )">
 
                     <h3 onclick="abrirModal(
-               'My Word',
-               'Editor de texto de escritorio desarrollado en Python, similar a Word, con herramientas avanzadas de edición y formato.',
-               'myword'
-            )">
-                        My Word
+			        'Comparador avanzado de Excel',
+			        'Herramienta de escritorio para comparar columnas entre archivos Excel, detectar registros faltantes y generar reportes automáticos.',
+			        'Comparador Excel'
+			     )">
+                        Comparador Excel
                     </h3>
                 </div>
 
                 <ul>
-                    <li>📝 Editor de texto estilo Word.</li>
-                    <li>✍️ Escritura y edición libre de documentos.</li>
-                    <li>🔠 Formato de texto: tamaño, estilo y alineación.</li>
-                    <li>📄 Manejo de archivos de texto y documentos.</li>
-                    <li>🧠 Funciones avanzadas.</li>
-                    <li>💾 Guardado y apertura de archivos.</li>
-                    <li>🖥️ Interfaz clara y orientada a productividad.</li>
-                    <li>⚙️ No es Microsoft Word.</li>
+                    <li>📊 Comparación de columnas entre múltiples archivos Excel.</li>
+                    <li>📘 Archivo base + 📗 archivo a verificar.</li>
+                    <li>🧠 Detección inteligente de encabezados (ignora mayúsculas, espacios y variaciones).</li>
+                    <li>📑 Soporte para múltiples hojas por archivo.</li>
+                    <li>📎 Copia automática de una columna adicional asociada.</li>
+                    <li>📄 Generación de Excel con registros no encontrados.</li>
+                    <li>📈 Barra de progreso en tiempo real.</li>
+                    <li>🗂️ Gestor integrado de archivos generados.</li>
                 </ul>
 
                 <p><b>🖥️ Plataforma:</b> Windows</p>
+                <p><b>🛠️ Tecnología:</b> Python · Tkinter · Pandas</p>
 
                 <div class="app-actions">
-                    <div class="app-soon">
-                        🕒 <b>Próximamente</b>
+                    <a href="Instalador_Comparador_Datos_Excel_v1.0.zip"
+                       download
+                       class="btn-download"
+                       onclick="registrarDescarga('compararExcel')">
+                        ⬇️ Descargar Programa
+                    </a>
+
+                    <div class="app-small" id="status_compararExcel">
+                        <b>⬇️ Descargas: cargando...</b>
                     </div>
                 </div>
 
                 <!-- ⭐ VALORACIONES -->
-                <div class="app-review" data-app="myword">
+                <div class="app-review" data-app="compararExcel">
                     <h4>⭐ Valorá este programa</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email">
+                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
                     <div class="review-stars">
                         <span data-star="1">★</span>
                         <span data-star="2">★</span>
@@ -753,6 +624,136 @@
                     <div class="review-status"></div>
                 </div>
             </div>
+
+            <!-- 🔐 Encriptador de Archivos -->
+            <div class="app-card">
+                <div class="app-header-inline">
+                    <img src="encriptador_archivos.webp"
+                         alt="Encriptador de archivos"
+                         onclick="abrirModal(
+        'Encriptador de Archivos',
+        'Herramienta de escritorio para proteger carpetas completas y archivos personales mediante clave segura y cifrado avanzado.',
+        'Encriptador de Archivos'
+     )">
+
+                    <h3 onclick="abrirModal(
+        'Encriptador de Archivos',
+        'Herramienta de escritorio para proteger carpetas completas y archivos personales mediante clave segura y cifrado avanzado.',
+        'Encriptador de Archivos'
+     )">
+                        Encriptador de Archivos
+                    </h3>
+                </div>
+
+                <ul>
+                    <li>🔐 Encriptación segura de archivos y carpetas completas.</li>
+                    <li>📁 Soporte para subcarpetas y múltiples tipos de archivos.</li>
+                    <li>🔑 Protección mediante contraseña personalizada.</li>
+                    <li>🛡️ Cifrado avanzado con clave privada.</li>
+                    <li>📂 Recuperación total de archivos al ingresar la clave correcta.</li>
+                    <li>⚡ Procesamiento rápido y automático.</li>
+                    <li>🖥️ Interfaz moderna y fácil de usar.</li>
+                    <li>📌 Uso local sin conexión a internet.</li>
+                </ul>
+
+                <p><b>🖥️ Plataforma:</b> Windows</p>
+                <p><b>🛠️ Tecnología:</b> Python · CustomTkinter · Cryptography</p>
+
+                <div class="app-actions">
+                    <a href="Encriptador_Archivos_v1.0.zip"
+                       download
+                       class="btn-download"
+                       onclick="registrarDescarga('encriptadorArchivos')">
+                        ⬇️ Descargar Programa
+                    </a>
+
+                    <div class="app-small" id="status_encriptadorArchivos">
+                        <b>⬇️ Descargas: cargando...</b>
+                    </div>
+                </div>
+
+                <!-- ⭐ VALORACIONES -->
+                <div class="app-review" data-app="encriptadorArchivos">
+                    <h4>⭐ Valorá este programa</h4>
+                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
+                    <div class="review-stars">
+                        <span data-star="1">★</span>
+                        <span data-star="2">★</span>
+                        <span data-star="3">★</span>
+                        <span data-star="4">★</span>
+                        <span data-star="5">★</span>
+                    </div>
+                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+                    <button class="review-btn">Enviar valoración</button>
+                    <div class="review-status"></div>
+                </div>
+            </div>
+
+            <!-- 📅 Calendario de Trabajo PRO -->
+            <div class="app-card">
+                <div class="app-header-inline">
+                    <img src="calendario_trabajo.webp"
+                         alt="Calendario de Trabajo PRO"
+                         onclick="abrirModal(
+        'Calendario de Trabajo PRO',
+        'Sistema de escritorio para organizar eventos, recordatorios, agenda diaria, notificaciones automáticas y envío de emails para empresas, oficinas y uso personal.',
+        'Calendario de Trabajo PRO'
+     )">
+
+                    <h3 onclick="abrirModal(
+        'Calendario de Trabajo PRO',
+        'Sistema de escritorio para organizar eventos, recordatorios, agenda diaria, notificaciones automáticas y envío de emails para empresas, oficinas y uso personal.',
+        'Calendario de Trabajo PRO'
+     )">
+                        Calendario de Trabajo PRO
+                    </h3>
+                </div>
+
+                <ul>
+                    <li>📅 Calendario interactivo con selección diaria.</li>
+                    <li>🗓️ Agenda automática de eventos por fecha.</li>
+                    <li>🔔 Notificaciones emergentes con sonido personalizado.</li>
+                    <li>⏰ Alertas programadas: 1 día antes, 2 horas antes y en el momento.</li>
+                    <li>📧 Envío automático de recordatorios por email.</li>
+                    <li>📂 Adjuntar archivos a cada evento.</li>
+                    <li>🎉 Visualización automática de feriados nacionales.</li>
+                    <li>📌 Funciona en segundo plano sin interrumpir el trabajo.</li>
+                    <li>🖥️ Interfaz moderna, rápida y fácil de usar.</li>
+                </ul>
+
+                <p><b>🖥️ Plataforma:</b> Windows</p>
+                <p><b>🛠️ Tecnología:</b> Python · CustomTkinter · SQLite · EmailJS</p>
+
+                <div class="app-actions">
+                    <a href="Calendario_Trabajo_PRO_v1.0.zip"
+                       download
+                       class="btn-download"
+                       onclick="registrarDescarga('calendarioTrabajo')">
+                        ⬇️ Descargar Programa
+                    </a>
+
+                    <div class="app-small" id="status_calendarioTrabajo">
+                        <b>⬇️ Descargas: cargando...</b>
+                    </div>
+                </div>
+
+                <!-- ⭐ VALORACIONES -->
+                <div class="app-review" data-app="calendarioTrabajo">
+                    <h4>⭐ Valorá este programa</h4>
+                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
+                    <div class="review-stars">
+                        <span data-star="1">★</span>
+                        <span data-star="2">★</span>
+                        <span data-star="3">★</span>
+                        <span data-star="4">★</span>
+                        <span data-star="5">★</span>
+                    </div>
+                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+                    <button class="review-btn">Enviar valoración</button>
+                    <div class="review-status"></div>
+                </div>
+            </div>
+
 
 
             <!-- 🧾 BLOQUE DE PAGO -->
@@ -788,15 +789,9 @@
         </div>
     </div>
 
-    <a href="https://wa.me/5491124554076?text=JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos."
-   	target="_blank"
-   	class="whatsapp-float"
-   	aria-label="WhatsApp"
-	data-tooltip="Chateá con nosotros">
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M16 2.4c-7.5 0-13.6 6.1-13.6 13.6 0 2.4.6 4.7 1.8 6.8L2 30l7.4-2c2 1.1 4.3 1.6 6.6 1.6 7.5 0 13.6-6.1 13.6-13.6S23.5 2.4 16 2.4zm0 24.6c-2.1 0-4.1-.6-5.9-1.6l-.4-.2-4.4 1.2 1.2-4.3-.3-.4c-1.1-1.9-1.7-4-1.7-6.2 0-6.6 5.4-12 12-12s12 5.4 12 12-5.4 12-12 12zm6.6-8.9c-.4-.2-2.3-1.1-2.6-1.2-.4-.1-.6-.2-.9.2-.3.4-1 1.2-1.2 1.4-.2.2-.5.3-.9.1-.4-.2-1.6-.6-3.1-1.9-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.6.1-.2 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.5 3.9 1.7 4.2c.2.3 3 4.6 7.3 6.4 1 .4 1.8.6 2.4.8 1 .3 1.9.3 2.6.2.8-.1 2.3-.9 2.6-1.7.3-.8.3-1.5.2-1.7-.1-.2-.3-.3-.7-.5z"/>
-    </svg>
-	</a>
+    <a href="https://wa.me/5491124554076?text=JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.5 2.1 8L0 32l8.2-2.1C10.8 31.3 13.3 32 16 32c8.8 0 16-7.2 16-16S24.8 0 16 0z" /></svg>
+    </a>
 
     <!-- 🔥 FIREBASE - Contadores y descargas -->
     <script type="module">
@@ -820,6 +815,10 @@
         // 🔥 --- FUNCIONES FIRESTORE ---
 
         async function incrementarContador(tipo, id) {
+            console.warn("Contador deshabilitado por seguridad");
+        }
+
+        /*async function incrementarContador(tipo, id) {
             try {
                 const ref = doc(db, tipo, id);
                 const snap = await getDoc(ref);
@@ -834,7 +833,7 @@
             } catch (e) {
                 console.error("Error al incrementar contador:", e);
             }
-        }
+        }*/
 
         async function mostrarContador(tipo, id, elemento) {
             try {
@@ -859,6 +858,8 @@
             await incrementarContador("visitas", "web");
             mostrarContador("visitas", "web", "contador");
         }
+
+
 
         // 🔹 Registrar descarga (click en botón)
         window.registrarDescarga = async function (appId) {
@@ -1045,12 +1046,28 @@
             const comentario = section.querySelector(".review-comment").value.trim();
             const status = section.querySelector(".review-status");
 
-            if (selected === 0 || comentario === "") {
+             if (selected < 1 || selected > 5 || comentario.length < 3 || comentario.length > 300) {
               status.textContent = "⚠️ Elegí estrellas y escribí un comentario.";
               return;
             }
 
-            try {
+             try {
+
+                  const last = localStorage.getItem("lastReviewTime");
+                  const now = Date.now();
+
+                  if (last && now - last < 60000) {
+                      status.textContent = "⏳ Esperá 1 minuto antes de enviar otra valoración.";
+                      return;
+                  }
+
+                 localStorage.setItem("lastReviewTime", now);
+
+                 if (nombre.length > 50) {
+                     status.textContent = "⚠️ Nombre demasiado largo.";
+                     return;
+                 }
+
               await addDoc(collection(db, "valoraciones", appName, "comentarios"), {
                 nombre: nombre || "Anónimo",
                 estrellas: selected,
@@ -1114,77 +1131,33 @@
     </script>
 
     <style>
-    /* WhatsApp flotante */
-    .whatsapp-float {
-        position: fixed;
-        bottom: 22px;
-        right: 22px;
-        width: 55px;
-        height: 55px;
-        background: linear-gradient(135deg, #25d366, #128c7e);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
-        z-index: 1500;
-        transition: transform 0.3s ease;
-    }
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+            z-index: 1500;
+            transition: transform 0.3s ease;
+        }
 
-    .whatsapp-float:hover {
-        transform: scale(1.1);
-    }
+            .whatsapp-float:hover {
+                transform: scale(1.1);
+            }
 
-    .whatsapp-float svg {
-        fill: #fff;
-        width: 28px;
-        height: 28px;
-    }
-
-    /* ================= TOOLTIP ================= */
-
-    .whatsapp-float::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        right: 70px;
-        top: 50%;
-        transform: translateY(-50%) translateX(10px);
-        background: #1f2937;
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        box-shadow: 0 0 15px rgba(0,0,0,0.4);
-        transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .whatsapp-float::before {
-        content: "";
-        position: absolute;
-        right: 62px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: 6px solid transparent;
-        border-left-color: #1f2937;
-        opacity: 0;
-        transition: opacity 0.25s ease;
-    }
-
-    .whatsapp-float:hover::after,
-    .whatsapp-float:hover::before {
-        opacity: 1;
-        transform: translateY(-50%) translateX(0);
-    }
-	</style>
+            .whatsapp-float svg {
+                fill: #fff;
+                width: 28px;
+                height: 28px;
+            }
+    </style>
 </body>
 
-
 </html>
-
-
-
-
-
