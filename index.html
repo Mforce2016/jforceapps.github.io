@@ -1142,7 +1142,7 @@
         // Carga dinámica: solo agrega imágenes que existen realmente
         async function cargarCapturas(carpeta) {
         const existentes = [];
-        for (let i = 1; i <= 10; i++) { // hasta 10 modificar más adelante
+        for (let i = 1; i <= 12; i++) { // hasta 12 modificar más adelante
         const url = `${carpeta}${i}.webp`;
         try {
         const res = await fetch(url, { method: "HEAD" });
@@ -1271,7 +1271,8 @@
         turnos: "TurnosGo",
         fit: "FitCoach",
         linterna: "Linterna Shake",
-        sou: "SOUL"
+        sou: "SOUL",
+        Maker: "Maker Job"
 
         };
 
