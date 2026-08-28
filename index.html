@@ -1,1088 +1,1798 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="color-scheme" content="dark">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JForce Apps — Soluciones móviles</title>
-  <meta name="description" content="Gestión, salud, educación y utilidades. Licencias rápidas y seguras. Aplicaciones móviles y de escritorio por encargo.">
-  <meta name="author" content="JForce Apps">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.jforceapps.com.ar">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>JForce Apps | Software que resuelve</title>
+<meta name="description" content="JForce Apps desarrolla aplicaciones Android y software para Windows orientado a profesionales, emprendimientos y empresas.">
+<meta name="author" content="JForce Apps">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.jforceapps.com.ar">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<style>
+:root{
+  --bg:#07111f;
+  --bg-soft:#0b1728;
+  --panel:#0f1d30;
+  --panel-2:#13243a;
+  --line:rgba(255,255,255,.09);
+  --text:#f5f7fb;
+  --muted:#9fb0c4;
+  --primary:#4f8cff;
+  --primary-2:#75a7ff;
+  --green:#35c98b;
+  --radius:24px;
+  --shadow:0 24px 80px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
 
-  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+html{scroll-behavior:smooth}
 
-  <style>
-    :root {
-      --accent: #00f2ff;
-      --accent-2: #ff4ef8;
-      --muted: #9aa0b0;
-      --transition: 0.9s cubic-bezier(.25,.8,.25,1);
-      --radius: 14px;
-    }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  overflow-x:hidden
+}
 
-    :root {
-        --bg: linear-gradient(135deg,#060b20 0%,#0c112f 50%,#10152f 100%);
-        --text: #e9f0ff;
-        --card-bg: rgba(255,255,255,0.05);
-        --accent: #00f2ff;
-        --accent-2: #ff4ef8;
-        --muted: #9aa0b0;
-        --transition: 0.9s cubic-bezier(.25,.8,.25,1);
-        --radius: 14px;
-    }
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(79,140,255,.15),transparent 33%),
+    radial-gradient(circle at 0% 40%,rgba(53,201,139,.08),transparent 30%);
+  z-index:-1
+}
 
-    *{box-sizing:border-box;}
-    html,body{
-      margin:0;padding:0;
-      font-family:"Segoe UI",Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      scroll-behavior:smooth;
-      overflow-x:hidden;
-    }
+a{color:inherit}
 
-    body::before {
-      content:"";
-      position:fixed;inset:0;
-      background:radial-gradient(circle at 20% 30%, #0077ff22, transparent 50%),
-                 radial-gradient(circle at 80% 70%, #ff00ee22, transparent 50%);
-      animation:bgMove 10s infinite alternate;
-      z-index:-1;
-    }
-    @keyframes bgMove {
-      0%{background-position:20% 30%,80% 70%;}
-      100%{background-position:80% 40%,30% 80%;}
-    }
-
-    .container{width:92%;max-width:1100px;margin:0 auto;padding:6rem 0 2rem;}
-
-    .navbar{
-      position:fixed;top:0;left:0;right:0;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0.7rem 1.2rem;
-      background:rgba(15,25,40,0.35);
-      backdrop-filter:blur(10px);
-      z-index:1000;
-      box-shadow:0 0 12px rgba(0,255,255,0.15);
-    }
-    .navbar-logo{
-      font-size:1.4rem;
-      font-weight:800;
-      color:#fff;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 0 12px var(--accent);
-      animation:glowPulse 3s infinite alternate, spin 6s linear infinite;
-      cursor:pointer;
-    }
-    @keyframes glowPulse{
-      0%{text-shadow:0 0 6px var(--accent);}
-      100%{text-shadow:0 0 20px var(--accent-2);}
-    }
-    @keyframes spin{
-      0%{transform:rotate(0deg);}
-      100%{transform:rotate(360deg);}
-    }
-
-    header.site-header{text-align:center;animation:fadeDown 1s ease forwards 0.3s;opacity:0;}
-    @keyframes fadeDown{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
-    .hero{
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      box-shadow:0 0 25px rgba(0,255,255,0.2);
-      padding:1.2rem;
-      display:flex;flex-direction:column;align-items:center;gap:1rem;
-    }
-    .hero img{width:160px;height:160px;object-fit:contain;}
-    .hero h1{
-      font-size:2rem;margin:0;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
-    .hero p{color:var(--muted);margin:0;font-size:1rem;}
-
-    main.area{
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      padding:1rem;
-      margin-top:1.5rem;
-      box-shadow:0 0 30px rgba(0,0,0,0.25);
-    }
-
-    /* 🟦 app-card horizontal con icono a la altura del título */
-    .app-card{
-      display:flex;
-      flex-direction:column;
-      gap:1rem;
-      padding:1rem 0;
-      border-bottom:1px dashed rgba(255,255,255,0.1);
-    }
-    .app-header-inline{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .app-header-inline img{
-      width:64px;
-      height:64px;
-      border-radius:14px;
-      box-shadow:0 0 15px #00bfff;
-      transition:transform .3s ease, box-shadow .3s ease;
-      cursor:pointer;
-    }
-    .app-header-inline img:hover{
-      transform:rotate(8deg) scale(1.08);
-      box-shadow:0 0 25px #39f;
-    }
-    .app-header-inline h3{
-      margin:0;
-      color:#39f;
-      text-shadow:0 0 10px #39f;
-      cursor:pointer;
-    }
-    .app-card p, .app-card li{color:var(--muted);}
-    .app-card ul{margin:6px 0 0 1rem;}
-      .app-actions {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          margin-top: 0.8rem;
-      }
-
-      /* 🔹 Enlace con estilo de botón */
-      .btn-download {
-          background: linear-gradient(90deg, var(--accent-2), #ff9a51);
-          color: #fff;
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-weight: 700;
-          text-decoration: none; /* ✨ elimina subrayado */
-          cursor: pointer;
-          box-shadow: 0 0 12px rgba(255,118,255,0.35);
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-          display: inline-flex;
-          align-items: center;
-          gap: 6px; /* separa ícono del texto */
-          margin-bottom: 8px; /* 🔥 separa del contador */
-      }
-
-    	.btn-download:hover {
-        	 transform: scale(1.07);
-             box-shadow: 0 0 25px rgba(255,118,255,0.6);
-        }
-
-		  /* Contenedor para poner ambos botones lado a lado */
-		.app-actions {
-		    display: flex;
-		    gap: 10px;
-		    flex-wrap: wrap;
-		    align-items: center;
-		}
-	
-		/* Nuevo botón APK */
-		.btn-apk {
-		    background: linear-gradient(90deg, #3b82f6, #60a5fa);
-		    color: #fff;
-		    padding: 8px 16px;
-		    border-radius: 8px;
-		    font-weight: 700;
-		    text-decoration: none;
-		    cursor: pointer;
-		    box-shadow: 0 0 12px rgba(96,165,250,0.35);
-		    transition: transform 0.25s ease, box-shadow 0.25s ease;
-		    display: inline-flex;
-		    align-items: center;
-		    gap: 6px;
-		}
-		
-		.btn-apk:hover {
-		    transform: scale(1.07);
-		    box-shadow: 0 0 25px rgba(96,165,250,0.6);
-		}
+.shell{
+  width:min(1180px,92%);
+  margin:auto
+}
 
 
-      /* 🔸 Contador */
-      .app-small {
-          font-size: 0.9rem;
-          color: var(--muted);
-          display: flex;
-          align-items: center;
-          gap: 4px;
-      }
+/* =========================
+   NAV
+========================= */
 
-    .pay-block{
-      text-align:center;
-      padding:16px;
-      margin-top:1.5rem;
-      border-radius:var(--radius);
-      background:var(--card-bg);
-      box-shadow:0 0 20px rgba(0,255,255,0.15);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-    }
-    .qr{width:180px;margin:0 auto 10px;border-radius:10px;background:#fff;padding:8px;display:block;}
-    .pay-btn{
-      display:inline-block;padding:10px 16px;
-      border-radius:8px;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:#fff;text-decoration:none;font-weight:700;
-      box-shadow:0 0 15px rgba(0,255,255,0.4);
-      transition:transform 0.3s ease;
-    }
-    .pay-btn:hover{transform:scale(1.07);}
-    footer{text-align:center;margin-top:1.5rem;color:var(--muted);}
+.nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(7,17,31,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line)
+}
 
-    /* Modal */
-    .modal-content img {
-      display: block;
-      margin: 12px auto;
-      max-width: 90%;
-      max-height: 65vh;
-      object-fit: contain;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,255,255,0.2);
-    }
+.nav-inner{
+  height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px
+}
 
-    .modal{
-      position:fixed;inset:0;background:rgba(0,0,0,0.8);
-      display:flex;align-items:center;justify-content:center;
-      visibility:hidden;opacity:0;transition:opacity .4s;
-      z-index:2000;
-    }
-    .modal.active{visibility:visible;opacity:1;}
-    .modal-content{
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      padding:1rem;
-      max-width:700px;
-      width:90%;
-      box-shadow:0 0 25px rgba(0,255,255,0.3);
-      position:relative;
-      text-align:center;
-    }
-    .close-btn{
-      position:absolute;top:10px;right:15px;color:var(--accent);
-      font-size:1.5rem;cursor:pointer;
-    }
-    .modal-controls{
-      display:flex;justify-content:space-between;margin-top:8px;
-    }
-    .modal-controls button{
-      background:none;border:1px solid var(--accent);
-      color:var(--accent);border-radius:6px;padding:4px 10px;cursor:pointer;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:-.03em;
+  font-size:1.08rem
+}
 
-    @media (min-width:900px){
-      .container{width:85%;max-width:1200px;padding-top:8rem;}
-      .hero{flex-direction:row;text-align:left;gap:2rem;}
-      .hero img{width:180px;height:180px;}
-      .hero h1{font-size:2.4rem;}
-      .pay-block{max-width:480px;margin:2rem auto;}
-      main.area{padding:2rem;}
-    }
+.brand img{
+  width:38px;
+  height:38px;
+  object-fit:contain;
+  border-radius:10px
+}
 
-    /* Valoraciones */
-    .app-review {
-      margin-top: 10px;
-      padding: 10px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,255,255,0.1);
-    }
-    .app-review h4 { margin: 0 0 6px; color: var(--accent); }
-    .review-name, .review-comment {
-      width: 100%;
-      margin-bottom: 6px;
-      padding: 6px 8px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(0,0,0,0.1);
-      color: var(--text);
-      font-size: 0.9rem;
-    }
-    .review-stars {
-      margin-bottom: 6px;
-    }
-    .review-stars span {
-      font-size: 1.4rem;
-      color: #666;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    .review-stars span.active { color: gold; }
-    .review-btn {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: #fff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .review-btn:hover { transform: scale(1.05); }
-    .review-status { margin-top: 4px; font-size: 0.85rem; color: var(--muted); }
+.brand span{color:#fff}
 
-	    /* Reseñas visibles debajo */
-    .review-list {
-      margin-top: 8px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 8px;
-    }
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:.69rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-top:1px
+}
 
-    .review-item {
-      background: rgba(255,255,255,0.03);
-      padding: 6px 8px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-    }
+.nav-links{
+  display:flex;
+  gap:24px;
+  align-items:center
+}
 
-    .review-item strong {
-      color: var(--accent);
-      font-size: 0.9rem;
-    }
+.nav-links a{
+  text-decoration:none;
+  color:#bdcad9;
+  font-size:.91rem;
+  font-weight:650
+}
 
-    .review-item .stars {
-      color: gold;
-      font-size: 1rem;
-      margin-right: 6px;
-    }
+.nav-links a:hover{color:#fff}
 
-    .review-item p {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
+.nav-cta{
+  padding:10px 16px!important;
+  border:1px solid rgba(117,167,255,.35);
+  border-radius:12px;
+  background:rgba(79,140,255,.1);
+  color:#fff!important
+}
 
-    .review-average {
-      font-weight: bold;
-      color: gold;
-      margin-bottom: 6px;
-    }
-  </style>
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:720px;
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  align-items:center;
+  gap:58px;
+  padding:85px 0 80px;
+  position:relative
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 11px;
+  border:1px solid rgba(117,167,255,.25);
+  background:rgba(79,140,255,.08);
+  border-radius:999px;
+  color:#bcd1ff;
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase
+}
+
+.eyebrow:before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 5px rgba(53,201,139,.1)
+}
+
+.hero h1{
+  font-size:clamp(3.2rem,6vw,5.9rem);
+  line-height:.94;
+  letter-spacing:-.065em;
+  margin:22px 0 24px;
+  max-width:760px
+}
+
+.hero h1 span{
+  display:block;
+  color:#82adff
+}
+
+.hero p{
+  font-size:1.18rem;
+  line-height:1.7;
+  color:#aebdd0;
+  max-width:680px;
+  margin:0 0 32px
+}
+
+.hero-actions{
+  display:flex;
+  gap:13px;
+  flex-wrap:wrap
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-download,
+.pay-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-decoration:none;
+  border-radius:13px;
+  font-weight:800;
+  transition:.22s ease
+}
+
+.btn-primary{
+  background:#f6f8fc;
+  color:#07111f;
+  padding:14px 20px
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px)
+}
+
+.btn-secondary{
+  padding:14px 19px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:#e7edf5
+}
+
+.btn-secondary:hover{
+  border-color:rgba(117,167,255,.4);
+  background:rgba(79,140,255,.07)
+}
+
+
+/* =========================
+   HERO VISUAL
+========================= */
+
+.hero-visual{
+  position:relative;
+  min-height:630px
+}
+
+.glass-window{
+  position:absolute;
+  inset:20px 0 0 20px;
+
+  min-height:590px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(19,36,58,.96),
+      rgba(9,21,36,.96)
+    );
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+
+  overflow:hidden
+}
+
+.window-top{
+  height:52px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  gap:7px
+}
+
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#536175
+}
+
+.dot:nth-child(1){background:#ff6f73}
+.dot:nth-child(2){background:#f4c65d}
+.dot:nth-child(3){background:#48c98b}
+
+.window-body{
+  padding:38px 34px 34px
+}
+
+.code-kicker{
+  color:#75a7ff;
+  font-weight:800;
+  font-size:.78rem;
+  letter-spacing:.12em
+}
+
+.window-body h3{
+  font-size:2rem;
+  line-height:1.15;
+  margin:14px 0 12px;
+  letter-spacing:-.04em
+}
+
+.window-body p{
+  font-size:.98rem;
+  line-height:1.75;
+  margin:0 0 24px;
+  color:#91a4b9
+}
+
+
+/* =========================
+   HERO METRICS
+========================= */
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px
+}
+
+.metric{
+  min-height:118px;
+  padding:18px 20px;
+
+  border:1px solid var(--line);
+  border-radius:17px;
+
+  background:rgba(255,255,255,.025);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center
+}
+
+.metric strong{
+  display:block;
+  font-size:1.55rem;
+  line-height:1.2;
+  margin-bottom:6px
+}
+
+.metric span{
+  font-size:.78rem;
+  line-height:1.6;
+  color:var(--muted)
+}
+
+
+/* =========================
+   FLOATING CHIP
+========================= */
+
+.floating-chip{
+  position:absolute;
+
+  right:-18px;
+  bottom:26px;
+
+  z-index:5;
+
+  padding:16px 18px;
+
+  background:#f7f9fc;
+  color:#0b1625;
+
+  border-radius:16px;
+
+  box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+  font-weight:800
+}
+
+.floating-chip small{
+  display:block;
+  color:#64748b;
+  font-size:.72rem;
+  margin-top:4px
+}
+
+
+/* =========================
+   TRUST
+========================= */
+
+.trust{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:24px 0
+}
+
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px
+}
+
+.trust-item{
+  color:#c3cede
+}
+
+.trust-item strong{
+  display:block;
+  color:#fff;
+  font-size:1rem
+}
+
+.trust-item span{
+  font-size:.82rem;
+  color:var(--muted)
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+  padding:95px 0
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:28px;
+  margin-bottom:34px
+}
+
+.section-label{
+  color:#78a7ff;
+  font-size:.76rem;
+  letter-spacing:.12em;
+  font-weight:900;
+  text-transform:uppercase
+}
+
+.section h2{
+  font-size:clamp(2.2rem,4vw,3.7rem);
+  letter-spacing:-.05em;
+  line-height:1;
+  margin:10px 0 0
+}
+
+.section-head p{
+  max-width:520px;
+  color:var(--muted);
+  line-height:1.65;
+  margin:0
+}
+
+
+/* =========================
+   PRODUCTOS
+========================= */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px
+}
+
+.app-card{
+  position:relative;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(17,33,53,.96),
+      rgba(11,25,42,.96)
+    );
+
+  border:1px solid var(--line);
+  border-radius:22px;
+
+  padding:26px;
+
+  overflow:hidden;
+
+  transition:
+    transform .25s,
+    border-color .25s,
+    box-shadow .25s
+}
+
+.app-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(117,167,255,.24);
+  box-shadow:0 18px 45px rgba(0,0,0,.18)
+}
+
+.app-card:before{
+  content:"";
+  position:absolute;
+  right:-70px;
+  top:-70px;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  background:rgba(79,140,255,.07)
+}
+
+.featured-card{
+  grid-column:1/-1;
+
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:30px;
+
+  padding:36px;
+
+  background:
+    linear-gradient(
+      120deg,
+      #11243b,
+      #0c1b2d 62%,
+      #0e2338
+    )
+}
+
+.featured-card:after{
+  content:"PRODUCTO DESTACADO";
+
+  position:absolute;
+  right:24px;
+  top:20px;
+
+  color:#7891ad;
+
+  font-size:.65rem;
+  letter-spacing:.14em;
+  font-weight:900
+}
+
+.app-header-inline{
+  display:grid;
+  grid-template-columns:72px 1fr;
+  column-gap:16px;
+  align-items:center;
+
+  margin-bottom:18px;
+
+  position:relative;
+  z-index:1
+}
+
+.app-header-inline img{
+  width:72px;
+  height:72px;
+
+  border-radius:18px;
+
+  object-fit:cover;
+
+  border:1px solid rgba(255,255,255,.09);
+
+  cursor:pointer
+}
+
+.app-header-inline h3{
+  font-size:1.38rem;
+
+  margin:4px 0 0;
+
+  letter-spacing:-.03em;
+
+  cursor:pointer;
+
+  color:#fff
+}
+
+.platform-badge{
+  display:inline-block;
+
+  width:max-content;
+
+  font-size:.61rem;
+  font-weight:900;
+  letter-spacing:.12em;
+
+  border-radius:999px;
+
+  padding:5px 8px
+}
+
+.android-badge{
+  color:#71e0ac;
+
+  background:rgba(53,201,139,.1);
+
+  border:1px solid rgba(53,201,139,.18)
+}
+
+.windows-badge{
+  color:#91b7ff;
+
+  background:rgba(79,140,255,.1);
+
+  border:1px solid rgba(79,140,255,.18)
+}
+
+.click-logo{
+  grid-column:2;
+
+  color:#7890a8!important;
+
+  font-size:.74rem!important;
+
+  margin:3px 0 0!important
+}
+
+.app-card ul{
+  padding-left:18px;
+
+  margin:13px 0 16px
+}
+
+.app-card li{
+  color:#a7b7c8;
+
+  line-height:1.55;
+
+  margin:7px 0;
+
+  font-size:.91rem
+}
+
+.app-card p{
+  color:#a7b7c8;
+
+  line-height:1.6;
+
+  font-size:.91rem
+}
+
+.app-card b{
+  color:#eaf0f8
+}
+
+.app-actions{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  margin-top:20px
+}
+
+.btn-download{
+  background:#edf3ff!important;
+
+  color:#0a1626!important;
+
+  padding:11px 15px!important;
+
+  border-radius:11px!important;
+
+  box-shadow:none!important;
+
+  font-size:.86rem
+}
+
+.btn-download:hover{
+  transform:translateY(-1px)!important;
+
+  box-shadow:none!important
+}
+
+.store-unavailable{
+  display:inline-flex;
+
+  padding:10px 13px;
+
+  border-radius:10px;
+
+  background:rgba(255,255,255,.04);
+
+  border:1px solid var(--line);
+
+  color:#8799ad;
+
+  font-size:.82rem;
+
+  font-weight:700
+}
+
+
+/* =========================
+   REVIEWS
+========================= */
+
+.app-review{
+  margin-top:22px;
+
+  padding-top:20px;
+
+  border-top:1px solid var(--line);
+
+  background:none!important;
+
+  box-shadow:none!important;
+
+  border-radius:0!important
+}
+
+.app-review h4{
+  color:#dbe5f0!important;
+
+  font-size:.88rem;
+
+  margin:0 0 10px
+}
+
+.review-name,
+.review-comment{
+  width:100%;
+
+  padding:10px 12px;
+
+  border:1px solid var(--line)!important;
+
+  background:#0a1727!important;
+
+  color:#fff!important;
+
+  border-radius:10px!important
+}
+
+.review-stars span{
+  font-size:1.25rem!important;
+
+  color:#536275!important
+}
+
+.review-stars span.active{
+  color:#ffc857!important
+}
+
+.review-btn{
+  background:#182b44!important;
+
+  border:1px solid var(--line)!important;
+
+  color:#eaf1f8!important;
+
+  padding:9px 13px!important;
+
+  border-radius:10px!important
+}
+
+.review-list{
+  border-top:1px solid var(--line)!important
+}
+
+.review-item{
+  background:rgba(255,255,255,.025)!important
+}
+
+.review-item strong{
+  color:#dbe7f7!important
+}
+
+
+/* =========================
+   WINDOWS
+========================= */
+
+.windows-section{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.018),
+      rgba(255,255,255,0)
+    );
+
+  border-top:1px solid var(--line);
+
+  border-bottom:1px solid var(--line)
+}
+
+.windows-grid{
+  display:grid;
+
+  grid-template-columns:repeat(2,minmax(0,1fr));
+
+  gap:20px
+}
+
+
+/* =========================
+   SERVICIOS
+========================= */
+
+.services{
+  display:grid;
+
+  grid-template-columns:1.1fr .9fr;
+
+  gap:22px
+}
+
+.service-main,
+.service-side{
+  border:1px solid var(--line);
+
+  border-radius:24px;
+
+  background:var(--panel);
+
+  padding:34px
+}
+
+.service-main h3{
+  font-size:2rem;
+
+  letter-spacing:-.04em;
+
+  margin:0 0 14px
+}
+
+.service-main p,
+.service-side p{
+  color:var(--muted);
+
+  line-height:1.7
+}
+
+.service-list{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+
+  margin-top:26px
+}
+
+.service-list div{
+  padding:15px;
+
+  border-radius:14px;
+
+  background:#0b192a;
+
+  border:1px solid var(--line);
+
+  font-weight:700;
+
+  font-size:.9rem
+}
+
+.service-side{
+  background:
+    linear-gradient(
+      150deg,
+      #172c47,
+      #102138
+    )
+}
+
+.service-side .big{
+  font-size:2.8rem;
+
+  font-weight:900;
+
+  letter-spacing:-.05em;
+
+  margin-bottom:4px
+}
+
+.service-side small{
+  color:#91a4ba
+}
+
+
+/* =========================
+   LICENCIAS
+========================= */
+
+.pay-wrap{
+  padding:95px 0
+}
+
+.pay-block{
+  max-width:none!important;
+
+  margin:0!important;
+
+  padding:38px!important;
+
+  border-radius:26px!important;
+
+  background:
+    linear-gradient(
+      120deg,
+      #10233a,
+      #0b192a
+    )!important;
+
+  border:1px solid var(--line);
+
+  box-shadow:none!important;
+
+  display:grid!important;
+
+  grid-template-columns:160px 1fr auto;
+
+  gap:28px;
+
+  align-items:center;
+
+  text-align:left!important
+}
+
+.pay-block .qr{
+  width:145px!important;
+
+  margin:0!important;
+
+  border-radius:18px!important
+}
+
+.pay-block h3{
+  font-size:1.7rem;
+
+  margin:0 0 8px
+}
+
+.pay-btn{
+  padding:13px 17px!important;
+
+  background:#f6f8fb!important;
+
+  color:#0a1625!important;
+
+  box-shadow:none!important;
+
+  white-space:nowrap
+}
+
+.pay-block p{
+  margin:0!important
+}
+
+.contact-link{
+  color:#9ec0ff!important
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  padding:34px 0 45px;
+
+  border-top:1px solid var(--line);
+
+  color:#8193a6
+}
+
+.footer-inner{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+  align-items:center
+}
+
+.footer strong{
+  color:#dbe5ef
+}
+
+.footer a{
+  text-decoration:none;
+
+  color:#9fb6ce
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(2,8,15,.86);
+
+  backdrop-filter:blur(12px);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  visibility:hidden;
+
+  opacity:0;
+
+  transition:.25s;
+
+  z-index:3000
+}
+
+.modal.active{
+  visibility:visible;
+
+  opacity:1
+}
+
+.modal-content{
+  width:min(900px,92vw);
+
+  max-height:90vh;
+
+  overflow:auto;
+
+  background:#0e1d2f;
+
+  border:1px solid var(--line);
+
+  border-radius:24px;
+
+  padding:24px;
+
+  position:relative;
+
+  text-align:center;
+
+  box-shadow:var(--shadow)
+}
+
+.modal-content img{
+  display:block;
+
+  max-width:100%;
+
+  max-height:65vh;
+
+  object-fit:contain;
+
+  margin:18px auto;
+
+  border-radius:14px
+}
+
+.close-btn{
+  position:absolute;
+
+  right:18px;
+
+  top:14px;
+
+  font-size:1.25rem;
+
+  color:#aab8c8;
+
+  cursor:pointer
+}
+
+.modal-controls{
+  display:flex;
+
+  justify-content:center;
+
+  gap:12px
+}
+
+.modal-controls button{
+  border:1px solid var(--line);
+
+  background:#13263d;
+
+  color:#fff;
+
+  border-radius:10px;
+
+  padding:9px 14px;
+
+  cursor:pointer
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp-float{
+  position:fixed;
+
+  right:22px;
+
+  bottom:22px;
+
+  width:54px;
+
+  height:54px;
+
+  border-radius:16px;
+
+  background:#f6f8fb;
+
+  display:grid;
+
+  place-items:center;
+
+  box-shadow:0 16px 38px rgba(0,0,0,.3);
+
+  z-index:1200
+}
+
+.whatsapp-float svg{
+  width:27px;
+
+  height:27px;
+
+  fill:#0a1625
+}
+
+
+/* =========================
+   TABLETS
+========================= */
+
+@media(max-width:900px){
+
+  .nav-links a:not(.nav-cta){
+    display:none
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding-top:64px;
+    gap:55px
+  }
+
+  .hero-visual{
+    min-height:620px
+  }
+
+  .glass-window{
+    inset:0;
+    min-height:590px
+  }
+
+  .floating-chip{
+    right:18px;
+    bottom:18px
+  }
+
+  .trust-grid{
+    grid-template-columns:1fr 1fr
+  }
+
+  .product-grid,
+  .windows-grid,
+  .services{
+    grid-template-columns:1fr
+  }
+
+  .featured-card{
+    grid-column:auto;
+    display:block
+  }
+
+  .section-head{
+    display:block
+  }
+
+  .section-head p{
+    margin-top:18px
+  }
+
+  .pay-block{
+    grid-template-columns:1fr;
+    text-align:center!important
+  }
+
+  .pay-block .qr{
+    margin:auto!important
+  }
+
+  .footer-inner{
+    display:block
+  }
+
+  .footer-inner div+div{
+    margin-top:8px
+  }
+}
+
+
+/* =========================
+   CELULARES
+========================= */
+
+@media(max-width:560px){
+
+  .hero{
+    padding-top:45px;
+    padding-bottom:55px
+  }
+
+  .hero h1{
+    font-size:3.15rem
+  }
+
+  .hero-visual{
+    min-height:auto;
+  }
+
+  .glass-window{
+    position:relative;
+
+    inset:auto;
+
+    min-height:auto;
+
+    overflow:hidden
+  }
+
+  .window-body{
+    padding:28px 22px 110px
+  }
+
+  .window-body h3{
+    font-size:1.75rem
+  }
+
+  .metrics{
+    grid-template-columns:1fr
+  }
+
+  .metric{
+    min-height:95px
+  }
+
+  .floating-chip{
+    right:18px;
+    bottom:18px
+  }
+
+  .trust-grid{
+    grid-template-columns:1fr
+  }
+
+  .section{
+    padding:70px 0
+  }
+
+  .app-card,
+  .featured-card{
+    padding:22px
+  }
+
+  .service-list{
+    grid-template-columns:1fr
+  }
+
+  .nav-inner{
+    height:66px
+  }
+
+  .nav-cta{
+    padding:9px 12px!important
+  }
+
+  .brand small{
+    display:none
+  }
+}</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-logo" id="rayito">⚡️</div>
-    </nav>
+<nav class="nav">
+  <div class="shell nav-inner">
+    <a class="brand" href="#inicio"><img src="logo.webp" alt="JForce Apps"><div><span>JForce Apps</span><small>Software Studio</small></div></a>
+    <div class="nav-links">
+      <a href="#android">Android</a><a href="#windows">Windows</a><a href="#servicios">Servicios</a><a href="#licencias">Licencias</a><a class="nav-cta" href="mailto:jforceapps@gmail.com">Hablemos</a>
+    </div>
+  </div>
+</nav>
 
-    <div class="container" id="top">
-        <header class="site-header">
-            <div class="hero">
-                <img src="logo.webp" alt="JForce Apps Logo" loading="lazy">
-                <div>
-                    <h1>JForce Apps — Desarrollo para móviles y pc</h1>
-                    <p>Gestión, salud, educación y utilidades. Licencias rápidas y seguras.</p>
-                </div>
-            </div>
-        </header>
+<header class="shell hero" id="inicio">
+  <div>
+    <span class="eyebrow">Desarrollo de software</span>
+    <h1>Software útil.<span>Diseñado para trabajar.</span></h1>
+    <p>Aplicaciones móviles y herramientas de escritorio creadas para simplificar procesos reales, organizar información y transformar tareas repetitivas en soluciones digitales claras.</p>
+    <div class="hero-actions"><a class="btn-primary" href="#android">Explorar productos</a><a class="btn-secondary" href="mailto:jforceapps@gmail.com">Solicitar un desarrollo</a></div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="glass-window">
+      <div class="window-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+      <div class="window-body"><div class="code-kicker">JFORCE / BUILD</div><h3>Soluciones enfocadas en el uso real.</h3><p>Android · Windows · Automatización · Gestión · Herramientas profesionales</p><div class="metrics"><div class="metric"><strong>Android</strong><span>Publicación mediante Google Play</span></div><div class="metric"><strong>Windows</strong><span>Descarga directa de instaladores</span></div><div class="metric"><strong>Cloud</strong><span>Integraciones y sincronización</span></div><div class="metric"><strong>Custom</strong><span>Software a medida</span></div></div></div>
+    </div>
+    <div class="floating-chip">JForce Apps<small>Software que resuelve.</small></div>
+  </div>
+</header>
 
-        <main class="area">
-            <h2>📱 Aplicaciones móviles - Versión Android</h2>
+<section class="trust"><div class="shell trust-grid"><div class="trust-item"><strong>Android</strong><span>Distribución oficial por Play Store</span></div><div class="trust-item"><strong>Windows</strong><span>Herramientas listas para escritorio</span></div><div class="trust-item"><strong>A medida</strong><span>Desarrollo para necesidades concretas</span></div><div class="trust-item"><strong>Soporte</strong><span>Contacto directo y licencias</span></div></div></section>
 
-    <!-- 🟢 MAKERJOB -->
-<div class="app-card">
-
-    <div class="app-header-inline">
-        <img src="makerjob.webp"
-             alt="MakerJob"
-             onclick="abrirModal('MakerJob','Gestión profesional para negocios de impresión 3D.','makerjob')">
-
-        <h3 onclick="abrirModal('MakerJob','Gestión profesional para negocios de impresión 3D.','makerjob')">
+<section class="section" id="android"><div class="shell"><div class="section-head"><div><div class="section-label">Productos móviles</div><h2>Aplicaciones Android</h2></div><p>Una selección de soluciones móviles desarrolladas para negocios, organización personal, entrenamiento y productividad. Las aplicaciones disponibles se instalan únicamente desde Google Play.</p></div><div class="product-grid"><div class="app-card featured-card">
+<div class="app-header-inline">
+<img alt="MakerJob" onclick="abrirModal('MakerJob','Gestión profesional para negocios de impresión 3D.','makerjob')" src="makerjob.webp"/>
+<span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('MakerJob','Gestión profesional para negocios de impresión 3D.','makerjob')">
             MakerJob
         </h3>
-
-        <p class="click-logo">
-            📸 Hacé clic en el logo para ver capturas del programa
-        </p>
-
-    </div>
-
-    <ul>
-        <li>📋 <b>Gestión de clientes:</b> registrá y organizá todos tus clientes en un solo lugar.</li>
-
-        <li>💰 <b>Calculadora inteligente de presupuestos:</b> calculá costos reales, mano de obra, electricidad, embalaje, adicionales y obtené el precio de venta automáticamente.</li>
-
-        <li>🖼️ <b>Presupuestos con imágenes:</b> agregá fotos de tus proyectos y convertí cualquier presupuesto en un producto del catálogo con un solo clic.</li>
-
-        <li>📦 <b>Gestión completa de pedidos:</b> administrá cada trabajo desde el presupuesto hasta la entrega, registrando pagos, saldos y estados.</li>
-
-        <li>📊 <b>Estadísticas mensuales:</b> controlá ventas, pedidos, cobros, saldos pendientes y ganancias de cada mes.</li>
-
-        <li>🛍️ <b>Catálogo web profesional:</b> publicá automáticamente tus productos en un catálogo online moderno, con buscador, categorías, múltiples imágenes y diseño estilo e-commerce.</li>
-
-        <li>💬 <b>Consultas por WhatsApp:</b> los clientes pueden consultar cualquier producto directamente desde el catálogo utilizando el WhatsApp configurado en tu negocio.</li>
-
-        <li>🔍 <b>Consulta de pedidos:</b> tus clientes pueden verificar el estado de sus trabajos ingresando únicamente su DNI y número de pedido.</li>
-
-        <li>🗂️ <b>Historial completo:</b> conservá todos los presupuestos, productos y pedidos para reutilizarlos cuando lo necesites.</li>
-
-        <li>⚙️ <b>Configuración del negocio:</b> personalizá costos, materiales, mano de obra, electricidad, nombre del negocio, catálogo y datos de contacto.</li>
-
-        <li>☁️ <b>Sincronización en la nube:</b> toda la información queda protegida y disponible desde cualquier dispositivo.</li>
-
-        <li>📱 <b>Interfaz moderna:</b> diseñada especialmente para makers, rápida, intuitiva y fácil de usar.</li>
-
-        <li>🔒 <b>Acceso seguro:</b> autenticación mediante Email o Google con respaldo en Firebase.</li>
-    </ul>
-
-    <p><b>💪 Ideal para:</b></p>
-
-    <ul>
-        <li>🖨️ Emprendedores de impresión 3D</li>
-        <li>🏭 Talleres y makers</li>
-        <li>🎨 Diseñadores 3D</li>
-        <li>🛠️ Fabricación personalizada</li>
-        <li>📦 Producción en serie</li>
-        <li>🛒 Venta de productos impresos en 3D</li>
-    </ul>
-
-    <p>
-        <b>🚀 MakerJob — Imprimimos tus ideas. Organizamos tu negocio.</b>
-    </p>
-
-    <div class="app-actions">
-		<a href="https://play.google.com/store/apps/details?id=com.masterforce.markerjob"
-                       target="_blank"
-                       class="btn-download"
-                       onclick="registrarDescarga('MakerJob')">
-                        📲 Descargar en Google Play
-        </a>
-        <a href="MakerJob.apk"
-           download
-           class="btn-download"
-           onclick="registrarDescarga('MakerJob')">
-            ⬇️ Descargar APP
-        </a>
-
-        <div class="app-small" id="status_MakerJob">
-            <b>⬇️ Descargas: cargando...</b>
-        </div>
-    </div>
-
-    <div class="app-review" data-app="MakerJob">
-        <h4>⭐ Valorá esta app</h4>
-
-        <input type="text"
-               class="review-name"
-               placeholder="Tu nombre o email (opcional)">
-
-        <div class="review-stars">
-            <span data-star="1">★</span>
-            <span data-star="2">★</span>
-            <span data-star="3">★</span>
-            <span data-star="4">★</span>
-            <span data-star="5">★</span>
-        </div>
-
-        <textarea class="review-comment"
-                  placeholder="Dejá tu comentario..."
-                  rows="3"></textarea>
-
-        <button class="review-btn">
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>📋 <b>Gestión de clientes:</b> registrá y organizá todos tus clientes en un solo lugar.</li>
+<li>💰 <b>Calculadora inteligente de presupuestos:</b> calculá costos reales, mano de obra, electricidad, embalaje, adicionales y obtené el precio de venta automáticamente.</li>
+<li>🖼️ <b>Presupuestos con imágenes:</b> agregá fotos de tus proyectos y convertí cualquier presupuesto en un producto del catálogo con un solo clic.</li>
+<li>📦 <b>Gestión completa de pedidos:</b> administrá cada trabajo desde el presupuesto hasta la entrega, registrando pagos, saldos y estados.</li>
+<li>📊 <b>Estadísticas mensuales:</b> controlá ventas, pedidos, cobros, saldos pendientes y ganancias de cada mes.</li>
+<li>🛍️ <b>Catálogo web profesional:</b> publicá automáticamente tus productos en un catálogo online moderno, con buscador, categorías, múltiples imágenes y diseño estilo e-commerce.</li>
+<li>💬 <b>Consultas por WhatsApp:</b> los clientes pueden consultar cualquier producto directamente desde el catálogo utilizando el WhatsApp configurado en tu negocio.</li>
+<li>🔍 <b>Consulta de pedidos:</b> tus clientes pueden verificar el estado de sus trabajos ingresando únicamente su DNI y número de pedido.</li>
+<li>🗂️ <b>Historial completo:</b> conservá todos los presupuestos, productos y pedidos para reutilizarlos cuando lo necesites.</li>
+<li>⚙️ <b>Configuración del negocio:</b> personalizá costos, materiales, mano de obra, electricidad, nombre del negocio, catálogo y datos de contacto.</li>
+<li>☁️ <b>Sincronización en la nube:</b> toda la información queda protegida y disponible desde cualquier dispositivo.</li>
+<li>📱 <b>Interfaz moderna:</b> diseñada especialmente para makers, rápida, intuitiva y fácil de usar.</li>
+<li>🔒 <b>Acceso seguro:</b> autenticación mediante Email o Google con respaldo en Firebase.</li>
+</ul>
+<p><b>💪 Ideal para:</b></p>
+<ul>
+<li>🖨️ Emprendedores de impresión 3D</li>
+<li>🏭 Talleres y makers</li>
+<li>🎨 Diseñadores 3D</li>
+<li>🛠️ Fabricación personalizada</li>
+<li>📦 Producción en serie</li>
+<li>🛒 Venta de productos impresos en 3D</li>
+</ul>
+<p>
+<b>🚀 MakerJob — Imprimimos tus ideas. Organizamos tu negocio.</b>
+</p>
+<div class="app-actions">
+<a class="btn-primary store-link" href="https://play.google.com/store/apps/details?id=com.masterforce.markerjob" rel="noopener noreferrer" target="_blank">Ver en Google Play</a>
+</div>
+<div class="app-review" data-app="MakerJob">
+<h4>⭐ Valorá esta app</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">
             Enviar valoración
         </button>
-
-        <div class="review-status"></div>
-    </div>
-
+<div class="review-status"></div>
 </div>
-
-            <!-- 🟢 REGISTRO LAO -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="registrolao.webp" alt="Registro LAO" onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">
-                    <h3 onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">Registro LAO</h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
-                <ul>
-                    <li>Organizá tus días de descanso de forma simple, rápida y visual. Con esta app, podés llevar el control completo de tus vacaciones y días disponibles, todo desde tu celular.</li>
-                </ul>
-                <p><b>✨ Funciones principales</b></p>
-                <ul>
-                    <li>📅 Registro de períodos de vacaciones: guardá tus fechas de inicio y fin fácilmente.</li>
-                    <li>⏱️ Cálculo automático de días restantes: el sistema descuenta automáticamente los días tomados.</li>
-                    <li>🗂️ Historial completo: visualizá todos los períodos registrados con sus respectivas fechas.</li>
-                    <li>📸 Adjuntá comprobantes: agregá una imagen del papel firmado o constancia oficial (opcional).</li>
-                    <li>⚙️ Configuración flexible: modificá los días totales o tus años de servicio en cualquier momento.</li>
-                    <li>🌈 Interfaz moderna y clara: diseñada para ser cómoda y profesional.</li>
-                </ul>
-                <div class="app-actions">
-                    <a href="https://play.google.com/store/apps/details?id=com.masterforce.registrolao"
-                       target="_blank"
-                       class="btn-download"
-                       onclick="registrarDescarga('RegistroLAO')">
-                        📲 Descargar en Google Play
-                    </a>
-                    <a href="registrolao.apk" download class="btn-download" onclick="registrarDescarga('RegistroLAO')">⬇️ Descarga Directa</a>
-                    <div class="app-small" id="status_RegistroLAO"><b>⬇️ Descargas: cargando...</b></div>
-                </div>
-                <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-                <div class="app-review" data-app="RegistroLAO">
-                    <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-
-            <!-- 🟣 TURNOSGO -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="turnosgo.webp" alt="TurnosGo" onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">
-                    <h3 onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">TurnosGo</h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
-                <ul>
-                    <li>📅 Gestión de turnos: guarda fácilmente tus turnos laborales mes a mes.</li>
-                    <li>➕ Refuerzos y adicionales: agrega extras sin complicaciones y mantené todo registrado.</li>
-                    <li>📝 Observaciones: añadí notas o comentarios para cada día.</li>
-                    <li>📊 Vista clara y organizada: visualizá tus turnos en un calendario simple y práctico.</li>
-                    <li>🔔 Notificaciones: recibí alertas para no olvidar tus refuerzos o cambios de horario.</li>
-                    <li>🎨 Modo oscuro: elegí entre modo claro u oscuro para mayor comodidad visual.</li>
-                    <li>💾 Datos locales: toda tu información se guarda en tu dispositivo, sin conexión a internet.</li>
-                </ul>
-                <p><b>👨‍💼 Ideal para:</b></p>
-                <ul>
-                    <li>Personal de seguridad</li>
-                    <li>Policías y fuerzas de seguridad</li>
-                    <li>Médicos, enfermeros y personal de salud</li>
-                </ul>
-                <div class="app-actions">
-                    <a href="https://play.google.com/store/apps/details?id=com.masterforce.turnosgo"
-                       target="_blank"
-                       class="btn-download"
-                       onclick="registrarDescarga('TurnosGo')">
-                        📲 Descargar en Google Play
-                    </a>
-                    <a href="turnosgo.apk" download class="btn-download" onclick="registrarDescarga('TurnosGo')">⬇️ Descarga Directa</a>
-                    <div class="app-small" id="status_TurnosGo"><b>⬇️ Descargas: cargando...</b></div>
-                </div>
-                <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-                <div class="app-review" data-app="TurnosGo">
-                    <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-
-            <!-- 🟡 COACH ROUTINE -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="coachroutine.webp" alt="CoachRoutine" onclick="abrirModal('Coach Routine','Planificación de entrenamientos y seguimiento.','fit')">
-                    <h3 onclick="abrirModal('Coach Routine','Planificación de entrenamientos y seguimiento.','fit')">CoachRoutine</h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
-                <ul>
-                    <li>👨‍🏫 Registro de profesores: crea tu cuenta de entrenador personal de forma rápida y segura.</li>
-                    <li>👥 Gestión de alumnos: guarda sus datos físicos, plan contratado y progreso individual.</li>
-                    <li>📅 Rutinas personalizadas: organiza ejercicios por día, zona muscular y tipo de entrenamiento.</li>
-                    <li>🏋️‍♂️ Ejercicios con animaciones: cada ejercicio incluye un GIF demostrativo para asegurar la técnica correcta.</li>
-                    <li>📝 Observaciones: añade notas o indicaciones específicas para cada rutina o ejercicio.</li>
-                    <li>☁️ Sincronización en la nube: todos los datos se guardan automáticamente.</li>
-                    <li>📱 Interfaz moderna: diseño limpio y fácil de usar, adaptable a cualquier dispositivo Android.</li>
-                    <li>🔒 Acceso seguro: inicio de sesión con google, email y contraseña para proteger tus datos.</li>
-                </ul>
-
-                <p><b>💪 Ideal para:</b></p>
-                <ul>
-                    <li>Entrenadores personales</li>
-                    <li>Profesores de educación física</li>
-                    <li>Gimnasios y centros de entrenamiento</li>
-                    <li>Alumnos que desean seguir su rutina con guía visual</li>
-                </ul>
-
-                <p><b>🚀 Coach Routine— Entrena mejor, enseña más fácil.</b></p>
-                <div class="app-actions">
-					<a href="https://play.google.com/store/apps/details?id=com.masterforce.fitcoach"
-                       target="_blank"
-                       class="btn-download"
-                       onclick="registrarDescarga('FitCoach')">
-                        📲 Descargar en Google Play
-                    </a>
-                    <a href="CoachRoutine.apk" download class="btn-download" onclick="registrarDescarga('FitCoach')">⬇️ Descargar APP</a>
-                    <div class="app-small" id="status_FitCoach"><b>⬇️ Descargas: cargando...</b></div>
-                </div>
-                <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-                <div class="app-review" data-app="FitCoach">
-                    <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-
-            <!-- 🔦 LINTERNA SHAKE -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="linterna.webp" alt="Linterna Shake" onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">
-                    <h3 onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">Linterna Shake</h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
-                <ul>
-                    <li>💡 Activá la linterna con solo sacudir tu teléfono.</li>
-                    <li>⚡ Encendido ultra rápido.</li>
-                    <li>🔋 Optimizada para bajo consumo de batería.</li>
-                    <li>🎨 Interfaz minimalista y moderna.</li>
-                    <li>📱 Compatible con la mayoría de dispositivos Android.</li>
-                </ul>
-                <div class="app-actions">
-                    <a href="linterna.apk" download class="btn-download" onclick="registrarDescarga('LinternaShake')">⬇️ Descargar APP</a>
-                    <div class="app-small" id="status_LinternaShake"><b>⬇️ Descargas: cargando...</b></div>
-                </div>
-                <!-- 🔹 Bloque de valoraciones debajo de cada app -->
-                <div class="app-review" data-app="LinternaShake">
-                    <h4>⭐ Valorá esta app</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-            <!-- 🌌 SOU -->
-            <div class="app-card">
-
-                <div class="app-header-inline">
-
-                    <img src="sou.webp"
-                         alt="SOUL"
-                         onclick="abrirModal(
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="Registro LAO" onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')" src="registrolao.webp"/>
+<span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">Registro LAO</h3>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>Organizá tus días de descanso de forma simple, rápida y visual. Con esta app, podés llevar el control completo de tus vacaciones y días disponibles, todo desde tu celular.</li>
+</ul>
+<p><b>✨ Funciones principales</b></p>
+<ul>
+<li>📅 Registro de períodos de vacaciones: guardá tus fechas de inicio y fin fácilmente.</li>
+<li>⏱️ Cálculo automático de días restantes: el sistema descuenta automáticamente los días tomados.</li>
+<li>🗂️ Historial completo: visualizá todos los períodos registrados con sus respectivas fechas.</li>
+<li>📸 Adjuntá comprobantes: agregá una imagen del papel firmado o constancia oficial (opcional).</li>
+<li>⚙️ Configuración flexible: modificá los días totales o tus años de servicio en cualquier momento.</li>
+<li>🌈 Interfaz moderna y clara: diseñada para ser cómoda y profesional.</li>
+</ul>
+<div class="app-actions">
+<a class="btn-primary store-link" href="https://play.google.com/store/apps/details?id=com.masterforce.registrolao" rel="noopener noreferrer" target="_blank">Ver en Google Play</a>
+</div>
+<!-- 🔹 Bloque de valoraciones debajo de cada app -->
+<div class="app-review" data-app="RegistroLAO">
+<h4>⭐ Valorá esta app</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="TurnosGo" onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')" src="turnosgo.webp"/>
+<span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">TurnosGo</h3>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>📅 Gestión de turnos: guarda fácilmente tus turnos laborales mes a mes.</li>
+<li>➕ Refuerzos y adicionales: agrega extras sin complicaciones y mantené todo registrado.</li>
+<li>📝 Observaciones: añadí notas o comentarios para cada día.</li>
+<li>📊 Vista clara y organizada: visualizá tus turnos en un calendario simple y práctico.</li>
+<li>🔔 Notificaciones: recibí alertas para no olvidar tus refuerzos o cambios de horario.</li>
+<li>🎨 Modo oscuro: elegí entre modo claro u oscuro para mayor comodidad visual.</li>
+<li>💾 Datos locales: toda tu información se guarda en tu dispositivo, sin conexión a internet.</li>
+</ul>
+<p><b>👨‍💼 Ideal para:</b></p>
+<ul>
+<li>Personal de seguridad</li>
+<li>Policías y fuerzas de seguridad</li>
+<li>Médicos, enfermeros y personal de salud</li>
+</ul>
+<div class="app-actions">
+<a class="btn-primary store-link" href="https://play.google.com/store/apps/details?id=com.masterforce.turnosgo" rel="noopener noreferrer" target="_blank">Ver en Google Play</a>
+</div>
+<!-- 🔹 Bloque de valoraciones debajo de cada app -->
+<div class="app-review" data-app="TurnosGo">
+<h4>⭐ Valorá esta app</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="CoachRoutine" onclick="abrirModal('Coach Routine','Planificación de entrenamientos y seguimiento.','fit')" src="coachroutine.webp"/>
+<span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('Coach Routine','Planificación de entrenamientos y seguimiento.','fit')">CoachRoutine</h3>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>👨‍🏫 Registro de profesores: crea tu cuenta de entrenador personal de forma rápida y segura.</li>
+<li>👥 Gestión de alumnos: guarda sus datos físicos, plan contratado y progreso individual.</li>
+<li>📅 Rutinas personalizadas: organiza ejercicios por día, zona muscular y tipo de entrenamiento.</li>
+<li>🏋️‍♂️ Ejercicios con animaciones: cada ejercicio incluye un GIF demostrativo para asegurar la técnica correcta.</li>
+<li>📝 Observaciones: añade notas o indicaciones específicas para cada rutina o ejercicio.</li>
+<li>☁️ Sincronización en la nube: todos los datos se guardan automáticamente.</li>
+<li>📱 Interfaz moderna: diseño limpio y fácil de usar, adaptable a cualquier dispositivo Android.</li>
+<li>🔒 Acceso seguro: inicio de sesión con google, email y contraseña para proteger tus datos.</li>
+</ul>
+<p><b>💪 Ideal para:</b></p>
+<ul>
+<li>Entrenadores personales</li>
+<li>Profesores de educación física</li>
+<li>Gimnasios y centros de entrenamiento</li>
+<li>Alumnos que desean seguir su rutina con guía visual</li>
+</ul>
+<p><b>🚀 Coach Routine— Entrena mejor, enseña más fácil.</b></p>
+<div class="app-actions">
+<a class="btn-primary store-link" href="https://play.google.com/store/apps/details?id=com.masterforce.fitcoach" rel="noopener noreferrer" target="_blank">Ver en Google Play</a>
+</div>
+<!-- 🔹 Bloque de valoraciones debajo de cada app -->
+<div class="app-review" data-app="FitCoach">
+<h4>⭐ Valorá esta app</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="Linterna Shake" onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')" src="linterna.webp"/>
+<span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">Linterna Shake</h3>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>💡 Activá la linterna con solo sacudir tu teléfono.</li>
+<li>⚡ Encendido ultra rápido.</li>
+<li>🔋 Optimizada para bajo consumo de batería.</li>
+<li>🎨 Interfaz minimalista y moderna.</li>
+<li>📱 Compatible con la mayoría de dispositivos Android.</li>
+</ul>
+<div class="app-actions">
+<span class="availability-note">No disponible actualmente en Google Play</span><span class="store-unavailable">No disponible actualmente en Google Play</span></div>
+<!-- 🔹 Bloque de valoraciones debajo de cada app -->
+<div class="app-review" data-app="LinternaShake">
+<h4>⭐ Valorá esta app</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="SOUL" onclick="abrirModal(
                 'SOUL IA',
                 'Aplicación cristiana con mensajes inspiradores, reflexión bíblica y acompañamiento espiritual personalizado.',
                 'sou'
-             )">
-
-                    <h3 onclick="abrirModal(
+             )" src="sou.webp"/>
+<span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal(
                 'SOUL IA',
                 'Aplicación cristiana con mensajes inspiradores, reflexión bíblica y acompañamiento espiritual personalizado.',
                 'sou'
              )">
                         SOUL
                     </h3>
-
-                    <p class="click-logo">
-                        📸 Hacé clic en el logo para ver capturas del programa
-                    </p>
-
-                </div>
-
-                <ul>
-                    <li>🙏 Reflexiones cristianas diarias basadas en fe y esperanza.</li>
-                    <li>📖 Mensajes inspiradores y acompañamiento espiritual.</li>
-                    <li>✨ Chat inteligente para motivación y orientación personal.</li>
-                    <li>☁️ Sincronización segura en la nube.</li>
-                    <li>🔐 Inicio de sesión con Google y email.</li>
-                    <li>🌙 Diseño moderno, cálido y fácil de usar.</li>
-                    <li>🧠 Historial privado y protegido.</li>
-                    <li>📱 Optimizada para dispositivos Android.</li>
-                </ul>
-
-                <p><b>✝️ Ideal para:</b></p>
-
-                <ul>
-                    <li>Personas que desean fortalecer su fe diariamente.</li>
-                    <li>Aquellos que buscan palabras de ánimo y reflexión.</li>
-                    <li>Usuarios que desean una experiencia espiritual privada y moderna.</li>
-                </ul>
-
-                <p>
-                    <b>✨ SOUL — Un espacio de fe, esperanza y conexión con Dios.</b>
-                </p>
-
-                <div class="app-actions">
-
-                    <a href="sou.apk"
-                       download
-                       class="btn-download"
-                       onclick="registrarDescarga('SOUL')">
-
-                        ⬇️ Descargar APP
-
-                    </a>
-
-                    <div class="app-small" id="status_SOU">
-                        <b>⬇️ Descargas: cargando...</b>
-                    </div>
-
-                </div>
-
-                <!-- ⭐ VALORACIONES -->
-
-                <div class="app-review" data-app="SOUL">
-
-                    <h4>⭐ Valorá esta app</h4>
-
-                    <input type="text"
-                           class="review-name"
-                           placeholder="Tu nombre o email (opcional)">
-
-                    <div class="review-stars">
-
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-
-                    </div>
-
-                    <textarea class="review-comment"
-                              placeholder="Dejá tu comentario..."
-                              rows="3"></textarea>
-
-                    <button class="review-btn">
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>🙏 Reflexiones cristianas diarias basadas en fe y esperanza.</li>
+<li>📖 Mensajes inspiradores y acompañamiento espiritual.</li>
+<li>✨ Chat inteligente para motivación y orientación personal.</li>
+<li>☁️ Sincronización segura en la nube.</li>
+<li>🔐 Inicio de sesión con Google y email.</li>
+<li>🌙 Diseño moderno, cálido y fácil de usar.</li>
+<li>🧠 Historial privado y protegido.</li>
+<li>📱 Optimizada para dispositivos Android.</li>
+</ul>
+<p><b>✝️ Ideal para:</b></p>
+<ul>
+<li>Personas que desean fortalecer su fe diariamente.</li>
+<li>Aquellos que buscan palabras de ánimo y reflexión.</li>
+<li>Usuarios que desean una experiencia espiritual privada y moderna.</li>
+</ul>
+<p>
+<b>✨ SOUL — Un espacio de fe, esperanza y conexión con Dios.</b>
+</p>
+<div class="app-actions">
+<span class="availability-note">No disponible actualmente en Google Play</span><span class="store-unavailable">No disponible actualmente en Google Play</span></div>
+<!-- ⭐ VALORACIONES -->
+<div class="app-review" data-app="SOUL">
+<h4>⭐ Valorá esta app</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">
                         Enviar valoración
                     </button>
+<div class="review-status"></div>
+</div>
+</div></div></div></section>
 
-                    <div class="review-status"></div>
-
-                </div>
-
-            </div>
-            <hr style="margin:2.5rem 0; border:1px dashed rgba(255,255,255,0.15);">
-
-            <h2>🖥️ Programas para PC - Escritorio</h2>
-
-            <!-- 🖥️ Comparador Avanzado de columnas Excel -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="comparar_excel.webp"
-                         alt="Comparador avanzado de Excel"
-                         onclick="abrirModal(
+<section class="section windows-section" id="windows"><div class="shell"><div class="section-head"><div><div class="section-label">Escritorio</div><h2>Software para Windows</h2></div><p>Utilidades de escritorio orientadas a automatizar tareas, trabajar con documentos, proteger archivos y organizar procesos cotidianos.</p></div><div class="windows-grid"><div class="app-card">
+<div class="app-header-inline">
+<img alt="Comparador avanzado de Excel" onclick="abrirModal(
 			        'Comparador avanzado de Excel',
 			        'Herramienta de escritorio para comparar columnas entre archivos Excel, detectar registros faltantes y generar reportes automáticos.'
 			        'Comparador avanzado de Excel'
-			     )">
-
-                    <h3 onclick="abrirModal(
+			     )" src="comparar_excel.webp"/>
+<span class="platform-badge windows-badge">WINDOWS</span><h3 onclick="abrirModal(
 			        'Comparador avanzado de Excel',
 			        'Herramienta de escritorio para comparar columnas entre archivos Excel, detectar registros faltantes y generar reportes automáticos.',
 			        'Comparador Excel'
 			     )">
                         Comparador Excel
                     </h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>📊 Comparación de columnas entre múltiples archivos Excel.</li>
+<li>📘 Archivo base + 📗 archivo a verificar.</li>
+<li>🧠 Detección inteligente de encabezados (ignora mayúsculas, espacios y variaciones).</li>
+<li>📑 Soporte para múltiples hojas por archivo.</li>
+<li>📎 Copia automática de una columna adicional asociada.</li>
+<li>📄 Generación de Excel con registros no encontrados.</li>
+<li>📈 Barra de progreso en tiempo real.</li>
+<li>🗂️ Gestor integrado de archivos generados.</li>
+</ul>
+<p><b>🖥️ Plataforma:</b> Windows</p>
+<p><b>🛠️ Tecnología:</b> Python · Tkinter · Pandas</p>
+<div class="app-actions">
+<a class="btn-primary download-link" download="" href="Instalador_Comparador_Datos_Excel_v1.0.zip" onclick="registrarDescarga('compararExcel')">Descargar para Windows</a>
 
-                <ul>
-                    <li>📊 Comparación de columnas entre múltiples archivos Excel.</li>
-                    <li>📘 Archivo base + 📗 archivo a verificar.</li>
-                    <li>🧠 Detección inteligente de encabezados (ignora mayúsculas, espacios y variaciones).</li>
-                    <li>📑 Soporte para múltiples hojas por archivo.</li>
-                    <li>📎 Copia automática de una columna adicional asociada.</li>
-                    <li>📄 Generación de Excel con registros no encontrados.</li>
-                    <li>📈 Barra de progreso en tiempo real.</li>
-                    <li>🗂️ Gestor integrado de archivos generados.</li>
-                </ul>
-
-                <p><b>🖥️ Plataforma:</b> Windows</p>
-                <p><b>🛠️ Tecnología:</b> Python · Tkinter · Pandas</p>
-
-                <div class="app-actions">
-                    <a href="Instalador_Comparador_Datos_Excel_v1.0.zip"
-                       download
-                       class="btn-download"
-                       onclick="registrarDescarga('compararExcel')">
-                        ⬇️ Descargar Programa
-                    </a>
-
-                    <div class="app-small" id="status_compararExcel">
-                        <b>⬇️ Descargas: cargando...</b>
-                    </div>
-                </div>
-
-                <!-- ⭐ VALORACIONES -->
-                <div class="app-review" data-app="compararExcel">
-                    <h4>⭐ Valorá este programa</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-
-            <!-- 🖥️ PDF Watermark Pro -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="pdf_watermark_pro.webp"
-                         alt="PDF Watermark Pro"
-                         onclick="abrirModal(
+</div>
+<!-- ⭐ VALORACIONES -->
+<div class="app-review" data-app="compararExcel">
+<h4>⭐ Valorá este programa</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="PDF Watermark Pro" onclick="abrirModal(
         'PDF Watermark Pro',
         'Aplicación de escritorio para proteger documentos PDF mediante marcas de agua personalizadas con texto y logo, incluyendo vista previa y control de licencias.',
         'pdfWatermarkPro'
-     )">
-
-                    <h3 onclick="abrirModal(
+     )" src="pdf_watermark_pro.webp"/>
+<span class="platform-badge windows-badge">WINDOWS</span><h3 onclick="abrirModal(
         'PDF Watermark Pro',
         'Aplicación de escritorio para proteger documentos PDF mediante marcas de agua personalizadas con texto y logo, incluyendo vista previa y control de licencias.',
         'pdfWatermarkPro'
      )">
                         PDF Watermark Pro
                     </h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>🖋️ Aplicación de marcas de agua con texto personalizado.</li>
+<li>🖼️ Soporte para logo o imagen opcional (PNG / JPG).</li>
+<li>📄 Marca de agua aplicada en todas las páginas del PDF.</li>
+<li>👁️ Vista previa del documento antes de generar el PDF final.</li>
+<li>📊 Barra de progreso con porcentaje en tiempo real.</li>
+<li>📁 No modifica el archivo original.</li>
+<li>🔐 Sistema de activación por licencia.</li>
+<li>⚡ Funcionamiento 100% offline.</li>
+</ul>
+<p><b>🖥️ Plataforma:</b> Windows</p>
+<p><b>🛠️ Tecnología:</b> Python · Tkinter · PyPDF · ReportLab</p>
+<div class="app-actions">
+<a class="btn-primary download-link" download="" href="Instalador_PDF_Watermark_Pro.zip" onclick="registrarDescarga('pdfWatermarkPro')">Descargar para Windows</a>
 
-                <ul>
-                    <li>🖋️ Aplicación de marcas de agua con texto personalizado.</li>
-                    <li>🖼️ Soporte para logo o imagen opcional (PNG / JPG).</li>
-                    <li>📄 Marca de agua aplicada en todas las páginas del PDF.</li>
-                    <li>👁️ Vista previa del documento antes de generar el PDF final.</li>
-                    <li>📊 Barra de progreso con porcentaje en tiempo real.</li>
-                    <li>📁 No modifica el archivo original.</li>
-                    <li>🔐 Sistema de activación por licencia.</li>
-                    <li>⚡ Funcionamiento 100% offline.</li>
-                </ul>
-
-                <p><b>🖥️ Plataforma:</b> Windows</p>
-                <p><b>🛠️ Tecnología:</b> Python · Tkinter · PyPDF · ReportLab</p>
-
-                <div class="app-actions">
-                    <a href="Instalador_PDF_Watermark_Pro.zip"
-                       download
-                       class="btn-download"
-                       onclick="registrarDescarga('pdfWatermarkPro')">
-                        ⬇️ Descargar Programa
-                    </a>
-
-                    <div class="app-small" id="status_pdfWatermarkPro">
-                        <b>⬇️ Descargas: cargando...</b>
-                    </div>
-                </div>
-
-                <!-- ⭐ VALORACIONES -->
-                <div class="app-review" data-app="pdfWatermarkPro">
-                    <h4>⭐ Valorá este programa</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-
-            <!-- 🔐 Encriptador de Archivos -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="encriptador_archivos.webp"
-                         alt="Encriptador de archivos"
-                         onclick="abrirModal(
+</div>
+<!-- ⭐ VALORACIONES -->
+<div class="app-review" data-app="pdfWatermarkPro">
+<h4>⭐ Valorá este programa</h4>
+<input class="review-name" placeholder="Tu nombre o email" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="Encriptador de archivos" onclick="abrirModal(
         'Encriptador de Archivos',
         'Herramienta de escritorio para proteger carpetas completas y archivos personales mediante clave segura y cifrado avanzado.',
         'Encriptador de Archivos'
-     )">
-
-                    <h3 onclick="abrirModal(
+     )" src="encriptador_archivos.webp"/>
+<span class="platform-badge windows-badge">WINDOWS</span><h3 onclick="abrirModal(
         'Encriptador de Archivos',
         'Herramienta de escritorio para proteger carpetas completas y archivos personales mediante clave segura y cifrado avanzado.',
         'Encriptador de Archivos'
      )">
                         Encriptador de Archivos
                     </h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>🔐 Encriptación segura de archivos y carpetas completas.</li>
+<li>📁 Soporte para subcarpetas y múltiples tipos de archivos.</li>
+<li>🔑 Protección mediante contraseña personalizada.</li>
+<li>🛡️ Cifrado avanzado con clave privada.</li>
+<li>📂 Recuperación total de archivos al ingresar la clave correcta.</li>
+<li>⚡ Procesamiento rápido y automático.</li>
+<li>🖥️ Interfaz moderna y fácil de usar.</li>
+<li>📌 Uso local sin conexión a internet.</li>
+</ul>
+<p><b>🖥️ Plataforma:</b> Windows</p>
+<p><b>🛠️ Tecnología:</b> Python · CustomTkinter · Cryptography</p>
+<div class="app-actions">
+<a class="btn-primary download-link" download="" href="Encriptador_Archivos_v1.0.zip" onclick="registrarDescarga('encriptadorArchivos')">Descargar para Windows</a>
 
-                <ul>
-                    <li>🔐 Encriptación segura de archivos y carpetas completas.</li>
-                    <li>📁 Soporte para subcarpetas y múltiples tipos de archivos.</li>
-                    <li>🔑 Protección mediante contraseña personalizada.</li>
-                    <li>🛡️ Cifrado avanzado con clave privada.</li>
-                    <li>📂 Recuperación total de archivos al ingresar la clave correcta.</li>
-                    <li>⚡ Procesamiento rápido y automático.</li>
-                    <li>🖥️ Interfaz moderna y fácil de usar.</li>
-                    <li>📌 Uso local sin conexión a internet.</li>
-                </ul>
-
-                <p><b>🖥️ Plataforma:</b> Windows</p>
-                <p><b>🛠️ Tecnología:</b> Python · CustomTkinter · Cryptography</p>
-
-                <div class="app-actions">
-                    <a href="Encriptador_Archivos_v1.0.zip"
-                       download
-                       class="btn-download"
-                       onclick="registrarDescarga('encriptadorArchivos')">
-                        ⬇️ Descargar Programa
-                    </a>
-
-                    <div class="app-small" id="status_encriptadorArchivos">
-                        <b>⬇️ Descargas: cargando...</b>
-                    </div>
-                </div>
-
-                <!-- ⭐ VALORACIONES -->
-                <div class="app-review" data-app="encriptadorArchivos">
-                    <h4>⭐ Valorá este programa</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-
-            <!-- 📅 Calendario de Trabajo PRO -->
-            <div class="app-card">
-                <div class="app-header-inline">
-                    <img src="calendario_trabajo.webp"
-                         alt="Calendario de Trabajo PRO"
-                         onclick="abrirModal(
+</div>
+<!-- ⭐ VALORACIONES -->
+<div class="app-review" data-app="encriptadorArchivos">
+<h4>⭐ Valorá este programa</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div>
+<div class="app-card">
+<div class="app-header-inline">
+<img alt="Calendario de Trabajo PRO" onclick="abrirModal(
         'Calendario de Trabajo PRO',
         'Sistema de escritorio para organizar eventos, recordatorios, agenda diaria, notificaciones automáticas y envío de emails para empresas, oficinas y uso personal.',
         'Calendario de Trabajo PRO'
-     )">
-
-                    <h3 onclick="abrirModal(
+     )" src="calendario_trabajo.webp"/>
+<span class="platform-badge windows-badge">WINDOWS</span><h3 onclick="abrirModal(
         'Calendario de Trabajo PRO',
         'Sistema de escritorio para organizar eventos, recordatorios, agenda diaria, notificaciones automáticas y envío de emails para empresas, oficinas y uso personal.',
         'Calendario de Trabajo PRO'
      )">
                         Calendario de Trabajo PRO
                     </h3>
-                    <p class="click-logo">📸 Hacé clic en el logo para ver capturas del programa</p>
-                </div>
+<p class="click-logo">Ver capturas del producto</p>
+</div>
+<ul>
+<li>📅 Calendario interactivo con selección diaria.</li>
+<li>🗓️ Agenda automática de eventos por fecha.</li>
+<li>🔔 Notificaciones emergentes con sonido personalizado.</li>
+<li>⏰ Alertas programadas: 1 día antes, 2 horas antes y en el momento.</li>
+<li>📧 Envío automático de recordatorios por email.</li>
+<li>📂 Adjuntar archivos a cada evento.</li>
+<li>🎉 Visualización automática de feriados nacionales.</li>
+<li>📌 Funciona en segundo plano sin interrumpir el trabajo.</li>
+<li>🖥️ Interfaz moderna, rápida y fácil de usar.</li>
+</ul>
+<p><b>🖥️ Plataforma:</b> Windows</p>
+<p><b>🛠️ Tecnología:</b> Python · CustomTkinter · SQLite · EmailJS</p>
+<div class="app-actions">
+<a class="btn-primary download-link" download="" href="Calendario_Trabajo_PRO_v1.0.zip" onclick="registrarDescarga('calendarioTrabajo')">Descargar para Windows</a>
 
-                <ul>
-                    <li>📅 Calendario interactivo con selección diaria.</li>
-                    <li>🗓️ Agenda automática de eventos por fecha.</li>
-                    <li>🔔 Notificaciones emergentes con sonido personalizado.</li>
-                    <li>⏰ Alertas programadas: 1 día antes, 2 horas antes y en el momento.</li>
-                    <li>📧 Envío automático de recordatorios por email.</li>
-                    <li>📂 Adjuntar archivos a cada evento.</li>
-                    <li>🎉 Visualización automática de feriados nacionales.</li>
-                    <li>📌 Funciona en segundo plano sin interrumpir el trabajo.</li>
-                    <li>🖥️ Interfaz moderna, rápida y fácil de usar.</li>
-                </ul>
+</div>
+<!-- ⭐ VALORACIONES -->
+<div class="app-review" data-app="calendarioTrabajo">
+<h4>⭐ Valorá este programa</h4>
+<input class="review-name" placeholder="Tu nombre o email (opcional)" type="text"/>
+<div class="review-stars">
+<span data-star="1">★</span>
+<span data-star="2">★</span>
+<span data-star="3">★</span>
+<span data-star="4">★</span>
+<span data-star="5">★</span>
+</div>
+<textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
+<button class="review-btn">Enviar valoración</button>
+<div class="review-status"></div>
+</div>
+</div></div></div></section>
 
-                <p><b>🖥️ Plataforma:</b> Windows</p>
-                <p><b>🛠️ Tecnología:</b> Python · CustomTkinter · SQLite · EmailJS</p>
+<section class="section" id="servicios"><div class="shell"><div class="section-head"><div><div class="section-label">Desarrollo personalizado</div><h2>¿Necesitás algo específico?</h2></div><p>Además de productos propios, JForce Apps desarrolla soluciones digitales adaptadas a procesos y necesidades concretas.</p></div><div class="services"><div class="service-main"><h3>Convertimos una necesidad en una herramienta.</h3><p>Desde una aplicación simple hasta un sistema de gestión, el objetivo es construir software claro, mantenible y útil para el trabajo diario.</p><div class="service-list"><div>Aplicaciones Android</div><div>Software para Windows</div><div>Herramientas de gestión</div><div>Automatización de tareas</div><div>Integración con servicios cloud</div><div>Soluciones internas</div></div></div><div class="service-side"><div class="big">01 → 04</div><small>Idea · Diseño · Desarrollo · Entrega</small><p>Un proceso directo: entender el problema, definir el alcance, construir la solución y entregarla lista para usar.</p><a class="btn-primary" href="mailto:jforceapps@gmail.com">Consultar proyecto</a></div></div></div></section>
 
-                <div class="app-actions">
-                    <a href="Calendario_Trabajo_PRO_v1.0.zip"
-                       download
-                       class="btn-download"
-                       onclick="registrarDescarga('calendarioTrabajo')">
-                        ⬇️ Descargar Programa
-                    </a>
+<section class="pay-wrap" id="licencias"><div class="shell"><div class="pay-block" id="licencias">
+<h3>Licencias y activaciones</h3>
+<img alt="QR Mercado Pago" class="qr" loading="lazy" src="qr-mercadopago.webp"/>
+<a class="pay-btn" href="https://mpago.la/1RvEaba" target="_blank">Pagar licencia con Mercado Pago</a>
+<p id="contacto" style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
+                    Ante consultas o activaciones:<br/>
+<a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a>
+</p>
+</div></div></section>
 
-                    <div class="app-small" id="status_calendarioTrabajo">
-                        <b>⬇️ Descargas: cargando...</b>
-                    </div>
-                </div>
-
-                <!-- ⭐ VALORACIONES -->
-                <div class="app-review" data-app="calendarioTrabajo">
-                    <h4>⭐ Valorá este programa</h4>
-                    <input type="text" class="review-name" placeholder="Tu nombre o email (opcional)">
-                    <div class="review-stars">
-                        <span data-star="1">★</span>
-                        <span data-star="2">★</span>
-                        <span data-star="3">★</span>
-                        <span data-star="4">★</span>
-                        <span data-star="5">★</span>
-                    </div>
-                    <textarea class="review-comment" placeholder="Dejá tu comentario..." rows="3"></textarea>
-                    <button class="review-btn">Enviar valoración</button>
-                    <div class="review-status"></div>
-                </div>
-            </div>
-
-        </div>
-
-
-
-            <!-- 🧾 BLOQUE DE PAGO -->
-            <div class="pay-block">
-                <h3>Pagos de Licencias</h3>
-                <img src="qr-mercadopago.webp" alt="QR Mercado Pago" loading="lazy" class="qr">
-                <a href="https://mpago.la/1RvEaba" target="_blank" class="pay-btn">Abonar licencia con Mercado Pago</a>
-                <p style="color:var(--muted);font-size:0.9rem;margin-top:8px;">
-                    Ante consultas o activaciones:<br>
-                    <a href="mailto:jforceapps@gmail.com" style="color:var(--accent);text-decoration:none;">jforceapps@gmail.com</a>
-                </p>
-            </div>
-
-            <p id="contador" style="text-align:center;margin-top:1rem;font-weight:700;color:var(--accent)">
-                Visitas totales: cargando...
-            </p>
-        </main>
-
-        <footer>© 2025 JForce Apps · Todos los derechos reservados</footer>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal" id="modalApp">
-        <div class="modal-content">
-            <span class="close-btn" onclick="cerrarModal()">✖</span>
-            <h3 id="modalTitle"></h3>
-            <p id="modalDesc"></p>
-            <img id="modalImg" src="" alt="">
-            <div class="modal-controls">
-                <button onclick="prevImg()">⬅️</button>
-                <button onclick="nextImg()">➡️</button>
-            </div>
-        </div>
-    </div>
-
-    <a href="https://wa.me/5491124554076?text=JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
-        <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.5 2.1 8L0 32l8.2-2.1C10.8 31.3 13.3 32 16 32c8.8 0 16-7.2 16-16S24.8 0 16 0z" /></svg>
-    </a>
-
-    <!-- 🔥 FIREBASE - Contadores y descargas -->
-    <script type="module">
+<footer class="footer"><div class="shell footer-inner"><div><strong>JForce Apps</strong> · Software Studio</div><div>© 2026 · <a href="mailto:jforceapps@gmail.com">jforceapps@gmail.com</a></div></div></footer>
+<div hidden aria-hidden="true"><span id="rayito"></span><span id="contador"></span><span id="status_RegistroLAO"></span><span id="status_TurnosGo"></span><span id="status_FitCoach"></span><span id="status_LinternaShake"></span><span id="status_SOU"></span><span id="status_compararExcel"></span><span id="status_pdfWatermarkPro"></span><span id="status_encriptadorArchivos"></span><span id="status_calendarioTrabajo"></span></div>
+<div class="modal" id="modalApp">
+<div class="modal-content">
+<span class="close-btn" onclick="cerrarModal()">✖</span>
+<h3 id="modalTitle"></h3>
+<p id="modalDesc"></p>
+<img alt="" id="modalImg" src=""/>
+<div class="modal-controls">
+<button onclick="prevImg()">⬅️</button>
+<button onclick="nextImg()">➡️</button>
+</div>
+</div>
+</div>
+<a aria-label="WhatsApp" class="whatsapp-float" href="https://wa.me/5491124554076?text=JForce%20Apps,%20quiero%20consultar%20por%20licencias%20o%20encargos." target="_blank">
+<svg viewbox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.5 2.1 8L0 32l8.2-2.1C10.8 31.3 13.3 32 16 32c8.8 0 16-7.2 16-16S24.8 0 16 0z"></path></svg>
+</a>
+<script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
         import { getFirestore, doc, getDoc, updateDoc, setDoc, increment, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
@@ -1157,8 +1867,8 @@
 
         // 🔹 Cargar contadores al inicio
         window.onload = async () => {
-            registrarVisita();
-            const apps = ["RegistroLAO", "TurnosGo", "FitCoach", "LinternaShake", "SOUL", "compararExcel", "pdfWatermarkPro", "encriptadorArchivos", "calendarioTrabajo"];
+            
+            const apps = ["compararExcel", "pdfWatermarkPro", "encriptadorArchivos", "calendarioTrabajo"];
             for (const app of apps) await mostrarContador("descargas", app, "status_" + app);
         };
 
@@ -1420,35 +2130,8 @@
         mostrarValoraciones();
 
     </script>
-
-    <style>
-        /* WhatsApp flotante */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 22px;
-            right: 22px;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
-            z-index: 1500;
-            transition: transform 0.3s ease;
-        }
-
-            .whatsapp-float:hover {
-                transform: scale(1.1);
-            }
-
-            .whatsapp-float svg {
-                fill: #fff;
-                width: 28px;
-                height: 28px;
-            }
-    </style>
-</body>
-
-</html>
+<script>
+// Simplifica textos heredados del bloque de pagos y evita estilos inline antiguos.
+document.querySelectorAll('.pay-block a[href^="mailto:"]').forEach(a=>a.classList.add('contact-link'));
+</script>
+</body></html>
