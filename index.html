@@ -456,7 +456,7 @@ a{color:inherit}
 .product-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:20px
+  gap:20px;
 }
 
 .app-card{
@@ -479,25 +479,35 @@ a{color:inherit}
   transition:
     transform .25s,
     border-color .25s,
-    box-shadow .25s
+    box-shadow .25s;
 }
 
 .app-card:hover{
   transform:translateY(-4px);
   border-color:rgba(117,167,255,.24);
-  box-shadow:0 18px 45px rgba(0,0,0,.18)
+  box-shadow:0 18px 45px rgba(0,0,0,.18);
 }
 
 .app-card:before{
   content:"";
+
   position:absolute;
+
   right:-70px;
   top:-70px;
+
   width:170px;
   height:170px;
+
   border-radius:50%;
-  background:rgba(79,140,255,.07)
+
+  background:rgba(79,140,255,.07);
 }
+
+
+/* =========================
+   PRODUCTO DESTACADO
+========================= */
 
 .featured-card{
   grid-column:1/-1;
@@ -514,13 +524,14 @@ a{color:inherit}
       #11243b,
       #0c1b2d 62%,
       #0e2338
-    )
+    );
 }
 
 .featured-card:after{
   content:"PRODUCTO DESTACADO";
 
   position:absolute;
+
   right:24px;
   top:20px;
 
@@ -528,58 +539,104 @@ a{color:inherit}
 
   font-size:.65rem;
   letter-spacing:.14em;
-  font-weight:900
+  font-weight:900;
 }
+
+
+/* =========================
+   CABECERA APP
+========================= */
 
 .app-header-inline{
   display:grid;
-  grid-template-columns:72px 1fr;
-  column-gap:16px;
+
+  grid-template-columns:92px 1fr;
+  grid-template-rows:auto auto auto;
+
+  column-gap:18px;
+  row-gap:5px;
+
   align-items:center;
 
-  margin-bottom:18px;
+  margin-bottom:22px;
 
   position:relative;
-  z-index:1
+  z-index:1;
 }
 
-.app-header-inline img{
-  width:72px;
-  height:72px;
 
-  border-radius:18px;
+/* LOGO NORMAL */
+
+.app-header-inline img{
+  grid-column:1;
+  grid-row:1 / 4;
+
+  width:92px;
+  height:92px;
+
+  border-radius:20px;
 
   object-fit:cover;
 
-  border:1px solid rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.12);
 
-  cursor:pointer
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
 }
 
-.app-header-inline h3{
-  font-size:1.38rem;
+.app-header-inline img:hover{
+  transform:scale(1.04);
 
-  margin:4px 0 0;
+  border-color:rgba(117,167,255,.45);
+
+  box-shadow:0 12px 30px rgba(0,0,0,.28);
+}
+
+
+/* NOMBRE DE LA APP */
+
+.app-header-inline h3{
+  grid-column:2;
+  grid-row:2;
+
+  font-size:1.45rem;
+  line-height:1.15;
+
+  margin:0;
 
   letter-spacing:-.03em;
 
   cursor:pointer;
 
-  color:#fff
+  color:#fff;
 }
 
+
+/* =========================
+   BADGES
+========================= */
+
 .platform-badge{
+  grid-column:2;
+  grid-row:1;
+
   display:inline-block;
 
   width:max-content;
 
   font-size:.61rem;
+
   font-weight:900;
+
   letter-spacing:.12em;
 
   border-radius:999px;
 
-  padding:5px 8px
+  padding:5px 8px;
 }
 
 .android-badge{
@@ -587,7 +644,7 @@ a{color:inherit}
 
   background:rgba(53,201,139,.1);
 
-  border:1px solid rgba(53,201,139,.18)
+  border:1px solid rgba(53,201,139,.18);
 }
 
 .windows-badge{
@@ -595,23 +652,96 @@ a{color:inherit}
 
   background:rgba(79,140,255,.1);
 
-  border:1px solid rgba(79,140,255,.18)
+  border:1px solid rgba(79,140,255,.18);
 }
+
+
+/* =========================
+   TEXTO VER CAPTURAS
+========================= */
 
 .click-logo{
   grid-column:2;
+  grid-row:3;
 
-  color:#7890a8!important;
+  display:inline-flex;
 
-  font-size:.74rem!important;
+  align-items:center;
 
-  margin:3px 0 0!important
+  gap:6px;
+
+  width:max-content;
+
+  color:#93a9c1!important;
+
+  font-size:.76rem!important;
+
+  font-weight:650;
+
+  line-height:1.3;
+
+  margin:2px 0 0!important;
+
+  cursor:pointer;
+
+  transition:color .2s ease;
 }
+
+.click-logo:before{
+  content:"↗";
+
+  font-size:.8rem;
+
+  color:#75a7ff;
+}
+
+.click-logo:hover{
+  color:#dce8f7!important;
+}
+
+
+/* =========================
+   APP DESTACADA
+========================= */
+
+.featured-card .app-header-inline{
+  grid-template-columns:160px 1fr;
+
+  column-gap:26px;
+
+  align-items:center;
+}
+
+.featured-card .app-header-inline img{
+  width:160px;
+  height:160px;
+
+  border-radius:30px;
+}
+
+.featured-card .app-header-inline h3{
+  font-size:2rem;
+}
+
+.featured-card .platform-badge{
+  font-size:.67rem;
+
+  padding:6px 10px;
+}
+
+.featured-card .click-logo{
+  font-size:.82rem!important;
+}
+
+
+/* =========================
+   CONTENIDO APP
+========================= */
 
 .app-card ul{
   padding-left:18px;
 
-  margin:13px 0 16px
+  margin:13px 0 16px;
 }
 
 .app-card li{
@@ -621,7 +751,7 @@ a{color:inherit}
 
   margin:7px 0;
 
-  font-size:.91rem
+  font-size:.91rem;
 }
 
 .app-card p{
@@ -629,12 +759,17 @@ a{color:inherit}
 
   line-height:1.6;
 
-  font-size:.91rem
+  font-size:.91rem;
 }
 
 .app-card b{
-  color:#eaf0f8
+  color:#eaf0f8;
 }
+
+
+/* =========================
+   BOTONES
+========================= */
 
 .app-actions{
   display:flex;
@@ -645,7 +780,7 @@ a{color:inherit}
 
   flex-wrap:wrap;
 
-  margin-top:20px
+  margin-top:20px;
 }
 
 .btn-download{
@@ -659,13 +794,13 @@ a{color:inherit}
 
   box-shadow:none!important;
 
-  font-size:.86rem
+  font-size:.86rem;
 }
 
 .btn-download:hover{
   transform:translateY(-1px)!important;
 
-  box-shadow:none!important
+  box-shadow:none!important;
 }
 
 .store-unavailable{
@@ -683,9 +818,88 @@ a{color:inherit}
 
   font-size:.82rem;
 
-  font-weight:700
+  font-weight:700;
 }
 
+
+/* =========================
+   RESPONSIVE PRODUCTOS
+========================= */
+
+@media(max-width:900px){
+
+  .featured-card{
+    grid-column:auto;
+    display:block;
+  }
+
+  .featured-card .app-header-inline{
+    grid-template-columns:130px 1fr;
+  }
+
+  .featured-card .app-header-inline img{
+    width:130px;
+    height:130px;
+    border-radius:26px;
+  }
+
+  .featured-card .app-header-inline h3{
+    font-size:1.7rem;
+  }
+
+}
+
+@media(max-width:560px){
+
+  .app-card,
+  .featured-card{
+    padding:22px;
+  }
+
+  .app-header-inline{
+    grid-template-columns:76px 1fr;
+    column-gap:14px;
+  }
+
+  .app-header-inline img{
+    width:76px;
+    height:76px;
+    border-radius:17px;
+  }
+
+  .app-header-inline h3{
+    font-size:1.25rem;
+  }
+
+  .click-logo{
+    font-size:.7rem!important;
+  }
+
+  .featured-card .app-header-inline{
+    grid-template-columns:92px 1fr;
+    column-gap:16px;
+  }
+
+  .featured-card .app-header-inline img{
+    width:92px;
+    height:92px;
+    border-radius:20px;
+  }
+
+  .featured-card .app-header-inline h3{
+    font-size:1.4rem;
+  }
+
+  .featured-card .platform-badge{
+    font-size:.6rem;
+    padding:5px 8px;
+  }
+
+  .featured-card .click-logo{
+    font-size:.72rem!important;
+  }
+
+}
 
 /* =========================
    REVIEWS
@@ -1313,7 +1527,7 @@ a{color:inherit}
 <span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('MakerJob','Gestión profesional para negocios de impresión 3D.','makerjob')">
             MakerJob
         </h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>📋 <b>Gestión de clientes:</b> registrá y organizá todos tus clientes en un solo lugar.</li>
@@ -1366,7 +1580,7 @@ a{color:inherit}
 <div class="app-header-inline">
 <img alt="Registro LAO" onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')" src="registrolao.webp"/>
 <span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('Registro LAO','Registro y control de licencias para personal.','lao')">Registro LAO</h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>Organizá tus días de descanso de forma simple, rápida y visual. Con esta app, podés llevar el control completo de tus vacaciones y días disponibles, todo desde tu celular.</li>
@@ -1403,7 +1617,7 @@ a{color:inherit}
 <div class="app-header-inline">
 <img alt="TurnosGo" onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')" src="turnosgo.webp"/>
 <span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('TurnosGo','Sistema de turnos ágil para dispositivos móviles.','turnos')">TurnosGo</h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>📅 Gestión de turnos: guarda fácilmente tus turnos laborales mes a mes.</li>
@@ -1443,7 +1657,7 @@ a{color:inherit}
 <div class="app-header-inline">
 <img alt="CoachRoutine" onclick="abrirModal('Coach Routine','Planificación de entrenamientos y seguimiento.','fit')" src="coachroutine.webp"/>
 <span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('Coach Routine','Planificación de entrenamientos y seguimiento.','fit')">CoachRoutine</h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>👨‍🏫 Registro de profesores: crea tu cuenta de entrenador personal de forma rápida y segura.</li>
@@ -1486,7 +1700,7 @@ a{color:inherit}
 <div class="app-header-inline">
 <img alt="Linterna Shake" onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')" src="linterna.webp"/>
 <span class="platform-badge android-badge">ANDROID</span><h3 onclick="abrirModal('Linterna Shake','Linterna instantánea con gesto de sacudir.','linterna')">Linterna Shake</h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>💡 Activá la linterna con solo sacudir tu teléfono.</li>
@@ -1527,7 +1741,7 @@ a{color:inherit}
              )">
                         SOUL
                     </h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>🙏 Reflexiones cristianas diarias basadas en fe y esperanza.</li>
@@ -1583,7 +1797,7 @@ a{color:inherit}
 			     )">
                         Comparador Excel
                     </h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>📊 Comparación de columnas entre múltiples archivos Excel.</li>
@@ -1631,7 +1845,7 @@ a{color:inherit}
      )">
                         PDF Watermark Pro
                     </h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>🖋️ Aplicación de marcas de agua con texto personalizado.</li>
@@ -1679,7 +1893,7 @@ a{color:inherit}
      )">
                         Encriptador de Archivos
                     </h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>🔐 Encriptación segura de archivos y carpetas completas.</li>
@@ -1727,7 +1941,7 @@ a{color:inherit}
      )">
                         Calendario de Trabajo PRO
                     </h3>
-<p class="click-logo">Ver capturas del producto</p>
+<p class="click-logo">Hacé clic en el logo para ver capturas</p>
 </div>
 <ul>
 <li>📅 Calendario interactivo con selección diaria.</li>
